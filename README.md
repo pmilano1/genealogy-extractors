@@ -22,13 +22,13 @@ python extract.py --surname Dubois --given-name Marie --birth-year 1880 --all-so
 
 | Source | Status | Records | Data Quality | Access Method |
 |--------|--------|---------|--------------|---------------|
-| **Find A Grave** | ✅ Working | 20 | Full names, birth/death years, complete locations | WEB_FETCH |
+| **Find A Grave** | ✅ Working | 20 | Full names, birth/death years, complete locations | CDP_BROWSER |
 | **Geneanet** | ✅ Working | 20 | Full names, birth years, locations | CDP_BROWSER |
 | **WikiTree** | ✅ Working | 20 | Full names (with surnames), birth years, locations | API |
 | **Ancestry** | ✅ Working | 20 | Clean names, birth years, locations | CDP_BROWSER |
-| **FamilySearch** | ✅ Working | 20 | Full names, birth years, clean locations | WEB_FETCH |
+| **FamilySearch** | ✅ Working | 20 | Full names, birth years, clean locations | CDP_BROWSER |
 | **Antenati** | ⚠️ Limited | 10 | Names only (no birth years - nominative search) | CDP_BROWSER |
-| **MyHeritage** | ❌ Disabled | - | Requires subscription, fixture needs replacement | MANUAL_ONLY |
+| **MyHeritage** | ❌ Disabled | - | Requires subscription, fixture needs replacement | CDP_BROWSER |
 
 ## Data Quality Improvements (Latest)
 
