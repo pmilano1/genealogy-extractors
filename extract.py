@@ -76,13 +76,15 @@ SOURCES = {
         'test_fixture': 'tests/fixtures/ancestry_smith_john.html',
         'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
     },
-    'myheritage': {
-        'name': 'MyHeritage',
-        'extractor': MyHeritageExtractor(),
-        'url_template': 'https://www.myheritage.com/research?action=query&qname=Name+{given_name}+{surname}&qbirth=Year+{birth_year}',
-        'test_fixture': 'tests/fixtures/myheritage_smith_john.html',
-        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
-    }
+    # MyHeritage disabled - current fixture is search form, not results
+    # Requires subscription + manual browser access to get proper results HTML
+    # 'myheritage': {
+    #     'name': 'MyHeritage',
+    #     'extractor': MyHeritageExtractor(),
+    #     'url_template': 'https://www.myheritage.com/research?action=query&qname=Name+{given_name}+{surname}&qbirth=Year+{birth_year}',
+    #     'test_fixture': 'tests/fixtures/myheritage_smith_john.html',
+    #     'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+    # }
 }
 
 

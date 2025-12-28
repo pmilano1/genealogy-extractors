@@ -20,15 +20,23 @@ python extract.py --surname Dubois --given-name Marie --birth-year 1880 --all-so
 
 ## Supported Sources
 
-| Source | Status | Data Quality | Notes |
-|--------|--------|--------------|-------|
-| Find A Grave | ✅ Production | ⭐⭐⭐⭐⭐ | Full data (name, birth, death, location, URL) |
-| Geneanet | ✅ Production | ⭐⭐⭐⭐⭐ | Full data (name, birth, death, location, URL) |
-| FamilySearch | ✅ Production | ⭐⭐⭐⭐⭐ | Full data + parents |
-| WikiTree | ✅ Production | ⭐⭐⭐⭐⭐ | Full data via API |
-| Antenati | ✅ Production | ⭐⭐⭐ | Names only (nominative search) |
-| Ancestry | ⚠️ Working | ⭐⭐ | Needs HTML parsing refinement |
-| MyHeritage | ⚠️ Working | ⭐⭐ | Needs HTML parsing refinement |
+| Source | Status | Records | Data Quality | Access Method |
+|--------|--------|---------|--------------|---------------|
+| **Find A Grave** | ✅ Working | 20 | Full names, birth/death years, complete locations | WEB_FETCH |
+| **Geneanet** | ✅ Working | 20 | Full names, birth years, locations | CDP_BROWSER |
+| **WikiTree** | ✅ Working | 20 | Full names (with surnames), birth years, locations | API |
+| **Ancestry** | ✅ Working | 20 | Clean names, birth years, locations | CDP_BROWSER |
+| **FamilySearch** | ✅ Working | 20 | Full names, birth years, clean locations | WEB_FETCH |
+| **Antenati** | ⚠️ Limited | 10 | Names only (no birth years - nominative search) | CDP_BROWSER |
+| **MyHeritage** | ❌ Disabled | - | Requires subscription, fixture needs replacement | MANUAL_ONLY |
+
+## Data Quality Improvements (Latest)
+
+- **Names**: Proper spacing, no concatenation (e.g., "Mary Ewald Johnson" not "MaryEwaldJohnson")
+- **Locations**: Complete multi-part locations (e.g., "Beatrice, Gage County, Nebraska")
+- **WikiTree**: Surnames extracted from Name field (e.g., "Smith-269952" → "John Smith")
+- **Ancestry**: Clean names with special characters removed
+- **FamilySearch**: Event type prefixes removed from locations
 
 ## Directory Structure
 
@@ -59,6 +67,12 @@ scripts/sources/
 
 ## Test Results
 
-Last test: 5 ancestors × 7 sources = **111 records extracted**
+Last test: **6 sources, 110 records extracted** (MyHeritage disabled)
+
+## Known Limitations
+
+1. **Antenati**: Nominative search doesn't return birth years
+2. **MyHeritage**: Requires subscription, has bot detection, needs manual browser access
+3. **FamilySearch**: Some locations include dates (acceptable)
 
 See `docs/` for detailed architecture and implementation documentation.
