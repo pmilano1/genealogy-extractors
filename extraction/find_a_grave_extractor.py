@@ -85,20 +85,45 @@ class FindAGraveExtractor(BaseRecordExtractor):
         # Get all text
         item_text = item.get_text('\n', strip=True)
 
-        # Extract dates
+        # Extract full dates and years
         birth_year = None
         death_year = None
-        dates_match = re.search(r'(\d{1,2}\s+\w+\s+)?(\d{4})\s*[–-]\s*(\d{1,2}\s+\w+\s+)?(\d{4})', item_text)
-        if dates_match:
-            birth_year = int(dates_match.group(2))
-            death_year = int(dates_match.group(4))
-        else:
-            year_matches = re.findall(r'\b(1\d{3}|20\d{2})\b', item_text)
-            if len(year_matches) >= 2:
-                birth_year = int(year_matches[0])
-                death_year = int(year_matches[1])
-            elif len(year_matches) == 1:
-                birth_year = int(year_matches[0])
+        birth_date = None
+        death_date = None
+
+        # Look for full dates in <b class="birthDeathDates">
+        dates_elem = item.find('b', class_='birthDeathDates')
+        if dates_elem:
+            dates_text = dates_elem.get_text(strip=True)
+            # Format: "15 Aug 1871 – 25 Oct 1899" or "1879 – 1968"
+            dates_match = re.search(r'(\d{1,2}\s+\w+\s+)?(\d{4})\s*[–-]\s*(\d{1,2}\s+\w+\s+)?(\d{4})', dates_text)
+            if dates_match:
+                birth_year = int(dates_match.group(2))
+                death_year = int(dates_match.group(4))
+                if dates_match.group(1):  # Has full birth date
+                    birth_date = f"{dates_match.group(1).strip()} {birth_year}"
+                if dates_match.group(3):  # Has full death date
+                    death_date = f"{dates_match.group(3).strip()} {death_year}"
+
+        # Fallback to text extraction
+        if not birth_year:
+            dates_match = re.search(r'(\d{1,2}\s+\w+\s+)?(\d{4})\s*[–-]\s*(\d{1,2}\s+\w+\s+)?(\d{4})', item_text)
+            if dates_match:
+                birth_year = int(dates_match.group(2))
+                death_year = int(dates_match.group(4))
+            else:
+                year_matches = re.findall(r'\b(1\d{3}|20\d{2})\b', item_text)
+                if len(year_matches) >= 2:
+                    birth_year = int(year_matches[0])
+                    death_year = int(year_matches[1])
+                elif len(year_matches) == 1:
+                    birth_year = int(year_matches[0])
+
+        # Extract photo URL
+        photo_url = None
+        img = item.find('img')
+        if img and img.get('src'):
+            photo_url = img['src']
 
         # Extract cemetery and location
         lines = [line.strip() for line in item_text.split('\n') if line.strip()]
@@ -127,9 +152,12 @@ class FindAGraveExtractor(BaseRecordExtractor):
             'name': name,
             'birth_year': birth_year,
             'death_year': death_year,
+            'birth_date': birth_date,
+            'death_date': death_date,
             'birth_place': location,
             'death_place': location,
             'cemetery': cemetery,
+            'photo_url': photo_url,
             'url': url,
             'memorial_id': memorial_id,
             'source': self.source_name

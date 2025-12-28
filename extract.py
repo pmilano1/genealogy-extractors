@@ -44,7 +44,7 @@ SOURCES = {
     'geneanet': {
         'name': 'Geneanet',
         'extractor': GeneanetExtractor(),
-        'url_template': 'https://www.geneanet.org/search/?name={surname}&firstname={given_name}&birth_year={birth_year}',
+        'url_template': 'https://en.geneanet.org/fonds/individus/?nom={surname}&prenom={given_name}&type_periode=birth_between&from={birth_year}&to={birth_year_end}&go=1&size=20',
         'test_fixture': 'tests/fixtures/geneanet_dubois_marie.html',
         'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1880}
     },
@@ -88,7 +88,7 @@ SOURCES = {
 }
 
 
-def extract_from_source(source_key, params, test_mode=False, verbose=False):
+def extract_from_source(source_key, params, test_mode=False, verbose=False, save_html=False):
     """Extract records from a single source (production or test mode)"""
     
     source = SOURCES[source_key]
@@ -130,8 +130,19 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False):
             
             if verbose:
                 print(f"Fetching: {url}")
-            
+
             content = fetch_page_content(url, source_name=source['name'])
+
+            # Save HTML if requested
+            if save_html:
+                from datetime import datetime
+                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                safe_name = f"{params.get('given_name', 'unknown')}_{params.get('surname', 'unknown')}_{params.get('birth_year', 'unknown')}"
+                filename = f"test/fixtures/{source_key}-{safe_name}-{timestamp}.html"
+                Path('test/fixtures').mkdir(parents=True, exist_ok=True)
+                with open(filename, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                print(f"💾 Saved HTML to {filename}")
         
         # Extract records
         records = source['extractor'].extract_records(content, params)
@@ -191,6 +202,8 @@ def main():
     parser.add_argument('--verbose', '-v', action='store_true',
                        help='Show detailed output')
     parser.add_argument('--output', '-o', help='Save results to JSON file')
+    parser.add_argument('--save-html', action='store_true',
+                       help='Save fetched HTML to test/fixtures/ directory')
     
     args = parser.parse_args()
     
@@ -229,7 +242,7 @@ def main():
 
     results = []
     for source_key in sources_to_run:
-        result = extract_from_source(source_key, params, test_mode=args.test, verbose=args.verbose)
+        result = extract_from_source(source_key, params, test_mode=args.test, verbose=args.verbose, save_html=args.save_html)
         results.append(result)
 
         if not args.verbose:

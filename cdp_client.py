@@ -129,8 +129,13 @@ class CDPClient:
             print(f"[ERROR] Command timeout: {method}")
             return {"error": "timeout"}
     
-    async def navigate(self, url: str) -> bool:
-        """Navigate to URL and wait for page load"""
+    async def navigate(self, url: str, timeout: int = 10) -> bool:
+        """Navigate to URL and wait for page load
+
+        Args:
+            url: URL to navigate to
+            timeout: Maximum seconds to wait (default 10)
+        """
         try:
             # Enable Page domain
             await self.send_command("Page.enable")
@@ -141,14 +146,34 @@ class CDPClient:
                 print(f"[ERROR] Navigation failed: {result['error']}")
                 return False
 
-            # Wait for page load
-            await asyncio.sleep(3)
-            return True
+            # Simple approach: wait for document.readyState == "complete" + fixed delay
+            # This is more reliable than event-based waiting for JS-heavy sites
+            start_time = asyncio.get_event_loop().time()
+            while True:
+                elapsed = asyncio.get_event_loop().time() - start_time
+                if elapsed > timeout:
+                    print(f"[WARNING] Navigation timeout after {timeout}s")
+                    # Still return True - page might have loaded
+                    await asyncio.sleep(2)
+                    return True
+
+                # Check if document is ready
+                result = await self.send_command("Runtime.evaluate", {
+                    "expression": "document.readyState"
+                })
+
+                if result.get("result", {}).get("value") == "complete":
+                    # Wait 2 seconds for JavaScript to render
+                    await asyncio.sleep(2)
+                    return True
+
+                await asyncio.sleep(0.5)
 
         except Exception as e:
             print(f"[ERROR] Navigation error: {str(e)}")
             return False
-    
+
+
     async def get_page_content(self) -> str:
         """Get current page HTML content
 
@@ -210,7 +235,13 @@ class CDPClient:
 
 
 async def fetch_with_cdp(url: str, debug_url: str = "http://127.0.0.1:9222", source_name: str = None) -> str:
-    """Fetch page content using CDP"""
+    """Fetch page content using CDP
+
+    Args:
+        url: URL to fetch
+        debug_url: Chrome debug URL
+        source_name: Name of source (for logging)
+    """
     client = CDPClient(debug_url, source_name=source_name)
 
     try:
@@ -228,7 +259,12 @@ async def fetch_with_cdp(url: str, debug_url: str = "http://127.0.0.1:9222", sou
 
 
 def fetch_page_content(url: str, source_name: str = None) -> str:
-    """Synchronous wrapper for CDP fetch"""
+    """Synchronous wrapper for CDP fetch
+
+    Args:
+        url: URL to fetch
+        source_name: Name of source (for logging)
+    """
     try:
         return asyncio.run(fetch_with_cdp(url, source_name=source_name))
     except Exception as e:
