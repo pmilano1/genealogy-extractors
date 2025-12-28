@@ -69,13 +69,18 @@ class FindAGraveExtractor(BaseRecordExtractor):
         memorial_id_match = re.search(r'/memorial/(\d+)', url)
         memorial_id = memorial_id_match.group(1) if memorial_id_match else None
 
-        # Extract name
+        # Extract name - it's in the <i> tag inside the name element
         name = None
-        name_elem = item.find('h3') or item.find(class_=re.compile(r'name|title'))
+        name_elem = item.find('h2', class_='name-grave') or item.find('h3') or item.find(class_=re.compile(r'name|title'))
         if name_elem:
-            name = name_elem.get_text(strip=True)
+            # Name is in the <i> tag
+            i_tag = name_elem.find('i')
+            if i_tag:
+                name = i_tag.get_text(' ', strip=True)
+            else:
+                name = name_elem.get_text(' ', strip=True)
         else:
-            name = link.get_text(strip=True).split('\n')[0]
+            name = link.get_text(' ', strip=True).split('\n')[0]
 
         # Get all text
         item_text = item.get_text('\n', strip=True)
@@ -99,18 +104,24 @@ class FindAGraveExtractor(BaseRecordExtractor):
         lines = [line.strip() for line in item_text.split('\n') if line.strip()]
 
         cemetery = None
-        location = None
+        location_parts = []
 
-        for line in lines:
+        # Find cemetery
+        for i, line in enumerate(lines):
             if any(word in line for word in ['Cemetery', 'Churchyard', 'Memorial', 'Gardens', 'Burial']):
-                if not cemetery:
-                    cemetery = line
-                    break
-
-        for line in lines:
-            if ',' in line and line != cemetery and line != name:
-                location = line
+                cemetery = line
+                # Location is typically the next few lines after cemetery
+                # Collect lines until we hit "Plot info:" or other metadata
+                for j in range(i + 1, min(i + 5, len(lines))):
+                    next_line = lines[j]
+                    if any(skip in next_line for skip in ['Plot info:', 'Memorial', 'Flowers', 'grave photo']):
+                        break
+                    if next_line and not next_line.isdigit():
+                        location_parts.append(next_line)
                 break
+
+        # Combine location parts, clean up commas
+        location = ', '.join(part.rstrip(',') for part in location_parts if part).strip()
 
         record = {
             'name': name,

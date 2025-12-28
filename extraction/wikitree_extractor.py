@@ -47,10 +47,17 @@ class WikiTreeExtractor(BaseRecordExtractor):
     
     def _extract_person(self, match: Dict[str, Any], search_params: Dict[str, Any]) -> Dict[str, Any]:
         """Extract data from a single WikiTree person"""
-        
+
         # Extract name
         first_name = match.get('FirstName', '')
         last_name = match.get('LastName', '')
+
+        # If LastName not provided, extract from Name field (format: "Smith-269952")
+        if not last_name:
+            wiki_name = match.get('Name', '')
+            if wiki_name and '-' in wiki_name:
+                last_name = wiki_name.split('-')[0]
+
         name = f"{first_name} {last_name}".strip()
         
         # Extract birth year

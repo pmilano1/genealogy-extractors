@@ -71,13 +71,22 @@ class AncestryExtractor(BaseRecordExtractor):
             td = row.find('td')
             if th and td:
                 key = th.get_text(strip=True).lower()
-                value = td.get_text(strip=True)
+                # Use separator to preserve spaces between elements
+                value = td.get_text(' ', strip=True)
                 data[key] = value
 
-        # Extract name (remove user corrections in brackets)
+        # Extract name - clean up properly
         name = data.get('name', '')
+
+        # Remove user corrections in brackets first
         name = re.sub(r'\[.*?\]', '', name).strip()
-        name = re.sub(r'\s+', ' ', name)  # Normalize whitespace
+
+        # Remove angle brackets (alternate surnames)
+        name = re.sub(r'<.*?>', '', name).strip()
+
+        # Clean up special characters and normalize whitespace
+        name = name.replace('??', '').strip()
+        name = re.sub(r'\s+', ' ', name)
 
         # Extract birth info
         birth_year = None

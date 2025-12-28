@@ -85,12 +85,16 @@ class FamilySearchExtractor(BaseRecordExtractor):
                         birth_year = int(year_match.group(1))
                         break
 
-                # Extract location (text after year)
+                # Extract location (text after year, excluding "Birth" prefix)
                 lines = [line.strip() for line in cell_text.split('\n') if line.strip()]
                 for line in lines:
-                    if line and line != 'Birth' and not re.match(r'^\d{4}$', line):
-                        birth_place = line
-                        break
+                    # Skip "Birth", years, and event types
+                    if line and line not in ['Birth', 'Baptism', 'Christening'] and not re.match(r'^\d{1,2}\s+\w+\s+\d{4}$', line) and not re.match(r'^\d{4}$', line):
+                        # Remove event type prefixes
+                        line = re.sub(r'^(Birth|Baptism|Christening|Birth Registration)\s+', '', line).strip()
+                        if line:
+                            birth_place = line
+                            break
 
         # Extract parents from <td> with <strong>Parents</strong>
         parents = None
