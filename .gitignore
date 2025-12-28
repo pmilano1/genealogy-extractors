@@ -43,3 +43,9 @@ test_results.json
 
 # Chrome debugging
 .chrome-debug-profile/
+
+# Documentation (keep local only)
+docs/
+
+# Test fixtures (too large for git)
+tests/
