@@ -27,9 +27,14 @@ from extraction.wikitree_extractor import WikiTreeExtractor
 from extraction.familysearch_extractor import FamilySearchExtractor
 from extraction.ancestry_extractor import AncestryExtractor
 from extraction.myheritage_extractor import MyHeritageExtractor
+from extraction.freebmd_extractor import FreeBMDExtractor
+from extraction.filae_extractor import FilaeExtractor
+from extraction.geni_extractor import GeniExtractor
 
 # Import CDP client for production fetching
 from cdp_client import fetch_page_content
+from rate_limiter import get_rate_limiter
+import requests
 
 
 # Source configuration
@@ -51,16 +56,17 @@ SOURCES = {
     'antenati': {
         'name': 'Antenati',
         'extractor': AntenatiExtractor(),
-        'url_template': 'https://www.antenati.san.beniculturali.it/search-registry/?searchType=nominative&surname={surname}',
+        'url_template': 'https://antenati.cultura.gov.it/search-nominative/?cognome={surname}&nome={given_name}',
         'test_fixture': 'tests/fixtures/antenati_milanese_nominative.html',
         'test_params': {'surname': 'Milanese', 'given_name': 'Giovanni', 'birth_year': 1885}
     },
     'familysearch': {
         'name': 'FamilySearch',
         'extractor': FamilySearchExtractor(),
-        'url_template': 'https://www.familysearch.org/search/record/results?q.givenName={given_name}&q.surname={surname}&q.birthLikeYear={birth_year}',
+        'url_template': 'https://www.familysearch.org/en/search/record/results?q.givenName={given_name}&q.surname={surname}&q.birthLikeDate={birth_year}',
         'test_fixture': 'tests/fixtures/familysearch_anderson_margaret.html',
-        'test_params': {'surname': 'Anderson', 'given_name': 'Margaret', 'birth_year': 1880}
+        'test_params': {'surname': 'Anderson', 'given_name': 'Margaret', 'birth_year': 1880},
+        'wait_for_selector': 'tr[data-testid*="/ark:/"]'  # Wait for results to load
     },
     'wikitree': {
         'name': 'WikiTree',
@@ -76,16 +82,108 @@ SOURCES = {
         'test_fixture': 'tests/fixtures/ancestry_smith_john.html',
         'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
     },
-    # MyHeritage disabled - current fixture is search form, not results
-    # Requires subscription + manual browser access to get proper results HTML
-    # 'myheritage': {
-    #     'name': 'MyHeritage',
-    #     'extractor': MyHeritageExtractor(),
-    #     'url_template': 'https://www.myheritage.com/research?action=query&qname=Name+{given_name}+{surname}&qbirth=Year+{birth_year}',
-    #     'test_fixture': 'tests/fixtures/myheritage_smith_john.html',
-    #     'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
-    # }
+    'myheritage': {
+        'name': 'MyHeritage',
+        'extractor': MyHeritageExtractor(),
+        'url_template': 'https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.{given_name}+fnmo.2+fnmsvos.1+fnmsmi.1+ln.{surname}+lnmo.4+lnmsdm.1+lnmsmf3.1&qevents-event1=Event+et.birth+ey.{birth_year}+epmo.similar&useTranslation=1',
+        'test_fixture': 'tests/fixtures/myheritage_smith_john.html',
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880},
+        'wait_for_selector': '.search_results_list'  # Wait for results to load
+    },
+    'filae': {
+        'name': 'Filae',
+        'extractor': FilaeExtractor(),
+        'url_template': 'https://www.filae.com/recherche/individus?nom={surname}&prenom={given_name}&annee_debut={birth_year}&annee_fin={birth_year_end}',
+        'test_fixture': 'tests/fixtures/filae_sample.html',
+        'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1880}
+    },
+    'geni': {
+        'name': 'Geni',
+        'extractor': GeniExtractor(),
+        'url_template': 'https://www.geni.com/search?search_type=people&names={given_name}+{surname}',
+        'test_fixture': 'tests/fixtures/geni_sample.html',
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+    },
+    'freebmd': {
+        'name': 'FreeBMD',
+        'extractor': FreeBMDExtractor(),
+        'url_template': None,  # Uses Playwright form fill
+        'test_fixture': 'tests/fixtures/freebmd_smith_john.html',
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+    }
 }
+
+
+def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
+    """Fetch FreeBMD results using Playwright form submission
+
+    FreeBMD requires POST form submission, not GET URL navigation.
+    This function fills in the search form and submits it.
+    """
+    try:
+        from playwright.sync_api import sync_playwright
+        import time
+
+        with sync_playwright() as p:
+            browser = p.chromium.connect_over_cdp("http://localhost:9222")
+            context = browser.contexts[0]
+
+            # Create new page for FreeBMD
+            page = context.new_page()
+
+            if verbose:
+                print("[FreeBMD] Navigating to search page...")
+
+            # Go to the main search page
+            page.goto("https://www.freebmd.org.uk/cgi/search.pl", timeout=30000)
+
+            # Wait for form to load
+            page.wait_for_selector('form[action="search.pl"]', timeout=10000)
+
+            # Fill in the form fields
+            surname = params.get('surname', '')
+            given_name = params.get('given_name', '')
+            birth_year = params.get('birth_year', 1880)
+            birth_year_end = params.get('birth_year_end', birth_year + 10)
+
+            if verbose:
+                print(f"[FreeBMD] Searching for {given_name} {surname} ({birth_year}-{birth_year_end})")
+
+            # Select Births type
+            page.select_option('select[name="type"]', 'Births')
+
+            # Fill surname
+            page.fill('input[name="surname"]', surname)
+
+            # Fill first name
+            page.fill('input[name="given"]', given_name)
+
+            # Fill start year
+            page.fill('input[name="start"]', str(birth_year))
+
+            # Fill end year
+            page.fill('input[name="end"]', str(birth_year_end))
+
+            # Submit form
+            page.click('input[type="submit"][value="Find"]')
+
+            # Wait for results
+            time.sleep(3)
+
+            # Get content
+            content = page.content()
+
+            if verbose:
+                print(f"[FreeBMD] Got {len(content)} bytes")
+
+            # Close the page
+            page.close()
+
+            return content
+
+    except Exception as e:
+        print(f"[ERROR] FreeBMD Playwright fetch failed: {str(e)}")
+        return ""
 
 
 def extract_from_source(source_key, params, test_mode=False, verbose=False, save_html=False):
@@ -119,19 +217,52 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
         else:
             # Production: fetch live data
             if source['url_template'] is None:
-                raise NotImplementedError(f"{source['name']} requires API implementation")
-            
-            # Build URL
-            url_params = params.copy()
-            if 'birth_year_end' not in url_params and 'birth_year' in url_params:
-                url_params['birth_year_end'] = url_params['birth_year'] + 10
-            
-            url = source['url_template'].format(**url_params)
-            
-            if verbose:
-                print(f"Fetching: {url}")
+                # Special handling for API-based sources
+                if source_key == 'wikitree':
+                    # WikiTree API with rate limiting (200/min, 4000/hr)
+                    api_url = "https://api.wikitree.com/api.php"
+                    api_params = {
+                        'action': 'searchPerson',
+                        'FirstName': params.get('given_name', ''),
+                        'LastName': params.get('surname', ''),
+                        'BirthDate': str(params.get('birth_year', '')),
+                        'BirthDateDecade': str((params.get('birth_year', 1900) // 10) * 10),
+                        'format': 'json',
+                        'limit': 20,
+                        'fields': 'Id,Name,FirstName,LastNameAtBirth,BirthDate,BirthLocation,DeathDate'
+                    }
 
-            content = fetch_page_content(url, source_name=source['name'])
+                    if verbose:
+                        print(f"Fetching WikiTree API: {api_url}")
+
+                    def fetch_wikitree():
+                        response = requests.get(api_url, params=api_params, timeout=15)
+                        response.raise_for_status()
+                        return response.text
+
+                    rate_limiter = get_rate_limiter()
+                    content = rate_limiter.retry_with_backoff(fetch_wikitree, source='wikitree')
+
+                elif source_key == 'freebmd':
+                    # FreeBMD requires Playwright form fill (POST not GET)
+                    content = fetch_freebmd_with_playwright(params, verbose)
+
+                else:
+                    raise NotImplementedError(f"{source['name']} requires API implementation")
+            else:
+                # Build URL
+                url_params = params.copy()
+                if 'birth_year_end' not in url_params and 'birth_year' in url_params:
+                    url_params['birth_year_end'] = url_params['birth_year'] + 10
+
+                url = source['url_template'].format(**url_params)
+
+                if verbose:
+                    print(f"Fetching: {url}")
+
+                # Pass wait_for_selector if source needs it (for JS-heavy sites)
+                wait_selector = source.get('wait_for_selector')
+                content = fetch_page_content(url, source_name=source['name'], wait_for_selector=wait_selector)
 
             # Save HTML if requested
             if save_html:

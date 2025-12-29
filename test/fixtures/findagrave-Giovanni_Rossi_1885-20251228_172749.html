@@ -1,0 +1,2898 @@
+<section id="content" role="main">
+      
+<div class="section-banner memorial-search section-form stickme d-print-none" id="js--memorial-form" role="region" aria-label="filters">
+    <div class="container-lg">
+        <div class="row g-0">
+            <div class="col-sm-12 col-lg-8">
+                <!-- memorial search form -->
+                <div class="row g-0">
+                    <div class="grave-search-bg container-fluid p-0">
+                        
+                        
+
+                        
+                        <div class="d-print-none g-0 row hidden" id="js--memorial-search-block">
+                            <div class="col-12 grave-search-bg">
+                                
+<div class="grave-search-inner d-print-none">
+    <form id="memorialNewSearchForm" class="grave-search mb-3" method="get">
+        
+        <div class="row gx-0">
+            <div class="col-12 input-group">
+                <div class="form-floating">
+                    <input type="text" name="firstname" id="firstname" class="form-control hide-ac fs-unmask" placeholder="First Name" maxlength="75" value="Giovanni" autocomplete="on" autofocus="autofocus">
+                    <label for="firstname">First Name</label>
+                </div>
+                <div class="form-floating">
+                     <input type="text" name="middlename" id="middlename" class="form-control hide-ac fs-unmask" placeholder="Middle Name" maxlength="50" autocomplete="on">
+                   <label for="middlename">Middle Name</label>
+                </div>
+                <div class="form-floating">
+                      <input type="text" name="lastname" id="lastname" class="form-control hide-ac fs-unmask" placeholder="Last Name(s)" maxlength="75" value="Rossi" autocomplete="on">
+                      <label for="lastname">Last Name(s)</label>
+                   </div>
+               </div>
+               <p class="form-text text-end"><span class="error-msg" id="firstNameLengthError">Special characters are not allowed.</span> <span class="error-msg" id="lastNameLengthError">Please enter at least 2 characters.</span></p>
+            
+        </div>
+        <div class="row g-0">
+            <div class="col">
+                <p id="deathYearError" class="form-text error-msg">Death year must be in the past.</p>
+                <p id="deathYearGreaterThanBirthYearError" class="form-text error-msg">Birth year must come before death year.</p>
+                <p id="birthYearError" class="form-text error-msg">Birth year must be in the past.</p>
+            </div>
+        </div>
+        <div class="row gx-2">
+            <div class="col-6 col-md-6 mb-lg-0 col-lg-3 mb-3">
+                <div class="input-group date-select birthyearfilter">
+                    <div class="form-floating">
+                        <input type="number" id="birthyear" name="birthyear" class="form-control hide-ac fs-unmask" maxlength="4" placeholder="Year Born" value="1885" pattern="\d*" autocomplete="on">
+                        <label for="birthyear">Year Born</label>
+                    </div>
+                    <input type="hidden" name="birthyearfilter" id="birthyearfilter" value="5">
+                        <button class="btn btn-secondary dropdown-toggle dropdown" type="button" data-bs-toggle="dropdown" id="dropdownbyfilter1">
+                            
+                                +/- 5 years
+                            
+                        </button>
+                        <ul class="dropdown-menu shadow-sm dropdown-menu-end" aria-labelledby="dropdownbyfilter1">
+                            <li><a href="#" role="button" class="dropdown-item" value="exact">Exact</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="before">Before</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="after">After</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="1">+/- 1 year</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="3">+/- 3 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="5">+/- 5 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="10">+/- 10 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="25">+/- 25 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="unknown">Unknown</a></li>
+                        </ul>
+                </div>
+            </div>
+            <div class="col-6 col-md-6 mb-lg-0 col-lg-3 mb-3">
+                <div class="input-group date-select deathyearfilter">
+                    <div class="form-floating">
+                        <input type="number" id="deathyear" name="deathyear" class="form-control hide-ac fs-unmask" maxlength="4" placeholder="Year Died" value="" pattern="\d*" autocomplete="on">
+                        <label for="deathyear">Year Died</label>
+                    </div>
+                        <input type="hidden" name="deathyearfilter" id="deathyearfilter" value="">
+                        <button class="btn btn-secondary dropdown-toggle dropdown" type="button" data-bs-toggle="dropdown" id="dropdownbyfilter2">
+                            
+                                Exact
+                            
+                        </button>
+                        <ul class="dropdown-menu shadow-sm" aria-labelledby="dropdownbyfilter2">
+                            <li><a href="#" role="button" class="dropdown-item" value="exact">Exact</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="before">Before</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="after">After</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="1">+/- 1 year</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="3">+/- 3 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="5">+/- 5 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="10">+/- 10 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="25">+/- 25 years</a></li>
+                            <li><a href="#" role="button" class="dropdown-item" value="unknown">Unknown</a></li>
+                        </ul>
+
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg mb-md-0">
+                <div class="local-select">
+                    <div class="input-group align-items-stretch">
+                        <div class="contain-clear bg-white rounded-start col">
+                        <label for="location" class="visually-hidden-focusable">Cemetery Location</label>
+                        <span class="icon-close clear-search hidden" tabindex="0" role="button"><span class="visually-hidden">Clear</span></span>
+                            <span class="twitter-typeahead form-floating" style="position: relative; display: inline-block;"><input class="hide-ac fs-unmask tt-hint" type="text" autocomplete="off" value="" readonly="" spellcheck="false" tabindex="-1" aria-hidden="true" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);" dir="ltr"><input class="hide-ac fs-unmask tt-input form-control" type="text" autocomplete="off" placeholder="Cemetery Location" name="location" id="location" value="" spellcheck="false" dir="auto" aria-owns="location_listbox" aria-controls="location_listbox" role="combobox" aria-autocomplete="list" aria-expanded="false" style="position: relative; vertical-align: top; background-color: transparent;"><label for="location">Cemetery Location</label><span role="status" aria-live="polite" style="position: absolute; padding: 0px; border: 0px; height: 1px; width: 1px; margin-bottom: -1px; margin-right: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap;"></span><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Source Sans Pro&quot;, Helvetica, Arial, sans-serif; font-size: 15px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div role="listbox" class="tt-menu" id="location_listbox" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div role="presentation" class="tt-dataset tt-dataset-location"></div></div></span>
+
+                        </div>
+                        
+                        <div class="col-auto" id="browse-button">
+                            <button type="button" class="h-100 rounded-0 rounded-end px-3 btn btn-sm border-0 btn-secondary" data-bs-toggle="modal" data-bs-target="#cemetery-browse" aria-label="Browse Cemetery Locations">Browse</button>
+                        </div>
+                        
+                    </div>
+                    <p class="form-text text-end"><span class="error-msg" id="locationError">Please select a valid location</span></p>
+                    <input type="hidden" name="locationId" id="locationId" value="">
+                </div>
+            </div>
+            
+        </div>
+      
+        <div class="search-more row gx-2 g-0 mt-3">
+            <div id="adv-search" class="collapse col-12">
+                <div class="row gx-2 align-items-center">
+                    <div class="col-12 col-sm form-floating mb-3">
+                        <input type="text" name="bio" id="bio" class="form-control fs-unmask" placeholder="Bio keywords" maxlength="50">
+                        <label for="bio">Bio keywords</label>
+                    </div>
+                    <div class="col-12 col-sm pe-2 mb-3 form-floating">
+                        <input type="text" name="linkedToName" id="linkedToName" class="form-control hide-ac fs-unmask" placeholder="Spouse, Parent, Child or Sibling name" maxlength="50">
+                        <label for="linkedToName">Spouse, Parent, Child or Sibling name</label>
+                    </div>
+                    <div class="col-12 col-sm-auto col-md-3 col-lg-2 mb-3 form-floating">
+                        <input type="text" name="plot" id="plot" class="form-control fs-unmask" placeholder="Plot" maxlength="50">
+                        <label for="plot">Plot</label>
+                    </div>
+                </div>
+                <div class="row gx-2 align-items-center">
+                    
+                        <div class="col-12 col-sm-auto col-md-3 mb-3 mb-md-0">
+                           <div class="form-floating">
+                                <input type="number" name="memorialid" id="memorialid" class="form-control fs-unmask" placeholder="Memorial ID" maxlength="20" pattern="[0-9]*">
+                                <label for="memorialid">Memorial ID</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-sm-auto col-md-3 mb-3 mb-md-0">
+                           <div class="form-floating">
+                            <input type="number" name="mcid" id="mcid" class="form-control fs-unmask" placeholder="Contributor ID" maxlength="20" pattern="[0-9]*">
+                            <label for="mcid">Contributor ID</label>
+                           </div>
+                        </div>
+                        
+                    
+                    <div class="col-6 col-sm-auto col-md-auto mb-3 mb-md-0">
+                        <div class="select-style form-floating me-0">
+                            <select name="datefilter" class="form-control fs-unmask" id="datefilter">
+                                <option value=""></option>
+                                <option disabled="">---------</option>
+                                <option value="1">Added in last 24 hours</option>
+                                <option value="7">Added in last 7 days</option>
+                                <option value="30">Added in last 30 days</option>
+                                <option value="90">Added in last 90 days</option>
+                                <option value="-90">Older than 90 days</option>
+                            </select>
+                            <label for="datefilter">Date added</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6 col-sm-auto col-md-auto mb-3 mb-md-0">
+                        <div class="select-style form-floating me-0">
+                            <select name="orderby" class="form-control fs-unmask" id="orderby">
+                                <option value="r">Relevance</option>
+                                <option value="n">Name (A-Z)</option>
+                                <option value="n-">Name (Z-A)</option>
+                                <option value="b">Birth Date (Older)</option>
+                                <option value="b-">Birth Date (Newer)</option>
+                                <option value="d">Death Date (Older)</option>
+                                <option value="d-">Death Date (Newer)</option>
+                                
+                                <option value="c">Cemetery (A-Z)</option>
+                                <option value="c-">Cemetery (Z-A)</option>
+                                
+                                <option value="dc">Date Created</option>
+                                <option value="dm">Date Modified</option>
+                                <option value="pl">Plot</option>
+                            </select>
+                            <label for="orderby">Sort by</label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row g-0 pt-3 text-dark">
+                    <fieldset class="col-6 col-sm-4 mb-3 mt-3">
+                        <legend class="fw-bold h6">By Memorial Types:</legend>
+                        <ul class="input-list css-input list-unstyled" role="presentation">
+                            <li class="form-check checkbox ">
+                                <input class="form-check-input" type="checkbox" name="famous" value="true" id="is-famous"> <label class="form-check-label fg-checkbox form-check-label" for="is-famous">Famous</label>
+                            </li>
+                            <li class="form-check checkbox ">
+                                <input class="form-check-input" type="checkbox" name="sponsored" value="true" id="is-sponsored"> <label class="form-check-label fg-checkbox" for="is-sponsored">Sponsored</label>
+                            </li>
+                            
+                            <li class="form-check checkbox ">
+                                <input class="form-check-input" type="checkbox" name="noCemetery" value="true" id="noCemetery"> <label class="fg-radio form-check-label" for="noCemetery">Not buried in a cemetery</label>
+                            </li>
+                            
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="cenotaph" value="true" id="is-cenotaph"> <label class="form-check-label fg-checkbox" for="is-cenotaph">Cenotaph</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="monument" value="true" id="is-monument"> <label class="form-check-label fg-checkbox" for="is-monument">Monument</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="isVeteran" value="true" id="isVeteran"> <label class="form-check-label fg-checkbox" for="isVeteran">Veteran</label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <fieldset class="col-6 col-sm-4 mb-3 mt-3">
+                        <legend class="fw-bold h6">Include:</legend>
+                        <ul class="input-list css-input list-unstyled" role="presentation">
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="includeNickName" value="true" id="includeNickName"> <label class="form-check-label fg-checkbox" for="includeNickName">Nickname</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="includeMaidenName" value="true" id="includeMaidenName"> <label class="form-check-label fg-checkbox" for="includeMaidenName">Maiden name</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="includeTitles" value="true" id="includeTitles"> <label class="form-check-label fg-checkbox" for="includeTitles">Titles</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="exactName" value="true" id="exactName"> <label class="form-check-label fg-checkbox" for="exactName">Exact name spelling</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="fuzzyNames" value="true" id="fuzzyNames"> <label class="form-check-label fg-checkbox" for="fuzzyNames">Similar name spellings</label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <fieldset class="col-12 col-sm-4 mb-3 mt-3">
+                        <legend class="fw-bold h6">Memorials with:</legend>
+                        <ul class="input-list css-input list-unstyled" role="presentation">
+                            <li class="form-check checkbox ">
+                                <input class="form-check-input" type="checkbox" name="photofilter" value="nophotos" id="memorials-no-photos"> <label class="fg-radio form-check-label" for="memorials-no-photos">No grave photo</label>
+                            </li>
+                            <li class="form-check checkbox ">
+                                <input class="form-check-input" type="checkbox" name="photofilter" value="photos" id="memorials-with-photos"> <label class="fg-radio form-check-label" for="memorials-with-photos">Grave photo</label>
+                            </li>
+                            <li class="form-check checkbox ">
+                                <input class="form-check-input" type="checkbox" name="gpsfilter" value="nogps" id="memorials-no-gps"> <label class="fg-radio form-check-label" for="memorials-no-gps">No GPS</label>
+                            </li>
+                            <li class="form-check checkbox ">
+                                <input class="form-check-input" type="checkbox" name="gpsfilter" value="gps" id="memorials-with-gps"> <label class="fg-radio form-check-label" for="memorials-with-gps">GPS</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="flowers" value="true" id="is-flowered"> <label class="form-check-label fg-checkbox" for="is-flowered">Flowers</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="hasPlot" value="true" id="hasPlot"> <label class="form-check-label fg-checkbox" for="hasPlot">Plot info</label>
+                            </li>
+                            <li class="form-check checkbox">
+                                <input class="form-check-input" type="checkbox" name="hasPlot" value="false" id="noPlot"> <label class="form-check-label fg-checkbox" for="noPlot">No plot info</label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <!-- Advanced Search Collapse end -->
+        <div class="row gx-2 mt-3">
+            <div class="col">
+                <button type="submit" class="btn me-2 btn-primary btn-lg">SEARCH</button>
+                <p class="visually-hidden">Activating the following button will add more search options to the page.</p>
+                <a class="collapsed collapse-link me-md-0 mt-2 mt-sm-0 btn btn-link  text-primary" role="button" data-bs-toggle="collapse" href="#adv-search" id="collapseLink"><span id="moreOptions">More search options</span><span id="fewerOptions" class="d-none">Fewer search options</span> <span class="dropdown-toggle anim-caret" aria-hidden="true"></span></a>
+                <div class="label label-update d-md-inline mt-2 mt-md-0"><a data-bs-toggle="modal" role="button" href="#modal-search-updates" class="btn text-nowrap text-primary"><span class="vertical-middle icon-info" aria-hidden="true"></span>Search tips <span class="icon-arrowright vertical-middle" aria-hidden="true"></span></a></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+                            </div>
+                        </div>
+                        
+                        
+<a id="srp-top"></a>
+<div class="search-refine-block new d-print-none">
+    <div class="search-query row g-0">
+        <div class="search-tags-wrapper col-sm-12">
+            <div class="refineSearchForm row">
+                <div class="col-12 col-md-10">
+                    <h1 class="lead new h6 fw-normal">
+                    
+                        
+                            29 matching records found 
+                            
+                            for
+                            
+                        
+                    
+                    </h1>
+                </div>
+                <div class="col-12">
+                    <ul class="search-tags new">
+                        <li class="tag-item new">Giovanni<button type="button" class="remove d-print-none" id="firstNameFilter" aria-label="Clear"><span aria-hidden="true">×</span></button></li>
+                        
+                        <li class="tag-item new">Rossi<button type="button" class="remove d-print-none" id="lastNameFilter" aria-label="Clear"><span aria-hidden="true">×</span></button></li>
+                        
+                        
+                        
+                        
+                        <li class="tag-item new">
+                            
+                                Born 1885 +/- 5 years
+                            
+                            <button type="button" class="remove d-print-none" id="birthYearSearchFilter" aria-label="Clear"><span aria-hidden="true">×</span></button></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            <li><button class="btn btn-link d-print-none" id="js--refine-btn">Refine Search</button></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <p class="visually-hidden">Activating the following buttons will either remove or include search refinement options on the page.</p>
+            <button id="moreRefineOptions" class="btn btn-link js--tp-later more-options hidden" type="button"> 
+                <span class="icon icon-plus"></span>
+                <span class="more-options-text" aria-label="Show search refinement options">&nbsp;More</span>
+            </button>
+            <button id="hideRefineOptions" type="button" class="btn btn-link js--tp-later ">
+                <span class="icon icon-minus"></span>
+                <span class="more-options-text" aria-label="Hide search refinement options">&nbsp;Less</span>
+            </button>
+        </div>
+        <div class="col-10">
+            <div class="mb-3 text-end sort-search new d-print-none row align-items-center justify-content-end">
+                
+<div class="col row gx-2 justify-content-end">
+
+<div class="col-auto d-print-none d-flex border-end pe-2">
+   <div class="d-flex justify-content-end align-items-center">
+    
+        <label class="me-2" for="gotoPage">Page</label> <div class="flex-shrink-1 col-4"><input id="gotoPage" type="number" class="goto-page form-control form-control-sm" size="3" maxlength="3" onfocus="this.select();" onmouseup="return false;" min="1" max="2" enterkeyhint="go"></div> <span class="ms-2 py-2 text-nowrap">of 2</span>
+    
+    
+   </div>
+</div>
+
+<div class="col-auto btn-group d-print-none align-items-center">
+   <div class="dropdown">
+      <button class="btn btn-outline-primary border-0" type="button" id="settingsOptions" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Search Settings"><span class="icon-settings align-middle m-0 me-md-2" aria-hidden="true"></span><span class="d-none d-md-inline">Settings</span></button>
+      <div class="dropdown-menu dropdown-menu-end">
+         <div class="px-3 py-2">
+            <strong class="h6 d-block">List Settings</strong>
+            <div class="form-check form-switch mb-2">
+               <input class="form-check-input" type="checkbox" role="switch" id="scrollLists" checked="">
+               <label class="form-check-label text-nowrap" for="scrollLists">Use infinite scroll</label>
+            </div>
+            
+            
+               <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="condensedLists">
+                  <label class="form-check-label" for="condensedLists">Condensed list <span class="text-muted">(no thumbnail)</span></label>
+               </div>
+            
+            
+         </div>
+        </div>
+   </div>
+</div>
+</div>
+
+                <label for="sort-select" class="visually-hidden">Sort by </label>
+                <div class="select-style me-2 ms-0 col-auto">
+                    <select name="orderby" class="form-control form-control-sm" id="sort-select" title="Sort by">
+                        <optgroup label="Sort by">
+                            <option value="r" selected="selected">Relevance</option>
+                            <option value="n">Name (A-Z)</option>
+                            <option value="n-">Name (Z-A)</option>
+                            <option value="b">Birth Date (Older)</option>
+                            <option value="b-">Birth Date (Newer)</option>
+                            <option value="d">Death Date (Older)</option>
+                            <option value="d-">Death Date (Newer)</option>
+                            
+                            <option value="c">Cemetery (A-Z)</option>
+                            <option value="c-">Cemetery (Z-A)</option>
+                            
+                            <option value="dc">Date Created</option>
+                            <option value="dm">Date Modified</option>
+                            <option value="pl">Plot</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<!-- Redefine search ends -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-4 col-sidebar">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-banner memorial-search">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-12 col-lg-8 col-print-12">
+                <!-- Memorial search result list begins -->
+                <div class="memorial-search-list">
+                    
+<div id="loadpreviousajaxloader" style="display: none;" class="text-center mx-auto">
+    <div class="loader-h" role="status"><span class="visually-hidden">Loading...</span>
+            <div class="disc disc-1"></div>
+            <div class="disc disc-2"></div>
+            <div class="disc disc-3"></div>
+    </div>
+</div>
+<div class="pt-4 text-center mx-n2 hidden">
+    
+    <button type="button" class="position-relative btn btn-default px-5 mt-n4 hidden" id="load-previous-page" aria-label="Load previous set of results">Previous page <span class="align-middle icon-arrowupafter m-0" aria-hidden="true"></span></button>
+</div>
+                    <a class="visually-hidden-focusable" href="#skipsrp">Skip past search results</a>
+                    <div class="memorial-list-data">
+                        
+
+<div class="list-item-page pt-3 container-lg" data-url="page=1" data-instance="pqgorBZSNg" data-cmd="true">
+    
+        
+        <h2 class="paging-divide h6 mb-0 fw-normal " id="srppage1">
+            <span>Page 1</span>
+        </h2>
+        
+    
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-171700079">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/171700079/giovanni-rossi" data-scroll-offset="1">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2016/295/171700079_1477180194.jpg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni “John” Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1888 – 1950</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/104477/saint-ann-cemetery"><button type="submit" class="btn btn-link" role="link" title="Saint Ann Cemetery">Saint Ann Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Cranston,
+                        
+                        
+                        Providence County,
+                        
+                        
+                        Rhode Island
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Section 24, Lot 24</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-44415870">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/44415870/giovanni-rossi" data-scroll-offset="2">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2013/69/44415870_136304259034.jpg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni “John” Rossi</i>
+                
+                
+                
+                
+                <span class="visually-hidden">Flowers have been left.</span>
+                <b data-bs-toggle="tooltip" data-bs-placement="bottom" class="icon icon-flowers text-primary align-middle m-0" aria-hidden="true" aria-label="Flowers have been left." data-bs-original-title="Flowers have been left."></b>
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1885 – 2 Mar 1912</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/8078/the-italian-cemetery"><button type="submit" class="btn btn-link" role="link" title="The Italian Cemetery">The Italian Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Colma,
+                        
+                        
+                        San Mateo County,
+                        
+                        
+                        California
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>58</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-149056347">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/149056347/giovanni-rossi" data-scroll-offset="3">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2015/201/149056347_1437520680.jpg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1890 – 1979</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/64884/cemetery-of-the-holy-rood"><button type="submit" class="btn btn-link" role="link" title="Cemetery of the Holy Rood">Cemetery of the Holy Rood</button></form>
+                    <p class="addr-cemet mb-1">
+                        Westbury,
+                        
+                        
+                        Nassau County,
+                        
+                        
+                        New York
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Section 7 Row U</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-195562022">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/195562022/giovanni-rossi" data-scroll-offset="4">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2018/359/195562022_4d32f313-4a1d-4ffb-80d5-af0e10632ae8.jpeg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">8 Dec 1880 – 9 Aug 1972</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/1698809/st.-mary's-cemetery"><button type="submit" class="btn btn-link" role="link" title="St. Mary's Cemetery">St. Mary's Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Oakland,
+                        
+                        
+                        Alameda County,
+                        
+                        
+                        California
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Dormitory 4</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-169789658">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/169789658/giovanni-rossi" data-scroll-offset="5">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2016/249/UNCEM_1473082389038.JPG" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1880 – 1955</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/64166/holy-cross-cemetery"><button type="submit" class="btn btn-link" role="link" title="Holy Cross Cemetery">Holy Cross Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Brooklyn,
+                        
+                        
+                        Kings County,
+                        
+                        
+                        New York
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-232500776">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/232500776/giovanni-rossi" data-scroll-offset="6">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2021/263/UNCEM_8346_6a6305a7-a53d-41bd-adce-9a571ddace70.jpeg?v=1632784373" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1882 – 1952</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/8346/san-joaquin-catholic-cemetery"><button type="submit" class="btn btn-link" role="link" title="San Joaquin Catholic Cemetery">San Joaquin Catholic Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Stockton,
+                        
+                        
+                        San Joaquin County,
+                        
+                        
+                        California
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-255388285">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/255388285/giovanni-rossi" data-scroll-offset="7">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper bg-transparent border-0">
+                <span class="icon-findagrave" role="img" aria-label="No Grave Photo"></span>
+            </figure>
+            
+
+        <small class="text-muted text-center">No grave photo</small>
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                <span class="align-middle icon icon-findagrave text-muted m-0 condensed-show hidden" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="No grave photo" data-bs-original-title="No grave photo"></span>
+                <small class="d-print-inline d-none text-muted condensed-show hidden"> • No grave photo </small>
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">18 Jun 1888 – 21 Jan 1970</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/2147985/saint-kentigerns-cemetery"><button type="submit" class="btn btn-link" role="link" title="Saint Kentigerns Cemetery">Saint Kentigerns Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Glasgow,
+                        
+                        
+                        
+                        Glasgow City,
+                        
+                        
+                        Scotland
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Lair 2207 Section 6</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-139876029">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/139876029/giovanni-rossi" data-scroll-offset="8">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2016/201/139876029_1469065766.jpg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                <span class="visually-hidden">Flowers have been left.</span>
+                <b data-bs-toggle="tooltip" data-bs-placement="bottom" class="icon icon-flowers text-primary align-middle m-0" aria-hidden="true" aria-label="Flowers have been left." data-bs-original-title="Flowers have been left."></b>
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1887 – 23 Nov 1957</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/104477/saint-ann-cemetery"><button type="submit" class="btn btn-link" role="link" title="Saint Ann Cemetery">Saint Ann Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Cranston,
+                        
+                        
+                        Providence County,
+                        
+                        
+                        Rhode Island
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Section 20, Lot 338, Grave 2</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-206142558">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/206142558/giovanni-rossi" data-scroll-offset="9">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2020/11/206142558_cca918e2-e031-4a89-89e2-052b641dc461.jpeg" alt="">
+            </figure>
+            
+
+        <small class="text-muted text-center">No grave photo</small>
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni <i>Luigi</i> Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                <span class="align-middle icon icon-findagrave text-muted m-0 condensed-show hidden" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="No grave photo" data-bs-original-title="No grave photo"></span>
+                <small class="d-print-inline d-none text-muted condensed-show hidden"> • No grave photo </small>
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">15 Mar 1890 – 21 May 1931</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/45000/greenwood-cemetery"><button type="submit" class="btn btn-link" role="link" title="Greenwood Cemetery">Greenwood Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        New Castle,
+                        
+                        
+                        Lawrence County,
+                        
+                        
+                        Pennsylvania
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Lot Number: SG,  Section: 5,  Location: Row G, Grave 6</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div data-instance-child="pqgorBZSNg" class="ad__child-0 ad__slot--wrapper ad__w728 ad__h90 ad__align"><div id="incontent1" data-cmd="true" data-unit="ll870w" aria-label="Advertisement" role="region" class="fs-exclude ad__slot ad__h90--inner" style="" data-google-query-id="CLKwuZSq4ZEDFcO90QQd-mcz7g"><div id="google_ads_iframe_/4802/findagrave/desktop/incontent1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/4802/findagrave/desktop/incontent1_0" name="google_ads_iframe_/4802/findagrave/desktop/incontent1_0" title="3rd party ad content" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" aria-label="Advertisement" tabindex="0" allow="private-state-token-redemption;attribution-reporting" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-presentation" data-load-complete="true" style="border: 0px; vertical-align: bottom;" data-google-container-id="6"></iframe></div></div></div><div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-216628863">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/216628863/giovanni-rossi" data-scroll-offset="10">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper bg-transparent border-0">
+                <span class="icon-findagrave" role="img" aria-label="No Grave Photo"></span>
+            </figure>
+            
+
+        <small class="text-muted text-center">No grave photo</small>
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                <span class="align-middle icon icon-findagrave text-muted m-0 condensed-show hidden" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="No grave photo" data-bs-original-title="No grave photo"></span>
+                <small class="d-print-inline d-none text-muted condensed-show hidden"> • No grave photo </small>
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1888 – 5 Jun 1951</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/2169855/whitehaven-cemetery"><button type="submit" class="btn btn-link" role="link" title="Whitehaven Cemetery">Whitehaven Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Whitehaven,
+                        
+                        
+                        Copeland Borough,
+                        
+                        
+                        Cumbria,
+                        
+                        
+                        England
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Ward 6 - Section L - Grave 687</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-154068933">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/154068933/giovanni-rossi" data-scroll-offset="11">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2015/293/UNCEM_1445368048915.JPG" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni “John” Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">3 Jun 1886 – 27 Nov 1952</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/8411/tulocay-cemetery"><button type="submit" class="btn btn-link" role="link" title="Tulocay Cemetery">Tulocay Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Napa,
+                        
+                        
+                        Napa County,
+                        
+                        
+                        California
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-136231874">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/136231874/giovanni-rossi" data-scroll-offset="12">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2014/263/136231874_1411348879.jpg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni “John” Rossi</i>
+                
+                
+                
+                
+                <span class="visually-hidden">Flowers have been left.</span>
+                <b data-bs-toggle="tooltip" data-bs-placement="bottom" class="icon icon-flowers text-primary align-middle m-0" aria-hidden="true" aria-label="Flowers have been left." data-bs-original-title="Flowers have been left."></b>
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1888 – 18 Apr 1944</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/104477/saint-ann-cemetery"><button type="submit" class="btn btn-link" role="link" title="Saint Ann Cemetery">Saint Ann Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Cranston,
+                        
+                        
+                        Providence County,
+                        
+                        
+                        Rhode Island
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+                    <p class="addr-cemet mb-1"><span class="text-muted">Plot info:</span> <strong>Section 22, Lot 723, Grave 1</strong></p>
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-39892865">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/39892865/giovanni-rossi" data-scroll-offset="13">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2009/206/39892865_124862197169.jpg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">12 Feb 1881 – 14 Aug 1949</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/1974233/cedar-ridge-cemetery"><button type="submit" class="btn btn-link" role="link" title="Cedar Ridge Cemetery">Cedar Ridge Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Blairstown,
+                        
+                        
+                        Warren County,
+                        
+                        
+                        New Jersey
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-135950832">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/135950832/giovanni-rossi" data-scroll-offset="14">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2014/257/135950832_1410824491.jpg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni “John” Rossi</i>
+                
+                
+                
+                
+                <span class="visually-hidden">Flowers have been left.</span>
+                <b data-bs-toggle="tooltip" data-bs-placement="bottom" class="icon icon-flowers text-primary align-middle m-0" aria-hidden="true" aria-label="Flowers have been left." data-bs-original-title="Flowers have been left."></b>
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">26 Mar 1890 – 6 Jan 1969</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/91628/saint-mary's-cemetery"><button type="submit" class="btn btn-link" role="link" title="Saint Mary's Cemetery">Saint Mary's Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Beverly,
+                        
+                        
+                        Essex County,
+                        
+                        
+                        Massachusetts
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-281840002">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/281840002/giovanni-rossi" data-scroll-offset="15">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2025/111/281840002_194340c7-409a-4444-9067-ccfc8ae8bb8c.heic" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                <span class="icon-vet align-middle m-0 lh-1 badge rounded-pill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Veteran"><span aria-hidden="true">V</span><span class="visually-hidden">Veteran</span></span>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">4 Oct 1887 – 1 Jul 1915</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/2301125/cimitero-di-chieti"><button type="submit" class="btn btn-link" role="link" title="Cimitero di Chieti">Cimitero di Chieti</button></form>
+                    <p class="addr-cemet mb-1">
+                        Chieti,
+                        
+                        
+                        Provincia di Chieti,
+                        
+                        
+                        Abruzzo,
+                        
+                        
+                        Italy
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-133093564">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/133093564/giovanni-rossi" data-scroll-offset="16">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2019/108/133093564_fe770f55-9148-4325-89ee-f9ab9feb5698.jpeg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni “John” Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1886 – 30 Apr 1921</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/79790/saint-josephs-cemetery"><button type="submit" class="btn btn-link" role="link" title="Saint Josephs Cemetery">Saint Josephs Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Martinsburg,
+                        
+                        
+                        Berkeley County,
+                        
+                        
+                        West Virginia
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-199456000">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/199456000/giovanni-rossi" data-scroll-offset="17">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2021/12/199456000_7b5f5094-27fd-4def-9751-94cdc6ac7fd3.jpeg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                <span class="visually-hidden">Flowers have been left.</span>
+                <b data-bs-toggle="tooltip" data-bs-placement="bottom" class="icon icon-flowers text-primary align-middle m-0" aria-hidden="true" aria-label="Flowers have been left." data-bs-original-title="Flowers have been left."></b>
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">14 Oct 1888 – Dec 1971</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/744/holy-sepulchre-catholic-cemetery"><button type="submit" class="btn btn-link" role="link" title="Holy Sepulchre Catholic Cemetery">Holy Sepulchre Catholic Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Southfield,
+                        
+                        
+                        Oakland County,
+                        
+                        
+                        Michigan
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-179282722">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/179282722/giovanni-rossi" data-scroll-offset="18">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2017/126/UNCEM_1494085276286.jpeg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1881 – 1932</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/64107/calvary-cemetery"><button type="submit" class="btn btn-link" role="link" title="Calvary Cemetery">Calvary Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Woodside,
+                        
+                        
+                        Queens County,
+                        
+                        
+                        New York
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-270223459">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/270223459/giovanni-rossi" data-scroll-offset="19">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2024/153/270223459_0017a12a-dcfb-4186-ba90-527b48b1adc4.jpeg" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">1885 – 1932</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/46527/union-cemetery"><button type="submit" class="btn btn-link" role="link" title="Union Cemetery">Union Cemetery</button></form>
+                    <p class="addr-cemet mb-1">
+                        Arnold,
+                        
+                        
+                        Westmoreland County,
+                        
+                        
+                        Pennsylvania
+                        
+                        
+                            
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+    <div data-instance-child="pqgorBZSNg" class="ad__child-1 ad__slot--wrapper ad__w728 ad__h90 ad__align"><div id="incontent2" data-cmd="true" data-unit="yg9rkc" aria-label="Advertisement" role="region" class="fs-exclude ad__slot ad__h90--inner" style=""></div></div><div role="group" aria-label="Memorial">
+    
+    
+    <div class="memorial-item px-2 py-2 gx-4 gy-0 position-relative row border-bottom align-items-md-center" id="sr-277768104">
+    <div class="col-12 col-md col-print-3">
+    <a class="d-flex align-items-center text-decoration-none" href="/memorial/277768104/giovanni-rossi" data-scroll-offset="20">
+    
+    <div class="memorial-item-pic ms-sm-3">
+            
+            <figure class="pic-wrapper">
+            <img src="https://images.findagrave.com/photoThumbnails/photos/2024/357/UNCEM_2404846_67b66982-98d0-486a-9aea-e9bb304585d4.jpg?v=1735520304" alt="">
+            </figure>
+            
+
+        
+        
+    </div>
+    <div class="memorial-item--info mb-sm-4">
+        <div class="memorial-item---grave">
+            <h2 class="name-grave"><i class="pe-2 text-break">Giovanni Rossi</i>
+                
+                
+                
+                
+                
+                
+                
+                
+            </h2>
+            
+                
+                    <b class="birthDeathDates fw-light fs-5 text-body">10 Dec 1888 – 18 Nov 1965</b>
+                
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    </a>
+    
+    </div>
+    <div class="memorial-item---cemet col-12 col-md-auto">
+            
+                
+                    <form action="/cemetery/2404846/cemetery-of-maddaloni"><button type="submit" class="btn btn-link" role="link" title="Cemetery of Maddaloni">Cemetery of Maddaloni</button></form>
+                    <p class="addr-cemet mb-1">
+                        Maddaloni,
+                        
+                        
+                        Provincia di Caserta,
+                        
+                        
+                        Campania,
+                        
+                        
+                        Italy
+                        
+                    </p>
+                
+            
+
+                
+
+            
+
+    </div>
+</div>
+    </div>
+
+</div>
+
+                    </div>
+                    <div class="py-4 text-center mx-n2 hidden">
+    <hr aria-hidden="true" class="m-0">
+    <button type="button" class="position-relative btn btn-default px-5 mt-n4 " id="load-next-page" aria-label="Load another set of results">Next Page <span class="align-middle icon-arrowdownafter m-0" aria-hidden="true"></span></button>
+</div>
+<div id="loadmoreajaxloader" style="display: none;" class="text-center mx-auto">
+    <div class="loader-h" role="status"><span class="visually-hidden">Loading...</span>
+        <div class="disc disc-1"></div>
+        <div class="disc disc-2"></div>
+        <div class="disc disc-3"></div>
+    </div>
+</div>
+                    
+                    <div class="col-sm-12 p-0 d-print-none">
+                        <div class="py-3">
+                        <a class="btn-default btn icon-add" href="#prompt-signup" data-bs-toggle="modal" data-url="/memorial/create/search-cemetery">Add a memorial</a>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <!-- Memorial search result list ends -->
+            </div>
+            
+
+            <div class="col-12 col-md-4 col-sidebar pt-3 d-print-none" id="skipsrp" tabindex="-1">
+                
+                
+
+<div class="fg-prad mx-auto d-print-none position-relative">
+    
+    
+    <div id="rightrail1" class="ad-wrapper mt-0 fs-exclude ad__slot ad__h250--inner" data-cmd="true" data-unit="nnmlnz" aria-label="Advertisement" role="region" style="" data-google-query-id="CIW6tZSq4ZEDFTjS4wcdSik7Kw"><div id="google_ads_iframe_/4802/findagrave/desktop/rightrail1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/4802/findagrave/desktop/rightrail1_0" name="google_ads_iframe_/4802/findagrave/desktop/rightrail1_0" title="3rd party ad content" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" aria-label="Advertisement" tabindex="0" allow="private-state-token-redemption;attribution-reporting" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-presentation" data-load-complete="true" style="border: 0px; vertical-align: bottom;" data-google-container-id="4"></iframe></div></div>
+    
+    
+        
+        <p class="mb-0 mt-1">
+        <a href="/about-site-sponsorship?xid=29" class="btn btn-sm btn-light opacity-75 rounded-pill py-0 mb-1 small border-dark">
+            Remove Ads
+        </a>
+        </p>
+        
+    
+</div>
+
+
+                
+<div class="honor-widget pt-3 border-top mt-md-5 mx-md-4 d-print-none mb-4" itemscope="" itemtype="http://schema.org/Person">
+    <a href="/memorial/17993926/lou_emma-harper" itemprop="url" class="clearfix">
+        <img src="https://images.findagrave.com/photoThumbnails/photos/2007/49/17993926_117194393701.jpg" alt="" itemprop="image" class="honor-img float-start me-3">
+        <div class="honor-caption ms-2">
+            <strong class="fw-bold text-uppercase text-body">Honoring</strong>
+            <ul class="list-unstyled">
+                <li itemprop="name"><b class="text-primary fw-light fs-4">Lou Emma Harper</b></li>
+                <li><small class="text-muted text-uppercase">Birth</small> <span itemprop="birthDate" class="text-body">1869</span></li>
+                <li><small class="text-muted text-uppercase">Death</small> <span itemprop="deathDate" class="text-body">1918</span></li>
+
+            </ul>
+        </div>
+    </a>
+    <a href="/cemetery/online" class="mt-2 d-block text-muted"><span class="icon-globe" aria-hidden="true"></span>Explore featured memorials</a>
+</div>
+
+
+                
+                    
+<div class="native overview-panel mt-2 me-2 mx-md-0 d-print-none">
+    <h3 class="h5 overview-label text-primary">Explore more</h3>
+    <div id="nativeAncestrySlot">
+        <ul class="list-group list-unstyled m-0">
+            
+                
+                    <li class="list-group-item"><a target="_blank" class="list-group-item-action ancestry-hint-widget-item" href="https://www.newspapers.com/results/?keyword=Giovanni%20Rossi&amp;xid=1363">Giovanni Rossi in <b>Newspapers</b></a></li>
+                
+            
+                
+                    <li class="list-group-item"><a target="_blank" class="list-group-item-action ancestry-hint-widget-item" href="https://www.fold3.com/search?docQuery=(keywords:Giovanni%20Rossi)&amp;xid=2114">Giovanni Rossi in <b>Military Records</b></a></li>
+                
+            
+                
+                    <li class="list-group-item"><a target="_blank" class="list-group-item-action ancestry-hint-widget-item" href="http://www.ancestry.com/s80137/t37477/rd.ashx?gsln=Rossi&amp;gsfn=Giovanni&amp;msbdy=1885&amp;msddy=undefined&amp;gl=allgs">View <b>more records</b> for Giovanni Rossi at Ancestry.com</a></li>
+                
+            
+                
+                    <li class="list-group-item"><a target="_blank" class="list-group-item-action ancestry-hint-widget-item" href="http://www.ancestry.com/s80153/t13384/rd.ashx"> Discover more with a simple <b>DNA test</b></a></li>
+                
+            
+                
+                    <li class="list-group-item"><a target="_blank" class="list-group-item-action ancestry-hint-widget-item" href="http://www.ancestry.com/s80154/t37359/rd.ashx?surname=Rossi">More about the <b>Rossi family name</b></a></li>
+                
+            
+        </ul>
+        <p class="text-center text-muted mb-0"><small>By Ancestry®</small></p>
+    </div>
+</div>
+
+
+
+                
+                
+                
+                
+                    
+                    
+
+<div class="fg-prad mx-auto scroll-prad d-print-none " style="position: sticky; top: 248.195px; overflow: unset;">
+    
+    
+    <div id="rightrail2" class="ad-wrapper mt-0 ad__h100p" data-instance="MT-K9LFZTn" data-cmd="true" style="height: calc(2448.05px);"><div class="ad__rail-wrapper" style="overflow: unset;"><div class="ad__rail-child" style="max-height: 1009px;"><div data-instance-child="MT-K9LFZTn" class="ad__child-1 ad__h100 ad__slot--wrapper ad__align ad__rail-child--sticky" style="top: 210px;"><div id="memorialliststickyRail2" data-cmd="true" data-unit="kudqwe" aria-label="Advertisement" role="region" class="fs-exclude ad__slot" style="" data-google-query-id="CM_2tpSq4ZEDFfAWigMdMxMtOw"><div id="google_ads_iframe_/4802/findagrave/desktop/rightrail2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/4802/findagrave/desktop/rightrail2_0" name="google_ads_iframe_/4802/findagrave/desktop/rightrail2_0" title="3rd party ad content" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" aria-label="Advertisement" tabindex="0" allow="private-state-token-redemption;attribution-reporting" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-presentation" data-load-complete="true" style="border: 0px; vertical-align: bottom;" data-google-container-id="5"></iframe></div></div></div></div><div class="ad__rail-child"><div data-instance-child="MT-K9LFZTn" class="ad__child-2 ad__h100 ad__slot--wrapper ad__align ad__rail-child--sticky" style="top: 210px;"><div id="memorialliststickyRail3" data-cmd="true" data-unit="aytn6a" aria-label="Advertisement" role="region" class="fs-exclude ad__slot" style=""></div></div></div></div></div>
+    
+    
+        
+        <p class="mb-0 mt-1">
+        <a href="/about-site-sponsorship?xid=29" class="btn btn-sm btn-light opacity-75 rounded-pill py-0 mb-1 small border-dark">
+            Remove Ads
+        </a>
+        </p>
+        
+    
+</div>
+
+
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade cemetery-browse" tabindex="-1" style="display:none" id="cemetery-browse" role="dialog" aria-modal="true" aria-labelledby="mt_cemetery-browse">
+    <div class="modal-dialog" style="width:99%; max-width: 99%; height: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close border-none close-browse" type="button" aria-label="Close"><span class="m-0 icon-close" aria-hidden="true"></span></button>
+                <h1 id="mt_mt_cemetery-browse" class="modal-title h4">Browse</h1>
+            </div>
+            <div class="modal-body modal-scroll overflow-auto">
+                <div class="row g-0 browse-container flex-nowrap ">
+                    <div id="browse-loading" class="text-center mx-auto hidden">
+                        <div class="loader-h" role="status"><span class="visually-hidden">Loading...</span>
+                            <div class="disc disc-1"></div>
+                            <div class="disc disc-2"></div>
+                            <div class="disc disc-3"></div>
+                        </div>
+                    </div>
+                    <fieldset class="flex-shrink-1 flex-grow-0 bc-container list-group list-group-flush bc-continent">
+                        <legend class="card-header alert alert-info fs-6 mb-0 py-1 px-2">REGION<span class="count badge rounded-pill bg-primary float-end"></span></legend>
+                        <div class="overflow-auto col-auto card rounded-0 h-100 p-0">
+                            <div class="bc-container list-group list-group-flush h-100">
+                            <div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="" data-id="continent_74" data-link="/browse/continent_74" %}="">
+  <input type="radio" id="continent_74" name="continent" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="continent_74">
+    
+    
+    Africa
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="" data-id="continent_72" data-link="/browse/continent_72" %}="">
+  <input type="radio" id="continent_72" name="continent" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="continent_72">
+    
+    
+    Antarctica
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="" data-id="continent_71" data-link="/browse/continent_71" %}="">
+  <input type="radio" id="continent_71" name="continent" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="continent_71">
+    
+    
+    Asia
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="" data-id="continent_70" data-link="/browse/continent_70" %}="">
+  <input type="radio" id="continent_70" name="continent" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="continent_70">
+    
+    
+    Europe
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="" data-id="continent_68" data-link="/browse/continent_68" %}="">
+  <input type="radio" id="continent_68" name="continent" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light list-group-item-previous" for="continent_68">
+    
+    
+    North America
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="" data-id="continent_73" data-link="/browse/continent_73" data-gps="{&quot;__typename&quot;:&quot;Gps&quot;,&quot;lat&quot;:-22.593725484713367,&quot;lon&quot;:157.04681491288645}" %}="">
+  <input type="radio" id="continent_73" name="continent" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="continent_73">
+    
+    
+    Oceania
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="" data-id="continent_69" data-link="/browse/continent_69" %}="">
+  <input type="radio" id="continent_69" name="continent" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="continent_69">
+    
+    
+    South America
+  </label>
+</div></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="flex-shrink-1 flex-grow-0 list-group list-group-flush bc-container bc-country">
+                        <legend class="card-header alert alert-info fs-6 mb-0 py-1 px-2 border-start-0">COUNTRY<span aria-hidden="true" class="count badge rounded-pill bg-primary float-end"></span></legend>
+                        <div class="overflow-auto col-auto card rounded-0 h-100 p-0">
+                            <div class="bc-container list-group list-group-flush h-100">
+                            <div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Anguilla" data-id="country_111" data-link="/browse/country_111" %}="">
+  <input type="radio" id="country_111" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_111">
+    
+    
+    Anguilla
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Antigua And Barbuda" data-id="country_101" data-link="/browse/country_101" %}="">
+  <input type="radio" id="country_101" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_101">
+    
+    
+    Antigua And Barbuda
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Aruba" data-id="country_100" data-link="/browse/country_100" %}="">
+  <input type="radio" id="country_100" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_100">
+    
+    
+    Aruba
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Bahamas" data-id="country_18" data-link="/browse/country_18" %}="">
+  <input type="radio" id="country_18" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_18">
+    
+    
+    Bahamas
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Barbados" data-id="country_86" data-link="/browse/country_86" %}="">
+  <input type="radio" id="country_86" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_86">
+    
+    
+    Barbados
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Belize" data-id="country_116" data-link="/browse/country_116" %}="">
+  <input type="radio" id="country_116" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_116">
+    
+    
+    Belize
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Bermuda" data-id="country_98" data-link="/browse/country_98" %}="">
+  <input type="radio" id="country_98" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_98">
+    
+    
+    Bermuda
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="British Virgin Islands" data-id="country_272" data-link="/browse/country_272" %}="">
+  <input type="radio" id="country_272" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_272">
+    
+    
+    British Virgin Islands
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Canada" data-id="country_10" data-link="/browse/country_10" %}="">
+  <input type="radio" id="country_10" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_10">
+    
+    
+    Canada
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Caribbean Netherlands" data-id="country_220" data-link="/browse/country_220" %}="">
+  <input type="radio" id="country_220" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_220">
+    
+    
+    Caribbean Netherlands
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Cayman Islands" data-id="country_133" data-link="/browse/country_133" %}="">
+  <input type="radio" id="country_133" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_133">
+    
+    
+    Cayman Islands
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Costa Rica" data-id="country_81" data-link="/browse/country_81" %}="">
+  <input type="radio" id="country_81" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_81">
+    
+    
+    Costa Rica
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Cuba" data-id="country_26" data-link="/browse/country_26" %}="">
+  <input type="radio" id="country_26" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_26">
+    
+    
+    Cuba
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Curaçao" data-id="country_177" data-link="/browse/country_177" %}="">
+  <input type="radio" id="country_177" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_177">
+    
+    
+    Curaçao
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Dominica" data-id="country_144" data-link="/browse/country_144" data-gps="{&quot;__typename&quot;:&quot;Gps&quot;,&quot;lat&quot;:15.432503620289696,&quot;lon&quot;:-61.347679744467996}" %}="">
+  <input type="radio" id="country_144" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_144">
+    
+    
+    Dominica
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Dominican Republic" data-id="country_28" data-link="/browse/country_28" %}="">
+  <input type="radio" id="country_28" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_28">
+    
+    
+    Dominican Republic
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="El Salvador" data-id="country_150" data-link="/browse/country_150" %}="">
+  <input type="radio" id="country_150" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_150">
+    
+    
+    El Salvador
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Greenland" data-id="country_165" data-link="/browse/country_165" %}="">
+  <input type="radio" id="country_165" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_165">
+    
+    
+    Greenland
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Grenada" data-id="country_163" data-link="/browse/country_163" %}="">
+  <input type="radio" id="country_163" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_163">
+    
+    
+    Grenada
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Guadeloupe" data-id="country_167" data-link="/browse/country_167" %}="">
+  <input type="radio" id="country_167" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_167">
+    
+    
+    Guadeloupe
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Guatemala" data-id="country_88" data-link="/browse/country_88" %}="">
+  <input type="radio" id="country_88" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_88">
+    
+    
+    Guatemala
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Haiti" data-id="country_172" data-link="/browse/country_172" %}="">
+  <input type="radio" id="country_172" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_172">
+    
+    
+    Haiti
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Honduras" data-id="country_175" data-link="/browse/country_175" %}="">
+  <input type="radio" id="country_175" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_175">
+    
+    
+    Honduras
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Jamaica" data-id="country_46" data-link="/browse/country_46" %}="">
+  <input type="radio" id="country_46" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_46">
+    
+    
+    Jamaica
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Martinique" data-id="country_91" data-link="/browse/country_91" %}="">
+  <input type="radio" id="country_91" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_91">
+    
+    
+    Martinique
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Mexico" data-id="country_45" data-link="/browse/country_45" %}="">
+  <input type="radio" id="country_45" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_45">
+    
+    
+    Mexico
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Montserrat" data-id="country_203" data-link="/browse/country_203" %}="">
+  <input type="radio" id="country_203" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_203">
+    
+    
+    Montserrat
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Nicaragua" data-id="country_89" data-link="/browse/country_89" %}="">
+  <input type="radio" id="country_89" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_89">
+    
+    
+    Nicaragua
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Panama" data-id="country_72" data-link="/browse/country_72" %}="">
+  <input type="radio" id="country_72" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_72">
+    
+    
+    Panama
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Saint Barthélemy" data-id="country_141" data-link="/browse/country_141" %}="">
+  <input type="radio" id="country_141" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_141">
+    
+    
+    Saint Barthélemy
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Saint Kitts And Nevis" data-id="country_240" data-link="/browse/country_240" %}="">
+  <input type="radio" id="country_240" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_240">
+    
+    
+    Saint Kitts And Nevis
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Saint Lucia" data-id="country_247" data-link="/browse/country_247" %}="">
+  <input type="radio" id="country_247" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_247">
+    
+    
+    Saint Lucia
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Saint Martin" data-id="country_224" data-link="/browse/country_224" %}="">
+  <input type="radio" id="country_224" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_224">
+    
+    
+    Saint Martin
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Saint Pierre And Miquelon" data-id="country_239" data-link="/browse/country_239" %}="">
+  <input type="radio" id="country_239" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_239">
+    
+    
+    Saint Pierre And Miquelon
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Saint Vincent And The Grenadines" data-id="country_270" data-link="/browse/country_270" %}="">
+  <input type="radio" id="country_270" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_270">
+    
+    
+    Saint Vincent And The Grenadines
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Sint Maarten" data-id="country_266" data-link="/browse/country_266" %}="">
+  <input type="radio" id="country_266" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_266">
+    
+    
+    Sint Maarten
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Trinidad And Tobago" data-id="country_251" data-link="/browse/country_251" %}="">
+  <input type="radio" id="country_251" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_251">
+    
+    
+    Trinidad And Tobago
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Turks And Caicos Islands" data-id="country_255" data-link="/browse/country_255" %}="">
+  <input type="radio" id="country_255" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_255">
+    
+    
+    Turks And Caicos Islands
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="U.S. Virgin Islands" data-id="country_273" data-link="/browse/country_273" data-gps="{&quot;__typename&quot;:&quot;Gps&quot;,&quot;lat&quot;:17.741844391032185,&quot;lon&quot;:-64.77539975383814}" %}="">
+  <input type="radio" id="country_273" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="country_273">
+    
+    
+    U.S. Virgin Islands
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="United States of America" data-id="country_4" data-link="/browse/country_4" %}="">
+  <input type="radio" id="country_4" name="country" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light active bg-primary text-white" for="country_4">
+    
+    
+    United States of America
+  </label>
+</div></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="flex-shrink-1 flex-grow-0 list-group list-group-flush bc-container bc-state">
+                        <legend class="card-header alert alert-info fs-6 mb-0 py-1 px-2 border-start-0">STATE<span aria-hidden="true" class="count badge rounded-pill bg-primary float-end"></span></legend>
+                        <div class="overflow-auto col-auto card rounded-0 h-100 p-0">
+                            <div class="bc-container list-group list-group-flush h-100">
+                            <div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Alabama, United States of America" data-id="state_3" data-link="/browse/state_3" %}="">
+  <input type="radio" id="state_3" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_3">
+    
+    
+    Alabama
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Alaska, United States of America" data-id="state_2" data-link="/browse/state_2" %}="">
+  <input type="radio" id="state_2" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_2">
+    
+    
+    Alaska
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Arizona, United States of America" data-id="state_5" data-link="/browse/state_5" %}="">
+  <input type="radio" id="state_5" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_5">
+    
+    
+    Arizona
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Arkansas, United States of America" data-id="state_4" data-link="/browse/state_4" %}="">
+  <input type="radio" id="state_4" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_4">
+    
+    
+    Arkansas
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="California, United States of America" data-id="state_6" data-link="/browse/state_6" %}="">
+  <input type="radio" id="state_6" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_6">
+    
+    
+    California
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Colorado, United States of America" data-id="state_7" data-link="/browse/state_7" %}="">
+  <input type="radio" id="state_7" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_7">
+    
+    
+    Colorado
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Connecticut, United States of America" data-id="state_8" data-link="/browse/state_8" %}="">
+  <input type="radio" id="state_8" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_8">
+    
+    
+    Connecticut
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Delaware, United States of America" data-id="state_10" data-link="/browse/state_10" %}="">
+  <input type="radio" id="state_10" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_10">
+    
+    
+    Delaware
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="District of Columbia, United States of America" data-id="state_9" data-link="/browse/state_9" %}="">
+  <input type="radio" id="state_9" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_9">
+    
+    
+    District of Columbia
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Florida, United States of America" data-id="state_11" data-link="/browse/state_11" %}="">
+  <input type="radio" id="state_11" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_11">
+    
+    
+    Florida
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Georgia, United States of America" data-id="state_12" data-link="/browse/state_12" %}="">
+  <input type="radio" id="state_12" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_12">
+    
+    
+    Georgia
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Hawaii, United States of America" data-id="state_13" data-link="/browse/state_13" %}="">
+  <input type="radio" id="state_13" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_13">
+    
+    
+    Hawaii
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Idaho, United States of America" data-id="state_15" data-link="/browse/state_15" %}="">
+  <input type="radio" id="state_15" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_15">
+    
+    
+    Idaho
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Illinois, United States of America" data-id="state_16" data-link="/browse/state_16" %}="">
+  <input type="radio" id="state_16" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_16">
+    
+    
+    Illinois
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Indiana, United States of America" data-id="state_17" data-link="/browse/state_17" %}="">
+  <input type="radio" id="state_17" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_17">
+    
+    
+    Indiana
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Iowa, United States of America" data-id="state_14" data-link="/browse/state_14" %}="">
+  <input type="radio" id="state_14" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_14">
+    
+    
+    Iowa
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Kansas, United States of America" data-id="state_18" data-link="/browse/state_18" %}="">
+  <input type="radio" id="state_18" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_18">
+    
+    
+    Kansas
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Kentucky, United States of America" data-id="state_19" data-link="/browse/state_19" %}="">
+  <input type="radio" id="state_19" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_19">
+    
+    
+    Kentucky
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Louisiana, United States of America" data-id="state_20" data-link="/browse/state_20" %}="">
+  <input type="radio" id="state_20" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_20">
+    
+    
+    Louisiana
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Maine, United States of America" data-id="state_23" data-link="/browse/state_23" %}="">
+  <input type="radio" id="state_23" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_23">
+    
+    
+    Maine
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Maryland, United States of America" data-id="state_22" data-link="/browse/state_22" %}="">
+  <input type="radio" id="state_22" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_22">
+    
+    
+    Maryland
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Massachusetts, United States of America" data-id="state_21" data-link="/browse/state_21" %}="">
+  <input type="radio" id="state_21" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_21">
+    
+    
+    Massachusetts
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Michigan, United States of America" data-id="state_24" data-link="/browse/state_24" %}="">
+  <input type="radio" id="state_24" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_24">
+    
+    
+    Michigan
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Minnesota, United States of America" data-id="state_25" data-link="/browse/state_25" %}="">
+  <input type="radio" id="state_25" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_25">
+    
+    
+    Minnesota
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Mississippi, United States of America" data-id="state_27" data-link="/browse/state_27" %}="">
+  <input type="radio" id="state_27" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_27">
+    
+    
+    Mississippi
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Missouri, United States of America" data-id="state_26" data-link="/browse/state_26" %}="">
+  <input type="radio" id="state_26" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_26">
+    
+    
+    Missouri
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Montana, United States of America" data-id="state_28" data-link="/browse/state_28" %}="">
+  <input type="radio" id="state_28" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_28">
+    
+    
+    Montana
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Nebraska, United States of America" data-id="state_31" data-link="/browse/state_31" %}="">
+  <input type="radio" id="state_31" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_31">
+    
+    
+    Nebraska
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Nevada, United States of America" data-id="state_35" data-link="/browse/state_35" %}="">
+  <input type="radio" id="state_35" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_35">
+    
+    
+    Nevada
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="New Hampshire, United States of America" data-id="state_32" data-link="/browse/state_32" %}="">
+  <input type="radio" id="state_32" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_32">
+    
+    
+    New Hampshire
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="New Jersey, United States of America" data-id="state_33" data-link="/browse/state_33" %}="">
+  <input type="radio" id="state_33" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_33">
+    
+    
+    New Jersey
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="New Mexico, United States of America" data-id="state_34" data-link="/browse/state_34" %}="">
+  <input type="radio" id="state_34" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_34">
+    
+    
+    New Mexico
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="New York, United States of America" data-id="state_36" data-link="/browse/state_36" %}="">
+  <input type="radio" id="state_36" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_36">
+    
+    
+    New York
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="North Carolina, United States of America" data-id="state_29" data-link="/browse/state_29" %}="">
+  <input type="radio" id="state_29" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_29">
+    
+    
+    North Carolina
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="North Dakota, United States of America" data-id="state_30" data-link="/browse/state_30" %}="">
+  <input type="radio" id="state_30" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_30">
+    
+    
+    North Dakota
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Ohio, United States of America" data-id="state_37" data-link="/browse/state_37" %}="">
+  <input type="radio" id="state_37" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_37">
+    
+    
+    Ohio
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Oklahoma, United States of America" data-id="state_38" data-link="/browse/state_38" %}="">
+  <input type="radio" id="state_38" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_38">
+    
+    
+    Oklahoma
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Oregon, United States of America" data-id="state_39" data-link="/browse/state_39" %}="">
+  <input type="radio" id="state_39" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_39">
+    
+    
+    Oregon
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Pennsylvania, United States of America" data-id="state_40" data-link="/browse/state_40" %}="">
+  <input type="radio" id="state_40" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_40">
+    
+    
+    Pennsylvania
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Puerto Rico, United States of America" data-id="state_41" data-link="/browse/state_41" %}="">
+  <input type="radio" id="state_41" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_41">
+    
+    
+    Puerto Rico
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Rhode Island, United States of America" data-id="state_42" data-link="/browse/state_42" %}="">
+  <input type="radio" id="state_42" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_42">
+    
+    
+    Rhode Island
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="South Carolina, United States of America" data-id="state_43" data-link="/browse/state_43" %}="">
+  <input type="radio" id="state_43" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_43">
+    
+    
+    South Carolina
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="South Dakota, United States of America" data-id="state_44" data-link="/browse/state_44" %}="">
+  <input type="radio" id="state_44" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_44">
+    
+    
+    South Dakota
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Tennessee, United States of America" data-id="state_45" data-link="/browse/state_45" %}="">
+  <input type="radio" id="state_45" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_45">
+    
+    
+    Tennessee
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Texas, United States of America" data-id="state_46" data-link="/browse/state_46" %}="">
+  <input type="radio" id="state_46" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_46">
+    
+    
+    Texas
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Utah, United States of America" data-id="state_47" data-link="/browse/state_47" %}="">
+  <input type="radio" id="state_47" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_47">
+    
+    
+    Utah
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Vermont, United States of America" data-id="state_49" data-link="/browse/state_49" %}="">
+  <input type="radio" id="state_49" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_49">
+    
+    
+    Vermont
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Virginia, United States of America" data-id="state_48" data-link="/browse/state_48" %}="">
+  <input type="radio" id="state_48" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_48">
+    
+    
+    Virginia
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Washington, United States of America" data-id="state_50" data-link="/browse/state_50" %}="">
+  <input type="radio" id="state_50" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_50">
+    
+    
+    Washington
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="West Virginia, United States of America" data-id="state_52" data-link="/browse/state_52" %}="">
+  <input type="radio" id="state_52" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_52">
+    
+    
+    West Virginia
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Wisconsin, United States of America" data-id="state_51" data-link="/browse/state_51" %}="">
+  <input type="radio" id="state_51" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_51">
+    
+    
+    Wisconsin
+  </label>
+</div><div class="btn-group-toggle browse-link" data-bs-toggle="buttons" data-name="Wyoming, United States of America" data-id="state_53" data-link="/browse/state_53" %}="">
+  <input type="radio" id="state_53" name="state" class="btn-check" autocomplete="off">
+  <label class="btn btn-lg btn-outline-primary w-100 rounded-0 text-start border-bottom border-light" for="state_53">
+    
+    
+    Wyoming
+  </label>
+</div></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="flex-shrink-1 flex-grow-0 list-group list-group-flush bc-container bc-county hidden">
+                        <legend class="card-header alert alert-info fs-6 mb-0 py-1 px-2 border-start-0">COUNTY<span aria-hidden="true" class="count badge rounded-pill bg-primary float-end"></span></legend>
+                        <div class="overflow-auto col-auto card rounded-0 h-100 p-0">
+                            <div class="bc-container list-group list-group-flush h-100">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="flex-shrink-1 flex-grow-0 list-group list-group-flush bc-container bc-city hidden">
+                        <legend class="card-header alert alert-info fs-6 mb-0 py-1 px-2 border-start-0">CITY<span aria-hidden="true" class="count badge rounded-pill bg-primary float-end"></span></legend>
+                        <div class="overflow-auto col-auto card rounded-0 h-100 p-0">
+                            <div class="bc-container list-group list-group-flush h-100">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="flex-shrink-1 flex-grow-0 list-group list-group-flush bc-container hidden bc-cemetery">
+                        <legend class="card-header alert alert-info fs-6 mb-0 py-1 px-2 border-start-0">CEMETERY<span aria-hidden="true" class="count badge rounded-pill bg-primary float-end"></span></legend>
+                        <div class="overflow-auto col-auto card rounded-0 h-100 p-0">
+                            <div class="bc-container list-group list-group-flush h-100">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <p class="alert mx-auto alert-danger alert-dismissible icon-warning hidden flyover over shadow preciseLocation" style="bottom: 0;">Please select a location with GPS coordinates indicated by a map icon(<span class="icon-map" aria-hidden="true"></span>) to continue.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </p>
+                <p class="alert mx-auto alert-danger alert-dismissible icon-warning hidden flyover over shadow cemetery-only" style="bottom: 0;">Please select a cemetery indicated by a Find a Grave icon(<span class="icon-findagrave" aria-hidden="true"></span>) to continue.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </p>
+            </div>
+            <div class="modal-footer sticky justify-content-between align-items-center p-2">
+                <div class="text-start col">
+                    <p class="text-primary truncate-80 mt-2 mb-0"><span class="icon-map" aria-hidden="true"></span><span class="text-primary" id="location-placeholder">United States of America</span></p>
+                    <input type="hidden" id="locationId-placeholder" value="country_4">
+                </div>
+                <div class="col-auto">
+                    <button type="button" id="clear-browse" class="btn btn-default me-2">Clear</button>
+                    <button type="button" id="useLocation" class="btn btn-primary" aria-describedby="location-placeholder">Use Selected Location</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modal-search-updates" id="modal-search-updates" role="dialog" aria-modal="true" aria-labelledby="mt_modal-search-updates" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close border-none" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="m-0 icon-close" aria-hidden="true"></span></button>
+                <h1 id="mt_modal-search-updates" class="modal-title h4">Search Tips</h1>
+            </div>
+            <div class="modal-body p-3">
+                <ul>
+                    <li>When searching in a cemetery, use the <b><code>?</code></b> or <b><code>*</code></b> wildcards in name fields. <b><code>?</code></b> replaces one letter. <b><code>*</code></b> represents zero to many letters. <em>E.g. Sorens?n or Wil*</em></li>
+                    <li>Search for an exact birth/death year or select a range, before or after.</li>
+                    <li>Select "More search options" to:
+                        <ul>
+                            <li>Search for a memorial or contributor by <b>ID</b>.</li>
+                            <li>Include the name of a <b>spouse, parent, child or sibling</b> in your search.</li>
+                            <li>Use partial name search or similar name spellings to catch alternate spellings or broaden your search.</li>
+                            <li>Narrow your results to famous, Non-Cemetery Burials, memorials with or without grave photos and more.</li>
+                        </ul>
+
+                    </li>
+                </ul>
+                <p>Get more help from our <a href="https://support.findagrave.com/s/" target="_blank">Help Center</a>.
+                    </p>
+            </div>
+            <div class="modal-footer p-2">
+               <button class="btn btn-default" type="button" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade recently-deceased-modal" id="recentlyDeceased" role="dialog" aria-modal="true" aria-labelledby="mt_recentlyDeceased" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close border-none" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="m-0 icon-close" aria-hidden="true"></span></button>
+                <h1 id="mt_recentlyDeceased" class="modal-title h4">Recently Deceased</h1>
+            </div>
+            <div class="modal-body" id="recently-deceased-modal-container"></div>
+            <div class="modal-footer">
+                <button class="btn-default btn" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="addContributorRelationship" class="btn btn-primary hidden">Add Relationship</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </section>

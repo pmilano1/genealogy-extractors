@@ -57,7 +57,23 @@ class AntenatiExtractor(BaseRecordExtractor):
         return records
     
     def _extract_person(self, element, search_params: Dict[str, Any]) -> Dict[str, Any]:
-        """Extract data from a single Antenati person record"""
+        """Extract data from a single Antenati person record
+
+        Actual HTML structure (2024):
+        <div class="search-item" data-id="ID">
+          <div class="nominative-detail">
+            <h3><a href="URL">Name</a></h3>
+            <p class="nascita"><strong>Nascita:</strong> Location</p>
+          </div>
+          <div class="nominative-links">
+            <ul><li><h4>Padre</h4><a>Father Name</a></li>...</ul>
+          </div>
+          <div class="nominative-records">
+            <h4>Atti collegati</h4>
+            <ul><li><a><strong>Atto di nascita</strong><br/>Date info</a></li>...</ul>
+          </div>
+        </div>
+        """
 
         # Extract name from <h3><a>
         name_link = element.find('h3')
@@ -73,46 +89,64 @@ class AntenatiExtractor(BaseRecordExtractor):
         if url and not url.startswith('http'):
             url = f"https://antenati.cultura.gov.it{url}"
 
-        # Extract birth year and location from nominative-records
+        # Extract birth location from p.nascita
         birth_year = None
         birth_place = None
         death_year = None
 
-        records_div = element.find('div', class_='nominative-records')
-        if records_div:
-            # Look for birth record link
-            birth_link = records_div.find('a', string=re.compile(r'Birth|Nascita', re.I))
-            if birth_link:
-                text = birth_link.get_text()
-                # Extract year from "Birth: Location YEAR" or "Nascita: Location YEAR"
-                year_match = re.search(r'\b(1[7-9]\d{2}|20\d{2})\b', text)
+        nascita_p = element.find('p', class_='nascita')
+        if nascita_p:
+            text = nascita_p.get_text(strip=True)
+            # Format: "Nascita:Location" or "Nascita: Location YEAR"
+            if ':' in text:
+                location_part = text.split(':', 1)[1].strip()
+                # Check for year in location
+                year_match = re.search(r'\b(1[7-9]\d{2}|20\d{2})\b', location_part)
                 if year_match:
                     birth_year = int(year_match.group(1))
-                # Extract location (text before year)
-                loc_match = re.search(r':\s*([^,]+)', text)
-                if loc_match:
-                    birth_place = loc_match.group(1).strip()
+                    birth_place = location_part.replace(year_match.group(1), '').strip()
+                else:
+                    birth_place = location_part
 
-            # Look for death record
-            death_link = records_div.find('a', string=re.compile(r'Death|Morte', re.I))
-            if death_link:
-                text = death_link.get_text()
-                year_match = re.search(r'\b(1[7-9]\d{2}|20\d{2})\b', text)
-                if year_match:
-                    death_year = int(year_match.group(1))
+        # Extract year from records if not found in nascita
+        records_div = element.find('div', class_='nominative-records')
+        if records_div:
+            for li in records_div.find_all('li'):
+                a = li.find('a')
+                if a:
+                    text = a.get_text(strip=True)
+                    # Check for birth record
+                    if 'nascita' in text.lower() or 'birth' in text.lower():
+                        year_match = re.search(r'\b(1[7-9]\d{2}|20\d{2})\b', text)
+                        if year_match and not birth_year:
+                            birth_year = int(year_match.group(1))
+                    # Check for death record
+                    elif 'morte' in text.lower() or 'death' in text.lower():
+                        year_match = re.search(r'\b(1[7-9]\d{2}|20\d{2})\b', text)
+                        if year_match:
+                            death_year = int(year_match.group(1))
 
-        # Extract family relationships
+        # Extract family relationships from nominative-links
+        # Structure: <ul><li><h4>Role</h4><a>Name</a></li></ul>
         family = {}
         links_div = element.find('div', class_='nominative-links')
         if links_div:
-            for span in links_div.find_all('span'):
-                text = span.get_text(strip=True)
-                if 'Father' in text or 'Padre' in text:
-                    family['father'] = text.split(':', 1)[1].strip() if ':' in text else text
-                elif 'Mother' in text or 'Madre' in text:
-                    family['mother'] = text.split(':', 1)[1].strip() if ':' in text else text
-                elif 'Spouse' in text or 'Coniuge' in text:
-                    family['spouse'] = text.split(':', 1)[1].strip() if ':' in text else text
+            for li in links_div.find_all('li'):
+                h4 = li.find('h4')
+                a = li.find('a')
+                if h4 and a:
+                    role = h4.get_text(strip=True).lower()
+                    person_name = a.get_text(strip=True)
+                    if 'padre' in role or 'father' in role:
+                        family['father'] = person_name
+                    elif 'madre' in role or 'mother' in role:
+                        family['mother'] = person_name
+                    elif 'coniuge' in role or 'spouse' in role:
+                        family['spouse'] = person_name
+                    elif 'figlio' in role or 'figlia' in role or 'child' in role:
+                        if 'children' not in family:
+                            family['children'] = []
+                        family['children'].append(person_name)
 
         # Use search params as fallback
         if not birth_place:

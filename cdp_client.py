@@ -258,16 +258,64 @@ async def fetch_with_cdp(url: str, debug_url: str = "http://127.0.0.1:9222", sou
         await client.close()
 
 
-def fetch_page_content(url: str, source_name: str = None) -> str:
+def fetch_page_content(url: str, source_name: str = None, wait_for_selector: str = None) -> str:
     """Synchronous wrapper for CDP fetch
 
     Args:
         url: URL to fetch
         source_name: Name of source (for logging)
+        wait_for_selector: Optional CSS selector to wait for (for JS-heavy sites)
     """
+    # Use Playwright for sources that need special wait handling
+    if wait_for_selector:
+        return fetch_with_playwright(url, source_name=source_name, wait_for_selector=wait_for_selector)
+
     try:
         return asyncio.run(fetch_with_cdp(url, source_name=source_name))
     except Exception as e:
         print(f"[ERROR] CDP fetch failed: {str(e)}")
+        return ""
+
+
+def fetch_with_playwright(url: str, source_name: str = None, wait_for_selector: str = None) -> str:
+    """Fetch page content using Playwright (better for JS-heavy sites)
+
+    Args:
+        url: URL to fetch
+        source_name: Name of source (for logging)
+        wait_for_selector: CSS selector to wait for before getting content
+    """
+    try:
+        from playwright.sync_api import sync_playwright
+        import time
+
+        with sync_playwright() as p:
+            browser = p.chromium.connect_over_cdp("http://localhost:9222")
+            context = browser.contexts[0]
+
+            # Reuse last page or create new one
+            pages = context.pages
+            page = pages[-1] if pages else context.new_page()
+
+            print(f"[Playwright] Navigating to {source_name or 'page'}...")
+            page.goto(url, timeout=30000, wait_until="load")
+
+            # Wait for specific selector if provided
+            if wait_for_selector:
+                try:
+                    page.wait_for_selector(wait_for_selector, timeout=20000)
+                    print(f"[Playwright] Found results selector")
+                except Exception:
+                    print(f"[Playwright] Selector not found, continuing...")
+
+            # Small delay for any final rendering
+            time.sleep(2)
+
+            content = page.content()
+            print(f"[Playwright] Got {len(content)} bytes")
+            return content
+
+    except Exception as e:
+        print(f"[ERROR] Playwright fetch failed: {str(e)}")
         return ""
 
