@@ -5,22 +5,24 @@ Provides thread-safe rate limiting with exponential backoff retry
 WikiTree API Rate Limits (from Help:App_Policies):
 - 200 requests per minute
 - 4000 requests per hour
+- Returns Retry-After header on 429 responses
 """
 
 import time
 from threading import Lock
 from functools import wraps
+import requests
 
 
 class RateLimiter:
-    """Thread-safe rate limiter with exponential backoff
+    """Thread-safe rate limiter with Retry-After header support
 
     Default settings are tuned for WikiTree API limits:
     - 200 requests/minute = 1 request per 0.3 seconds
-    - We use 0.5s minimum delay to stay safely under the limit
+    - We use 1.0s minimum delay for parallel requests to stay safely under limit
     """
 
-    def __init__(self, min_delay: float = 0.5, max_retries: int = 3, backoff_factor: float = 2.0):
+    def __init__(self, min_delay: float = 1.0, max_retries: int = 5, backoff_factor: float = 2.0):
         self.min_delay = min_delay
         self.max_retries = max_retries
         self.backoff_factor = backoff_factor
@@ -47,10 +49,11 @@ class RateLimiter:
             self.request_counts[source] += 1
 
     def retry_with_backoff(self, func, source: str = "default", *args, **kwargs):
-        """Execute function with exponential backoff retry on failure
+        """Execute function with Retry-After header support and exponential backoff
 
-        Handles HTTP 429 (Too Many Requests) and similar rate limit errors.
-        Uses exponential backoff: delay doubles with each retry attempt.
+        Handles HTTP 429 (Too Many Requests) responses:
+        1. First checks for Retry-After header and uses that value
+        2. Falls back to exponential backoff if no header present
         """
         last_exception = None
 
@@ -58,16 +61,43 @@ class RateLimiter:
             try:
                 self.wait(source)
                 return func(*args, **kwargs)
+            except requests.exceptions.HTTPError as e:
+                last_exception = e
+                response = getattr(e, 'response', None)
+
+                if response is not None and response.status_code == 429:
+                    # Check for Retry-After header
+                    retry_after = response.headers.get('Retry-After')
+
+                    if retry_after:
+                        try:
+                            wait_time = float(retry_after)
+                            print(f"[RATE LIMIT] {source}: Server says wait {wait_time}s (Retry-After header)")
+                        except ValueError:
+                            # Retry-After might be a date string, fall back to backoff
+                            wait_time = self.min_delay * (self.backoff_factor ** (attempt + 1))
+                            print(f"[RATE LIMIT] {source}: Attempt {attempt + 1}/{self.max_retries}, "
+                                  f"waiting {wait_time:.1f}s...")
+                    else:
+                        # No Retry-After header, use exponential backoff
+                        wait_time = self.min_delay * (self.backoff_factor ** (attempt + 1))
+                        print(f"[RATE LIMIT] {source}: Attempt {attempt + 1}/{self.max_retries}, "
+                              f"waiting {wait_time:.1f}s (no Retry-After header)...")
+
+                    time.sleep(wait_time)
+                else:
+                    # Non-429 HTTP error, don't retry
+                    raise
+
             except Exception as e:
                 last_exception = e
                 error_str = str(e).lower()
 
-                # Check if it's a rate limit error
+                # Check if it's a rate limit error (non-requests exception)
                 if '429' in error_str or 'too many' in error_str or 'rate limit' in error_str:
-                    # Exponential backoff: 1s, 2s, 4s, 8s, etc.
                     wait_time = self.min_delay * (self.backoff_factor ** (attempt + 1))
                     print(f"[RATE LIMIT] {source}: Attempt {attempt + 1}/{self.max_retries}, "
-                          f"waiting {wait_time:.1f}s before retry...")
+                          f"waiting {wait_time:.1f}s...")
                     time.sleep(wait_time)
                 else:
                     # Non-rate-limit error, don't retry
@@ -88,8 +118,9 @@ class RateLimiter:
 
 # Global rate limiter instance
 # Settings tuned for WikiTree API: 200/min, 4000/hr
-# Using 0.5s delay = 120 requests/min (safely under 200 limit)
-_rate_limiter = RateLimiter(min_delay=0.5, max_retries=3, backoff_factor=2.0)
+# Using 1.0s delay for parallel requests = 60 requests/min per thread
+# With 8 threads, worst case ~480/min but staggered start times help
+_rate_limiter = RateLimiter(min_delay=1.0, max_retries=5, backoff_factor=2.0)
 
 
 def get_rate_limiter() -> RateLimiter:

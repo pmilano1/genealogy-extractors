@@ -1,78 +1,103 @@
-# Genealogy Source Extraction
+# Genealogy Research Runner
 
-Production-ready extraction system for genealogy records from 7 major sources.
+Automated genealogy enrichment system. Searches 9 sources in parallel for people in your family tree, stages findings for review, then submits approved matches to the API.
+
+## Prerequisites
+
+1. **Chrome running with debug port**:
+   ```bash
+   google-chrome --remote-debugging-port=9222 --user-data-dir=$HOME/.chrome-debug-profile &
+   ```
+
+2. **Log into these sites in Chrome** (sessions persist):
+   - Ancestry.com
+   - MyHeritage.com
+   - FamilySearch.org
+   - Filae.com (if researching French ancestry)
 
 ## Quick Start
 
 ```bash
-# Test all sources (uses fixtures)
-python extract.py --test
+cd ~/workspace/repos/genealogy-extractors
 
-# Test specific source with details
-python extract.py --test --source findagrave --verbose
+# Run research for 50 people
+python research_runner.py --limit 50
 
-# Production: search one source
-python extract.py --surname Smith --given-name John --birth-year 1850 --source findagrave
+# Review staged findings
+python research_runner.py --review
 
-# Production: search all sources and save results
-python extract.py --surname Dubois --given-name Marie --birth-year 1880 --all-sources --output results.json
+# Submit approved findings to API
+python research_runner.py --submit-approved
 ```
 
-## Supported Sources
+## Commands
 
-| Source | Status | Records | Data Quality | Access Method |
-|--------|--------|---------|--------------|---------------|
-| **Find A Grave** | ✅ Working | 20 | Full names, birth/death years, complete locations | CDP_BROWSER |
-| **Geneanet** | ✅ Working | 20 | Full names, birth years, locations | CDP_BROWSER |
-| **WikiTree** | ✅ Working | 20 | Full names (with surnames), birth years, locations | API |
-| **Ancestry** | ✅ Working | 20 | Clean names, birth years, locations | CDP_BROWSER |
-| **FamilySearch** | ✅ Working | 20 | Full names, birth years, clean locations | CDP_BROWSER |
-| **Antenati** | ⚠️ Limited | 10 | Names only (no birth years - nominative search) | CDP_BROWSER |
-| **MyHeritage** | ❌ Disabled | - | Requires subscription, fixture needs replacement | CDP_BROWSER |
+| Command | Description |
+|---------|-------------|
+| `--limit N` | Process N people (searches all sources per person) |
+| `--all` | Process ALL people in family tree (no limit) |
+| `--source SOURCE` | Search single source only |
+| `--review` | Interactively review staged findings |
+| `--summary` | Show summary of staged findings |
+| `--submit-approved` | Submit approved findings to API |
+| `--stats` | Show processing statistics |
+| `--errors` | Show error tracking summary |
+| `--reset` | Clear tracking (re-search everything) |
 
-## Data Quality Improvements (Latest)
+## Options
 
-- **Names**: Proper spacing, no concatenation (e.g., "Mary Ewald Johnson" not "MaryEwaldJohnson")
-- **Locations**: Complete multi-part locations (e.g., "Beatrice, Gage County, Nebraska")
-- **WikiTree**: Surnames extracted from Name field (e.g., "Smith-269952" → "John Smith")
-- **Ancestry**: Clean names with special characters removed
-- **FamilySearch**: Event type prefixes removed from locations
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--min-score` | 30.0 | Minimum match score to stage |
+| `--staging-file` | staged_findings.json | Path to staging file |
+| `--verbose` / `-v` | off | Show detailed output |
+| `--sequential` | off | Disable parallel (one source at a time) |
+| `--workers` | 8 | Max parallel threads |
 
-## Directory Structure
+## Workflow
 
-```
-scripts/sources/
-├── README.md                    # This file
-├── extract.py                   # Main entry point
-├── cdp_client.py               # Chrome DevTools Protocol client
-├── extraction/                 # Extractor modules
-│   ├── base_extractor.py
-│   ├── find_a_grave_extractor.py
-│   ├── geneanet_extractor.py
-│   ├── antenati_extractor.py
-│   ├── familysearch_extractor.py
-│   ├── wikitree_extractor.py
-│   ├── ancestry_extractor.py
-│   └── myheritage_extractor.py
-├── tests/
-│   └── fixtures/               # Test HTML/JSON files
-└── docs/                       # Documentation
-```
+1. **Research**: `python research_runner.py --limit 50`
+   - Searches 9 sources in parallel per person
+   - Skips already-searched person+source combinations
+   - Stages findings scoring ≥30 to `staged_findings.json`
 
-## Requirements
+2. **Review**: `python research_runner.py --review`
+   - Shows each finding with extracted data
+   - `[a]pprove`, `[r]eject`, `[s]kip`, `[q]uit`
 
-- Python 3.8+
-- Chrome browser with remote debugging enabled (for production mode)
-- BeautifulSoup4, requests
+3. **Submit**: `python research_runner.py --submit-approved`
+   - Sends approved findings to genealogy API
+   - Creates parent records with source citations
 
-## Test Results
+## Sources (9 total)
 
-Last test: **6 sources, 110 records extracted** (MyHeritage disabled)
+| Source | Status | Notes |
+|--------|--------|-------|
+| Find A Grave | ✅ | Burial records, death dates |
+| Geneanet | ✅ | European family trees |
+| Ancestry | ✅ | Requires login |
+| MyHeritage | ✅ | Requires login |
+| FamilySearch | ✅ | Free, requires login |
+| Filae | ✅ | French records |
+| Geni | ✅ | World family tree |
+| Antenati | ✅ | Italian civil records |
+| FreeBMD | ✅ | UK birth/marriage/death |
+| WikiTree | ⏸️ | Skipped (rate limited) |
 
-## Known Limitations
+## Incremental Processing
 
-1. **Antenati**: Nominative search doesn't return birth years
-2. **MyHeritage**: Requires subscription, has bot detection, needs manual browser access
-3. **FamilySearch**: Some locations include dates (acceptable)
+The runner tracks which person+source combinations have been searched:
 
-See `docs/` for detailed architecture and implementation documentation.
+- **First run**: Searches all sources for each person
+- **Second run**: Skips already-searched combinations
+- **After `--reset`**: Searches everything again
+
+Check progress: `python research_runner.py --stats`
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `staged_findings.json` | Pending findings awaiting review |
+| `processed_searches.json` | Tracks searched person+source combos |
+| `error_log.json` | Error tracking for debugging |

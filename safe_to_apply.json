@@ -1,0 +1,30 @@
+[
+  {
+    "person_id": "6eiHc2kNiL33",
+    "name": "Loretta Thompson",
+    "birth_year": 1855,
+    "sources_agree": 4,
+    "site_data": {
+      "id": "6eiHc2kNiL33",
+      "name_full": "Loretta Thompson",
+      "birth_year": null,
+      "birth_place": null,
+      "death_year": null,
+      "death_place": null
+    }
+  },
+  {
+    "person_id": "7xFKw2xCOSlv",
+    "name": "MRS Charles Laroque",
+    "birth_year": 1851,
+    "sources_agree": 3,
+    "site_data": {
+      "id": "7xFKw2xCOSlv",
+      "name_full": "MRS Charles Laroque",
+      "birth_year": null,
+      "birth_place": null,
+      "death_year": null,
+      "death_place": null
+    }
+  }
+]

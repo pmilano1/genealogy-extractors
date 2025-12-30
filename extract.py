@@ -32,8 +32,9 @@ from extraction.filae_extractor import FilaeExtractor
 from extraction.geni_extractor import GeniExtractor
 
 # Import CDP client for production fetching
-from cdp_client import fetch_page_content
+from cdp_client import fetch_page_content, BotCheckDetected, DailyLimitReached
 from rate_limiter import get_rate_limiter
+from error_tracker import log_error
 import requests
 
 
@@ -93,9 +94,9 @@ SOURCES = {
     'filae': {
         'name': 'Filae',
         'extractor': FilaeExtractor(),
-        'url_template': 'https://www.filae.com/recherche/individus?nom={surname}&prenom={given_name}&annee_debut={birth_year}&annee_fin={birth_year_end}',
+        'url_template': 'https://www.filae.com/search?ln={surname}&fn={given_name}&sy={birth_year}&ey={birth_year_end}',
         'test_fixture': 'tests/fixtures/filae_sample.html',
-        'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1880}
+        'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1875}
     },
     'geni': {
         'name': 'Geni',
@@ -117,72 +118,118 @@ SOURCES = {
 def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
     """Fetch FreeBMD results using Playwright form submission
 
-    FreeBMD requires POST form submission, not GET URL navigation.
-    This function fills in the search form and submits it.
+    FreeBMD requires POST form submission to get results.
+    Has a 3000 record limit - auto-narrows date range if exceeded.
     """
+    from error_tracker import log_error
+    import os
+
     try:
         from playwright.sync_api import sync_playwright
         import time
 
+        # Suppress Node.js deprecation warnings
+        os.environ['NODE_OPTIONS'] = '--no-deprecation'
+
+        surname = params.get('surname', '') or ''
+        given_name = params.get('given_name', '') or ''
+        birth_year = params.get('birth_year', 1880)
+        # Start with 2-year range to avoid 3000 limit on common names
+        birth_year_end = params.get('birth_year_end', birth_year + 2)
+
+        if verbose:
+            print(f"[FreeBMD] Searching for {given_name} {surname} ({birth_year}-{birth_year_end})")
+
         with sync_playwright() as p:
+            # Connect to existing Chrome
             browser = p.chromium.connect_over_cdp("http://localhost:9222")
             context = browser.contexts[0]
 
-            # Create new page for FreeBMD
+            # Always create a new page for FreeBMD (avoid stale tabs)
             page = context.new_page()
 
-            if verbose:
-                print("[FreeBMD] Navigating to search page...")
+            # Auto-dismiss any dialogs to prevent crashes
+            def safe_dismiss(dialog):
+                try:
+                    dialog.dismiss()
+                except Exception:
+                    pass  # Dialog may have already closed
+            page.on("dialog", safe_dismiss)
 
-            # Go to the main search page
-            page.goto("https://www.freebmd.org.uk/cgi/search.pl", timeout=30000)
+            try:
+                # Navigate to search page
+                page.goto("https://www.freebmd.org.uk/cgi/search.pl", timeout=30000)
+                page.wait_for_selector('form[name="search"]', timeout=10000)
 
-            # Wait for form to load
-            page.wait_for_selector('form[action="search.pl"]', timeout=10000)
+                if verbose:
+                    print("[FreeBMD] Filling form...")
 
-            # Fill in the form fields
-            surname = params.get('surname', '')
-            given_name = params.get('given_name', '')
-            birth_year = params.get('birth_year', 1880)
-            birth_year_end = params.get('birth_year_end', birth_year + 10)
+                # Check Births checkbox
+                births_checkbox = page.locator('input#typeBirths')
+                if not births_checkbox.is_checked():
+                    births_checkbox.check()
 
-            if verbose:
-                print(f"[FreeBMD] Searching for {given_name} {surname} ({birth_year}-{birth_year_end})")
+                # Fill form fields
+                page.fill('input[name="surname"]', surname)
+                if given_name:
+                    page.fill('input[name="given"]', given_name)
+                page.fill('input[name="start"]', str(birth_year))
+                page.fill('input[name="end"]', str(birth_year_end))
 
-            # Select Births type
-            page.select_option('select[name="type"]', 'Births')
+                if verbose:
+                    print("[FreeBMD] Submitting form...")
 
-            # Fill surname
-            page.fill('input[name="surname"]', surname)
+                # Submit and wait for results
+                page.click('input[name="find"]')
 
-            # Fill first name
-            page.fill('input[name="given"]', given_name)
+                # Wait for page to load
+                time.sleep(4)
 
-            # Fill start year
-            page.fill('input[name="start"]', str(birth_year))
+                # Get content
+                content = page.content()
 
-            # Fill end year
-            page.fill('input[name="end"]', str(birth_year_end))
+                # Check if we exceeded the 3000 limit
+                if 'maximum number that can be displayed is 3000' in content:
+                    if verbose:
+                        print("[FreeBMD] Exceeded 3000 limit, narrowing to 1-year range...")
 
-            # Submit form
-            page.click('input[type="submit"][value="Find"]')
+                    # Retry with just the birth year (1-year range)
+                    page.goto("https://www.freebmd.org.uk/cgi/search.pl", timeout=30000)
+                    page.wait_for_selector('form[name="search"]', timeout=10000)
 
-            # Wait for results
-            time.sleep(3)
+                    births_checkbox = page.locator('input#typeBirths')
+                    if not births_checkbox.is_checked():
+                        births_checkbox.check()
 
-            # Get content
-            content = page.content()
+                    page.fill('input[name="surname"]', surname)
+                    if given_name:
+                        page.fill('input[name="given"]', given_name)
+                    page.fill('input[name="start"]', str(birth_year))
+                    page.fill('input[name="end"]', str(birth_year))  # Same year = 1 year range
 
-            if verbose:
-                print(f"[FreeBMD] Got {len(content)} bytes")
+                    page.click('input[name="find"]')
+                    time.sleep(4)
+                    content = page.content()
 
-            # Close the page
-            page.close()
+                    # If still exceeded, we can't narrow further
+                    if 'maximum number that can be displayed is 3000' in content:
+                        if verbose:
+                            print("[FreeBMD] Still exceeded with 1-year range - name too common")
+                        return ""
 
-            return content
+                if verbose:
+                    print(f"[FreeBMD] Got {len(content)} bytes")
+
+                return content
+
+            finally:
+                # Always close the tab
+                page.close()
 
     except Exception as e:
-        print(f"[ERROR] FreeBMD Playwright fetch failed: {str(e)}")
+        error_msg = str(e)
+        log_error('freebmd', 'PLAYWRIGHT_ERROR', error_msg, search_params=params)
+        print(f"[ERROR] FreeBMD Playwright fetch failed: {error_msg}")
         return ""
 
 
@@ -244,7 +291,7 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
                     content = rate_limiter.retry_with_backoff(fetch_wikitree, source='wikitree')
 
                 elif source_key == 'freebmd':
-                    # FreeBMD requires Playwright form fill (POST not GET)
+                    # FreeBMD requires Playwright form submission
                     content = fetch_freebmd_with_playwright(params, verbose)
 
                 else:
@@ -296,16 +343,72 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
             'records': records
         }
     
-    except Exception as e:
-        if verbose:
-            print(f"\n❌ Error: {str(e)}")
-            import traceback
-            traceback.print_exc()
-        
+    except BotCheckDetected as e:
+        # Special handling for bot verification - don't mark as processed
+        # so we can retry after user clears the CAPTCHA
+        error_msg = str(e)
+        print(f"\n⚠️  BOT CHECK DETECTED: {source['name']}")
+        print(f"   Please complete the verification in the browser, then retry.")
+
         return {
             'source': source['name'],
             'success': False,
-            'error': str(e),
+            'error': error_msg,
+            'error_type': 'BOT_CHECK',
+            'bot_check': True,  # Flag for caller to handle specially
+            'records': []
+        }
+
+    except DailyLimitReached as e:
+        # Daily limit reached - don't mark as processed, skip this source for today
+        error_msg = str(e)
+        print(f"\n⚠️  DAILY LIMIT REACHED: {source['name']}")
+        print(f"   This source has reached its daily search limit. Try again tomorrow.")
+
+        return {
+            'source': source['name'],
+            'success': False,
+            'error': error_msg,
+            'error_type': 'DAILY_LIMIT',
+            'daily_limit': True,  # Flag for caller to skip this source
+            'records': []
+        }
+
+    except Exception as e:
+        import traceback
+        error_msg = str(e)
+        stack_trace = traceback.format_exc()
+
+        # Determine error type
+        if '429' in error_msg or 'rate limit' in error_msg.lower():
+            error_type = 'RATE_LIMIT'
+        elif 'timeout' in error_msg.lower():
+            error_type = 'TIMEOUT'
+        elif 'navigation' in error_msg.lower():
+            error_type = 'NAVIGATION'
+        elif '404' in error_msg:
+            error_type = 'NOT_FOUND'
+        else:
+            error_type = 'UNKNOWN'
+
+        # Log error for tracking
+        log_error(
+            source=source_key,
+            error_type=error_type,
+            message=error_msg,
+            search_params=params,
+            stack_trace=stack_trace
+        )
+
+        if verbose:
+            print(f"\n❌ Error: {error_msg}")
+            traceback.print_exc()
+
+        return {
+            'source': source['name'],
+            'success': False,
+            'error': error_msg,
+            'error_type': error_type,
             'records': []
         }
 

@@ -1,0 +1,1596 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html><head><script type="text/javascript" async="" src="https://static.criteo.net/js/ld/publishertag.prebid.144.js"></script><title>FreeBMD - Search</title>
+<meta name="pragma" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<style type="text/css">
+
+.help { cursor : help ; font-size: x-small} 
+img {border : 0}
+.searchinstr {color: red; margin-left: 100px; padding: 0}
+
+</style>
+<style type="text/css">
+<!-- 
+
+.mobile{display:none}
+@media screen and (max-width: 550px) {
+.desktop {display:none}
+.mobile {display:table-row}
+}
+@media screen and not (max-width: 550px) {
+.desktop {display:table-row}
+.mobile {display:none}
+}
+ -->
+</style>
+<script async="" type="text/javascript" src="https://btloader.com/tag?o=5708166709903360&amp;upapi=true"></script><script async="" src="//cdn.confiant-integrations.net/gptprebidnative/202512121329/wrap.js"></script><script async="" type="text/javascript" src="https://cdn.confiant-integrations.net/7j8irNZFR0I0buxfvnoOEZAWXAU/gpt_and_prebid/config.js"></script><script async="" type="text/javascript" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script><script async="" src="//c.amazon-adsystem.com/aax2/apstag.js"></script><script async="" type="text/javascript" src="https://cdn.fuseplatform.net/prebid/prebid-8.52.0-d3f49f08ef9c72095bcd1234471915da.js"></script><script type="text/javascript">
+<!-- Hide script
+
+var savedSearchAction = 0;
+var checkData = 0;
+function validate () {
+    with (document.search) {
+	if (checkData) {
+	    checkData = 0;
+	    var types = 0;
+	    for (i=0; i<=3; i++) if (type[i].checked) types += (1 << i);
+	    if (types & 1) types = 15;
+	    if (types == 0) {
+		alert('You must select a Type, one or more of Births, Deaths, Marriages or "All"');
+		return false;
+	    } else if (aad.value && types != 4) {
+		alert('You can only use "Death age/DoB" with a Deaths search. Please select "Deaths" for Type.');
+		return false;
+	    } else if (s_surname.value && (types & 4) != 0) {
+		alert('Spouse/Mother Surname can be specified only for Marriages and/or Births.');
+		return false;
+	    } else if (s_given.value && types != 8) {
+		alert('Spouse First Name(s) can be specified only for Marriages.');
+		return false;
+	    }
+
+	    if (typeof(countyToDistrict) === 'undefined' && countyid.selectedIndex>0 && districtid.selectedIndex>0) {
+		alert('You cannot search on both district and county. Please select "All Districts" or "All Counties".');
+		return false;
+	    }
+	    if (start.value) {
+		if (isNaN(start.value) || start.value<1000 || start.value>9999) {
+		    alert('Year for start of search must be 4 digits');
+		    return false;
+		}
+		if (start.value < 1837 || (start.value == 1837 && sq.selectedIndex < 2)) {
+		    alert('Start of search must be September 1837 or later.');
+		    return false;
+		}
+	    }
+	    if (end.value && end.value.toLowerCase() != 'start') {
+		if (isNaN(end.value) || end.value<1000 || end.value>9999) {
+		    alert('Year for end of search must be 4 digits');
+		    return false;
+		}
+ 		if (end.value >= 2000) {
+ 		    alert('End of search must be before 2000.');
+		    return false;
+		}
+
+		if (start.value) {
+		    if (start.value > end.value || (start.value == end.value && sq.selectedIndex > eq.selectedIndex)) {
+			alert('End of search must be after start of search');
+			return false;
+		    }
+		}
+	    }
+	}
+	return true;
+    }
+}
+// End script hiding -->
+</script>
+<script src="/js/search.js?1.78" type="text/javascript"></script>
+<script src="/js/countytodistrictmap.1763869701.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.fuseplatform.net/publift/tags/2/3126/fuse.js" async="" type="text/javascript"></script>
+<script src="/js/gtag_script.js?1.3" type="text/javascript"></script><script src="https://www.googletagmanager.com/gtag/js?id=G-QDS48R9ZC1" async=""></script>
+<meta http-equiv="origin-trial" content="A4A26Ymj79UVY7C7JGUS4BG1s7MdcDokAQf/RP0paks+RoTYbXHxceT/5L4iKcsleFCngi75YfNRGW2+SpVv1ggAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A4A26Ymj79UVY7C7JGUS4BG1s7MdcDokAQf/RP0paks+RoTYbXHxceT/5L4iKcsleFCngi75YfNRGW2+SpVv1ggAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><script src="https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202512040101/pubads_impl.js" async=""></script><link href="https://securepubads.g.doubleclick.net/pagead/managed/dict/m202512040101/gpt" rel="compression-dictionary"><script src="https://config.aps.amazon-adsystem.com/configs/8b48e249-e9e6-4a52-8b48-396ea93403e8" type="text/javascript" async="async"></script><script src="//cdn.id5-sync.com/api/1.0/id5-api.js"></script></head>
+<body background="/emb3.jpg">
+<style>
+   @media only screen and (min-width: 500px) {
+ #mobile_advert {
+    display:none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #non_mobile_advert {
+    display: none;
+  }
+}
+@media only screen and (min-width: 500px) {
+  #non_mobile_advert {
+    display: block;
+  }
+}
+@media only screen and (max-width: 500px){
+#mobile_advert {
+display: block;
+}
+}
+</style><div id="non_mobile_advert"><center>
+<div class="bmd_advert" title="Advertisement that supports FreeBMD but is not connected with FreeBMD" style="height:120px;">
+<font size="+1"><b>Advertisement</b></font><br>
+<ins class="dcmads" style="display: inline-block; width: 728px; height: 90px; text-decoration: none;" data-dcm-placement="N217801.4536833FREEBMD/B28102710.340540618" data-dcm-rendering-mode="iframe" data-dcm-https-only="" data-dcm-gdpr-applies="gdpr=${GDPR}" data-dcm-gdpr-consent="gdpr_consent=${GDPR_CONSENT_755}" data-dcm-addtl-consent="addtl_consent=${ADDTL_CONSENT}" data-dcm-ltd="false" data-dcm-resettable-device-id="" data-dcm-app-id="" data-dcm-processed="y">
+  <script src="https://www.googletagservices.com/dcm/dcmads.js"></script><script src="https://www.googletagservices.com/dcm/impl_v106.js"></script><iframe marginwidth="0" marginheight="0" scrolling="no" frameborder="0" title="advertisement" src="https://ad.doubleclick.net/ddm/adi/N217801.4536833FREEBMD/B28102710.340540618;dc_ver=106.314;sz=728x90;u_sd=2.5;nel=1;dc_adk=4071102105;ord=8tpkq1;uach=WyJMaW51eCIsIjYuNi44NyIsIng4NiIsIiIsIjE0My4wLjc0OTkuNDAiLG51bGwsMCxudWxsLCI2NCIsW1siR29vZ2xlIENocm9tZSIsIjE0My4wLjc0OTkuNDAiXSxbIkNocm9taXVtIiwiMTQzLjAuNzQ5OS40MCJdLFsiTm90IEEoQnJhbmQiLCIyNC4wLjAuMCJdXSwwXQ..;dc_rfl=0,https%3A%2F%2Fwww.freebmd.org.uk%2Fcgi%2Fsearch.pl%3Ftype%3DBirths%26surname%3Dsmith%26given%3Djohn%26start%3D1850%26end%3D1850%26sq%3D1%26eq%3D4$0;xdt=0;crlt='zQFU7sDfD;stc=1;chaa=1;sttr=71;prcl=s" allow="attribution-reporting" style="width: 100%; height: 100%; border: 0px; margin: 0px; padding: 0px;"></iframe>
+</ins>
+</div>
+</center>
+</div><div id="mobile_advert"><center>
+<div class="bmd_advert" title="Advertisement that supports FreeBMD but is not connected with FreeBMD" style="height:120px;">
+<font size="+1"><b>Advertisement</b></font><br>
+<ins class="dcmads" style="display: inline-block; width: 320px; height: 50px; text-decoration: none;" data-dcm-placement="N217801.4536833FREEBMD/B28102710.344033749" data-dcm-rendering-mode="iframe" data-dcm-https-only="" data-dcm-gdpr-applies="gdpr=${GDPR}" data-dcm-gdpr-consent="gdpr_consent=${GDPR_CONSENT_755}" data-dcm-addtl-consent="addtl_consent=${ADDTL_CONSENT}" data-dcm-ltd="false" data-dcm-resettable-device-id="" data-dcm-app-id="" data-dcm-processed="y">
+  <script src="https://www.googletagservices.com/dcm/dcmads.js"></script><script src="https://www.googletagservices.com/dcm/impl_v106.js"></script><iframe marginwidth="0" marginheight="0" scrolling="no" frameborder="0" title="advertisement" src="https://ad.doubleclick.net/ddm/adi/N217801.4536833FREEBMD/B28102710.344033749;dc_ver=106.314;sz=320x50;u_sd=2.5;nel=1;dc_adk=3995733079;ord=oxakib;uach=WyJMaW51eCIsIjYuNi44NyIsIng4NiIsIiIsIjE0My4wLjc0OTkuNDAiLG51bGwsMCxudWxsLCI2NCIsW1siR29vZ2xlIENocm9tZSIsIjE0My4wLjc0OTkuNDAiXSxbIkNocm9taXVtIiwiMTQzLjAuNzQ5OS40MCJdLFsiTm90IEEoQnJhbmQiLCIyNC4wLjAuMCJdXSwwXQ..;dc_rfl=0,https%3A%2F%2Fwww.freebmd.org.uk%2Fcgi%2Fsearch.pl%3Ftype%3DBirths%26surname%3Dsmith%26given%3Djohn%26start%3D1850%26end%3D1850%26sq%3D1%26eq%3D4$0;xdt=0;crlt='zQFU7sDfD;stc=1;chaa=1;sttr=35;prcl=s" allow="attribution-reporting" style="width: 100%; height: 100%; border: 0px; margin: 0px; padding: 0px;"></iframe>
+</ins>
+
+</div>
+</center>
+</div><hr style="margin-bottom: 0"><table cellpadding="10"><tbody><tr><td><a href="/"><img style="border:0" src="/Stamp.gif" height="128" width="216" align="middle" alt="FreeBMD" title="FreeBMD Home Page" class="desktop"><img src="/Stamp-small.gif" height="64" width="108" alt="FreeBMD" class="mobile"></a></td> <td><h1>Search</h1></td> <td class="searchinstr">To search FreeBMD for Births, Marriages or Deaths enter the details below and click on the Find button</td></tr></tbody></table><font size="+1"><b>To search FreeBMD enter the details of the
+search below.</b></font> To get a fuller explanation of how to
+get the most out of your search click on the Help button. To select and deselect multiple choices hold down CTRL as you click the mouse.
+For information on the years for which we have data please see our <a href="/progress.shtml">coverage</a> information.<p>
+<link type="text/css" rel="stylesheet" href="/style/cta.css"><style>.sticky{position:fixed;z-index:1000;}</style><script>
+    $(window).scroll(function(e){ 
+      var $el = $('.sticky'); 
+      var isPositionFixed = ($el.css('position') == 'fixed');
+      if ($(this).scrollTop() > 400 && !isPositionFixed){ 
+        $el.css({'position': 'fixed', 'top': '0px', 'right': '100px'}); 
+      }
+      if ($(this).scrollTop() < 400 && isPositionFixed){
+        $el.css({'position': 'static', 'top': '0px', 'right': '100px'}); 
+      } 
+    });</script><style>
+    @media only screen and (min-width: 1200px) {
+      #advert_div {
+        display: flex;
+      }
+    }
+    @media only screen and (max-width: 1200px) {
+      #advert_div {
+        display: none;
+      }
+    }
+    </style>
+    	<style>
+    	 @media only screen and (min-width: 500px) {
+			 .non_mobile_list {
+			    display:table-cell;
+			  }
+			}
+		@media only screen and (max-width: 500px) {
+			 .non_mobile_list {
+			    display:none;
+			  }
+		}
+		@media only screen and (min-width: 500px) {
+			 .mobile_list {
+			    display:none;
+			  }
+			}
+		@media only screen and (max-width: 500px) {
+			 .mobile_list {
+			    display:table-row;
+			  }
+		}
+    	</style>
+    	</p><div class="grid" id="form_grid" style="display: flex; overflow: unset;"><div class="grid__item sixty-percent-width desk-one-half" id="form_div"><form method="POST" action="/cgi/search.pl" enctype="multipart/form-data" onsubmit="return validate()" name="search">
+<table>
+<tbody><tr><td>Type</td> <td><table style="border-collapse:collapse"><tbody><tr><td style="min-width:90px"><input type="checkbox" name="type" value="All" id="typeAll">
+<label for="typeAll">All</label>
+<br><input type="checkbox" name="type" value="Births" checked="" id="typeBirths">
+<label for="typeBirths">Births</label>
+<br><input type="checkbox" name="type" value="Deaths" id="typeDeaths">
+<label for="typeDeaths">Deaths</label>
+<br><input type="checkbox" name="type" value="Marriages" id="typeMarriages">
+<label for="typeMarriages">Marriages</label>
+
+</td> <td style="text-align:center; padding-left:30px"><a href="/search-help.shtml" target="bmd-help"><img alt="help" src="/btnHelp.gif"></a><br><font size="-2">Click for help <br>on using FreeBMD</font></td></tr></tbody></table></td> 
+ <td class="" rowspan="6" style="padding-left:5%;">Districts <div><div><select name="districtid" id="districtlist" size="14" multiple="multiple" onchange="displaySelected('district')">
+<option value="all">All Districts</option>
+<option value="387">Aberayron (to Jun1936)</option>
+<option value="388">Aberconwy (from Sep1975)</option>
+<option value="389">Abergavenny (to 1958)</option>
+<option value="390">Aberystwyth (to Jun1936)</option>
+<option value="391">Abingdon</option>
+<option value="392">Acle (1939-Mar1974)</option>
+<option value="393">Alcester (to Sep1985)</option>
+<option value="394">Alderbury (to Jun1895)</option>
+<option value="395">Aldershot (Dec1932-Mar1974)</option>
+<option value="396">Aldridge &amp; Brownhills (Jun1966-Mar1974)</option>
+<option value="397">Aled (Dec1935-Mar1974)</option>
+<option value="398">Alnwick (to 1936)</option>
+<option value="399">Alresford (to Sep1932)</option>
+<option value="400">Alston (to Mar1974)</option>
+<option value="401">Alton (1837 onw)</option>
+<option value="402">Altrincham (to Sep1898)</option>
+<option value="403">Alverstoke (to Sep1932)</option>
+<option value="404">Alyn &amp; Deeside (Jun1974-Mar1996)</option>
+<option value="405">Amber Valley (from Jun1994)</option>
+<option value="406">Amersham (to Mar1974)</option>
+<option value="407">Amesbury (to Mar1936)</option>
+<option value="408">Amounderness (Jun1935-Mar1974)</option>
+<option value="409">Ampthill (to Jun1999)</option>
+<option value="410">Andover</option>
+<option value="411">Anglesey (to Mar1937)</option>
+<option value="412">Anglesey (Jun1968-Mar1974)</option>
+<option value="413">Anglesey East (Jun1937-Mar1968)</option>
+<option value="414">Anglesey West (Jun1937-Mar1968)</option>
+<option value="415">Appleby (Jun1974-Jun1984)</option>
+<option value="416">Ardudwy (from Jun1974)</option>
+<option value="417">Ashbourne</option>
+<option value="418">Ashby de la Zouch (to Sep1949)</option>
+<option value="419">Ashford (Jun1941-Mar1998)</option>
+<option value="421">Ashton &amp; Oldham (to Mar1848)</option>
+<option value="420">Ashton (Jun1937-Mar1974)</option>
+<option value="422">Ashton under Lyne (Jun1848-Mar1937)</option>
+<option value="423">Askrigg (to 1868)</option>
+<option value="424">Aston (to Sep1924)</option>
+<option value="425">Atcham (to Sep1935)</option>
+<option value="426">Atherstone (to Mar1974)</option>
+<option value="427">Auckland (to Jun1938)</option>
+<option value="428">Axbridge (to Mar1936)</option>
+<option value="429">Axminster (to Jun1936)</option>
+<option value="430">Aylesbury (to Mar1985)</option>
+<option value="431">Aylesbury Vale (from Jun1985)</option>
+<option value="432">Aylsham (to 1938)</option>
+<option value="433">Aysgarth (1869-Sep1936)</option>
+<option value="689">Bakewell (from 1839)</option>
+<option value="690">Bala (to Sep1935)</option>
+<option value="691">Banbury</option>
+<option value="692">Bangor</option>
+<option value="694">Barking &amp; Dagenham (from Jun1980)</option>
+<option value="693">Barking (Jun1965-Mar1980)</option>
+<option value="695">Barkston Ash (1947-Mar1974)</option>
+<option value="696">Barnet</option>
+<option value="697">Barnsley (from Jun1850)</option>
+<option value="698">Barnstaple (to Mar1998)</option>
+<option value="699">Barrow in Furness (from Sep1876)</option>
+<option value="700">Barrow upon Soar (to Sep1949)</option>
+<option value="702">Barton (Dec1934-Mar1980)</option>
+<option value="704">Barton Regis (Jun1877-1904)</option>
+<option value="703">Barton upon Irwell (1850-Sep1934)</option>
+<option value="701">Barton, Worsley &amp; Flixton (1839-Mar1841)</option>
+<option value="705">Basford</option>
+<option value="706">Basildon (Jun1974-Jun1974)</option>
+<option value="707">Basingstoke</option>
+<option value="708">Bath (to Mar1996)</option>
+<option value="709">Bath &amp; North East Somerset (from Jun1996)</option>
+<option value="710">Bathavon (Jun1936-Mar1974)</option>
+<option value="711">Battersea (Jun1930-Mar1965)</option>
+<option value="712">Battle (to Mar1977)</option>
+<option value="713">Beaminster (to Mar1937)</option>
+<option value="714">Bedale (Sep1839-Sep1936)</option>
+<option value="715">Bedford (to Jun1999)</option>
+<option value="716">Bedminster (to Mar1899)</option>
+<option value="717">Bedwellty (Sep1861-Mar1974)</option>
+<option value="718">Belford (to 1936)</option>
+<option value="719">Bellingham (to 1936)</option>
+<option value="720">Belper (to Jun1994)</option>
+<option value="722">Berkhampstead (to Sep1939)</option>
+<option value="721">Berkhamsted (Dec1939-Mar1974)</option>
+<option value="723">Bermondsey (to 1869)</option>
+<option value="724">Bermondsey (Jun1934-Mar1965)</option>
+<option value="725">Berwick (to 1936)</option>
+<option value="726">Bethnal Green (to 1965)</option>
+<option value="727">Beverley (to Mar1937)</option>
+<option value="728">Beverley (from Jun1974)</option>
+<option value="729">Bexley (from Jun1965)</option>
+<option value="730">Bicester (to Sep1932)</option>
+<option value="731">Bideford (to Mar1998)</option>
+<option value="732">Biggleswade (to Jun1999)</option>
+<option value="733">Billericay (to Jun1939)</option>
+<option value="734">Billesdon (to Sep1949)</option>
+<option value="735">Bilston (Jun1935-Mar1966)</option>
+<option value="736">Bingham (to Mar1974)</option>
+<option value="737">Birkenhead (Sep1861-Mar1998)</option>
+<option value="738">Birmingham (to Sep1924)</option>
+<option value="739">Birmingham (from Dec1932)</option>
+<option value="740">Birmingham North (Sep1924-Sep1932)</option>
+<option value="741">Birmingham South (Sep1924-Sep1932)</option>
+<option value="743">Bishops Stortford</option>
+<option value="742">Bishopsgate (to Mar1838)</option>
+<option value="744">Blaby (to Sep1949)</option>
+<option value="745">Blackburn (to Mar1998)</option>
+<option value="747">Blackpool &amp; Fylde (Jun1974-Mar1998)</option>
+<option value="746">Blackpool (Dec1936-Mar1974)</option>
+<option value="748">Blaenau Gwent (from Jun1974)</option>
+<option value="749">Blandford (to Jun1956)</option>
+<option value="750">Blean (to Mar1941)</option>
+<option value="751">Blofield (to 1938)</option>
+<option value="752">Blyth (Jun1935-Sep1983)</option>
+<option value="753">Blything (to Mar1935)</option>
+<option value="754">Bodmin</option>
+<option value="755">Bolton</option>
+<option value="756">Bootle Cul (to Mar1939)</option>
+<option value="757">Bootle Lan (Dec1934-Mar1980)</option>
+<option value="758">Border (Dec1937-Mar1974)</option>
+<option value="759">Bosmere (to Mar1935)</option>
+<option value="760">Boston</option>
+<option value="763">Bourne &amp; South Kesteven (1934-Mar1974)</option>
+<option value="761">Bourne (to 1933)</option>
+<option value="762">Bourne (from Jun1974)</option>
+<option value="765">Bournemouth &amp; Christchurch (Sep1925-Sep1932)</option>
+<option value="764">Bournemouth (from Dec1932)</option>
+<option value="766">Brackley</option>
+<option value="767">Bracknell (Jun1974-Mar1998)</option>
+<option value="768">Bradfield (to Mar1937)</option>
+<option value="770">Bradford</option>
+<option value="769">Bradford upon Avon (to Mar1936)</option>
+<option value="771">Braintree</option>
+<option value="772">Bramham (Jun1862-Sep1869)</option>
+<option value="774">Bramley &amp; Holbeck (Dec1925-1928)</option>
+<option value="773">Bramley (1863-Sep1925)</option>
+<option value="775">Brampton (to Sep1937)</option>
+<option value="776">Brecknock</option>
+<option value="777">Brent (from Jun1965)</option>
+<option value="778">Brentford (to Sep1947)</option>
+<option value="779">Brentwood (from Sep1939)</option>
+<option value="780">Bridge (to Mar1974)</option>
+<option value="782">Bridgend (from Jun1996)</option>
+<option value="781">Bridgend (to Sep1970)</option>
+<option value="783">Bridgnorth</option>
+<option value="784">Bridgwater (to Mar1974)</option>
+<option value="785">Bridlington (to Mar1937)</option>
+<option value="786">Bridlington (from Jun1974)</option>
+<option value="788">Bridport (1959-Mar1997)</option>
+<option value="787">Bridport (to 1958)</option>
+<option value="789">Brighton (to 1998)</option>
+<option value="790">Bristol</option>
+<option value="791">Brixworth (to Mar1974)</option>
+<option value="792">Bromley</option>
+<option value="793">Bromsgrove</option>
+<option value="794">Bromyard</option>
+<option value="795">Broxbourne (from Jun1974)</option>
+<option value="796">Buckingham (to Mar1935)</option>
+<option value="797">Bucklow (Dec1898-Mar1974)</option>
+<option value="798">Buckrose (Jun1937-Mar1974)</option>
+<option value="799">Builth (to 1987)</option>
+<option value="800">Bullingdon (from Dec1964)</option>
+<option value="801">Bulmer (Dec1936-Mar1974)</option>
+<option value="802">Buntingford (to 1837)</option>
+<option value="803">Burnley (to Mar1974)</option>
+<option value="804">Burnley &amp; Pendle (from Jun1974)</option>
+<option value="805">Burton upon Trent (to Mar1974)</option>
+<option value="806">Bury</option>
+<option value="807">Bury St Edmunds</option>
+<option value="1052">Caerleon (Sep1936-Mar1974)</option>
+<option value="1053">Caernarfon (from Jun1974)</option>
+<option value="1054">Caernarvon (Jun1937-Mar1974)</option>
+<option value="1055">Caerphilly (from Jun1996)</option>
+<option value="1056">Caistor</option>
+<option value="1057">Calder (Jun1938-Mar1974)</option>
+<option value="1058">Calne (to Mar1936)</option>
+<option value="1059">Camberwell (to Sep1991)</option>
+<option value="1060">Camborne-Redruth (from Jun1974)</option>
+<option value="1061">Cambridge (to Mar1935)</option>
+<option value="1062">Cambridge (from Jun1974)</option>
+<option value="1063">Cambridgeshire (Jun1935-Mar1974)</option>
+<option value="1064">Camden (from Dec1977)</option>
+<option value="1065">Camelford (to Jun1995)</option>
+<option value="1066">Cannock (Jun1877-Mar1974)</option>
+<option value="1067">Cannock Chase (from Jun1974)</option>
+<option value="1068">Canterbury (to Mar1998)</option>
+<option value="1069">Cardiff (to Mar1974)</option>
+<option value="1070">Cardiff (from Jun1996)</option>
+<option value="1071">Cardigan (to Jun1936)</option>
+<option value="1072">Cardiganshire Central (from Sep1936)</option>
+<option value="1073">Cardiganshire North (from Sep1936)</option>
+<option value="1074">Cardiganshire South (from Sep1936)</option>
+<option value="1075">Carlisle</option>
+<option value="1076">Carmarthen</option>
+<option value="1077">Carnarvon (to Mar1937)</option>
+<option value="1079">Castle Ward (to 1936)</option>
+<option value="1078">Castleford (Jun1862-1867)</option>
+<option value="1080">Catherington (to Sep1932)</option>
+<option value="1081">Caxton (to Mar1935)</option>
+<option value="1082">Central Cleveland (Jun1974-Mar1996)</option>
+<option value="1083">Cerne (to 1837)</option>
+<option value="1084">Chailey (to 1837)</option>
+<option value="1085">Chanctonbury (Jun1935-Mar1974)</option>
+<option value="1086">Chapel en le Frith (1838-Mar1974)</option>
+<option value="1087">Chard (to Mar1974)</option>
+<option value="1088">Chatham (Jun1941-Mar1998)</option>
+<option value="1089">Cheadle (to Mar1974)</option>
+<option value="1090">Chelmsford</option>
+<option value="1091">Chelsea (to 1837)</option>
+<option value="1092">Chelsea (Sep1841-Jun1981)</option>
+<option value="1093">Cheltenham</option>
+<option value="1094">Chepstow (to Mar1968)</option>
+<option value="1095">Chertsey (to Mar1934)</option>
+<option value="1096">Cheshire East (from Jun1998)</option>
+<option value="1097">Chester (1870-Mar1974)</option>
+<option value="1098">Chester &amp; Ellesmere Port (Jun1974-Mar1998)</option>
+<option value="1099">Chester le Street (to Jun1938)</option>
+<option value="1100">Chesterfield</option>
+<option value="1101">Chesterton (to Mar1935)</option>
+<option value="1102">Chichester</option>
+<option value="1103">Chiltern &amp; Beaconsfield (Jun1974-Jun1988)</option>
+<option value="1104">Chiltern &amp; South Bucks (Jun1988-1998)</option>
+<option value="1105">Chippenham</option>
+<option value="1106">Chipping Norton (to Mar1982)</option>
+<option value="1107">Chipping Sodbury (to Mar1937)</option>
+<option value="1108">Chorley</option>
+<option value="1109">Chorlton (to 1924)</option>
+<option value="1110">Christchurch (to Jun1925)</option>
+<option value="1111">Christchurch (Dec1932-Mar1974)</option>
+<option value="1112">Church Stretton (to Sep1935)</option>
+<option value="1113">Cirencester</option>
+<option value="1114">City of Westminster (Dec1933-Mar1965)</option>
+<option value="1115">Claro (1947-Sep1998)</option>
+<option value="1116">Cleethorpes (Jun1938-Mar1974)</option>
+<option value="1117">Cleobury Mortimer (to Sep1935)</option>
+<option value="1118">Clerkenwell (to Jun1869)</option>
+<option value="1119">Cleveland (Dec1936-Mar1974)</option>
+<option value="1120">Clifton (to Mar1877)</option>
+<option value="1121">Clitheroe (to Mar1974)</option>
+<option value="1122">Clun</option>
+<option value="1123">Clutton (to Mar1936)</option>
+<option value="1124">Coalville (Dec1949-1999)</option>
+<option value="1125">Cockermouth</option>
+<option value="1126">Colchester</option>
+<option value="1127">Colwyn (from Jun1974)</option>
+<option value="1128">Congleton (to Mar1937)</option>
+<option value="1129">Congleton &amp; Crewe (Jun1974-Jun1991)</option>
+<option value="1130">Conway (to Mar1937)</option>
+<option value="1131">Conway Valley (Jun1937-Mar1974)</option>
+<option value="1132">Cookham (to Mar1896)</option>
+<option value="1133">Corby (from Jun1974)</option>
+<option value="1134">Corwen (to Sep1935)</option>
+<option value="1135">Cosford (to Jun1938)</option>
+<option value="1136">Coventry</option>
+<option value="1137">Cranbrook (to Mar1941)</option>
+<option value="1138">Crawley (from Jun1974)</option>
+<option value="1139">Crediton (to Jun1936)</option>
+<option value="1140">Crewe (Jun1937-Mar1974)</option>
+<option value="1141">Crickhowell (to Mar1974)</option>
+<option value="1142">Cricklade (to Mar1936)</option>
+<option value="1143">Crosby (Dec1934-Mar1980)</option>
+<option value="1144">Croydon</option>
+<option value="1145">Cuckfield (to Sep1980)</option>
+<option value="1002">Dacorum (from Jun1974)</option>
+<option value="1003">Darlington</option>
+<option value="1004">Dartford (to 1979)</option>
+<option value="1005">Darwen (1937-Mar1974)</option>
+<option value="1006">Daventry</option>
+<option value="1007">De Meirionydd (from Jun1974)</option>
+<option value="1008">Deben (from Jun1935)</option>
+<option value="1009">Delyn (Jun1974-Mar1996)</option>
+<option value="1010">Denbighshire North (from Jun1996)</option>
+<option value="1011">Denbighshire South (from Jun1996)</option>
+<option value="1012">Deptford (Jun1930-Jun1966)</option>
+<option value="1013">Depwade</option>
+<option value="1014">Derby</option>
+<option value="1015">Devizes (to Sep1998)</option>
+<option value="1016">Devon Central (Sep1936-Mar1974)</option>
+<option value="1017">Devonport (Dec1898-Jun1937)</option>
+<option value="1018">Dewsbury</option>
+<option value="1019">Docking (to 1938)</option>
+<option value="1020">Dolgelly (to Sep1935)</option>
+<option value="1021">Don Valley (Sep1938-Mar1974)</option>
+<option value="1022">Doncaster</option>
+<option value="1023">Dorchester (to Jun1949)</option>
+<option value="1024">Dorking (to Mar1934)</option>
+<option value="1025">Dover (to Mar1998)</option>
+<option value="1026">Downham</option>
+<option value="1027">Driffield (to Mar1937)</option>
+<option value="1028">Droitwich</option>
+<option value="1029">Droxford</option>
+<option value="1031">Dudley (1913-Mar1935)</option>
+<option value="1032">Dudley (Jun1935-Mar1966)</option>
+<option value="1033">Dudley (from Jun1966)</option>
+<option value="1030">Dudley (to 1912)</option>
+<option value="1034">Dulverton (to 1837)</option>
+<option value="1035">Dulverton (1855-Mar1936)</option>
+<option value="1036">Dunmow (to 1967)</option>
+<option value="1037">Dunstable (Jun1964-Jun1999)</option>
+<option value="1038">Durham (to Jun1938)</option>
+<option value="1041">Durham Central &amp; South Eastern (Dec1971-Mar1974)</option>
+<option value="1039">Durham Central (Sep1938-Sep1971)</option>
+<option value="1040">Durham Central (from Jun1974)</option>
+<option value="1042">Durham Eastern (from Sep1938)</option>
+<option value="1044">Durham North Eastern (1938-Mar1974)</option>
+<option value="1045">Durham North Western (Sep1938-Mar1974)</option>
+<option value="1043">Durham Northern (from Sep1938)</option>
+<option value="1046">Durham South Eastern (Sep1938-Sep1971)</option>
+<option value="1047">Durham South Western (from Sep1938)</option>
+<option value="1048">Durham Western (from Sep1938)</option>
+<option value="1049">Dursley (to Mar1937)</option>
+<option value="1050">Dwyfor (from Dec1996)</option>
+<option value="1051">Dyffryn Conwy (Jun1974-Jun1975)</option>
+<option value="808">Ealing (from Dec1947)</option>
+<option value="809">Easington (to Jun1938)</option>
+<option value="810">Easingwold (to Sep1936)</option>
+<option value="811">East Ashford (to Mar1941)</option>
+<option value="813">East Cleveland (Jun1974-Mar1996)</option>
+<option value="814">East Dereham (from 1939)</option>
+<option value="815">East Dorset (from Jun1997)</option>
+<option value="816">East Elloe (from 1936)</option>
+<option value="817">East Glamorgan (1935-Mar1974)</option>
+<option value="818">East Grinstead (to Mar1935)</option>
+<option value="819">East Ham (Dec1935-1967)</option>
+<option value="823">East London (Jun1838-1869)</option>
+<option value="824">East Preston (1870-Mar1935)</option>
+<option value="825">East Retford</option>
+<option value="827">East Staffordshire (from Jun1974)</option>
+<option value="828">East Stonehouse (to Jun1937)</option>
+<option value="829">East Ward (to Sep1937)</option>
+<option value="812">Eastbourne</option>
+<option value="820">Easthampstead (to Mar1937)</option>
+<option value="821">Easthampstead (Jun1967-Mar1974)</option>
+<option value="822">Eastleigh (Jun1927-Sep1932)</option>
+<option value="826">Eastry (to Mar1941)</option>
+<option value="830">Ecclesall Bierlow (to Mar1935)</option>
+<option value="831">Ecclesfield (to Mar1850)</option>
+<option value="832">Edmonton (to Mar1965)</option>
+<option value="833">Elham (to Mar1941)</option>
+<option value="834">Ellesmere (to Sep1935)</option>
+<option value="835">Elstree &amp; Potters Bar (Jun1965-Mar1996)</option>
+<option value="836">Ely</option>
+<option value="837">Enfield (from Jun1965)</option>
+<option value="838">Epping (to Mar1974)</option>
+<option value="839">Epping Forest (from Jun1974)</option>
+<option value="840">Epsom (to Mar1934)</option>
+<option value="841">Erewash (from Jun1997)</option>
+<option value="842">Erpingham (to 1938)</option>
+<option value="843">Essex South Western (Dec1935-Mar1965)</option>
+<option value="844">Eton (to Mar1974)</option>
+<option value="845">Evesham</option>
+<option value="846">Ewecross (1947-Sep1998)</option>
+<option value="847">Exeter</option>
+<option value="848">Exmoor (Jun1936-Mar1974)</option>
+<option value="361">Fakenham (from 1939)</option>
+<option value="362">Falmouth</option>
+<option value="363">Fareham (to Sep1932)</option>
+<option value="364">Faringdon (to Mar1937)</option>
+<option value="365">Farnborough (1847-Jun1869)</option>
+<option value="366">Farnham (to Mar1934)</option>
+<option value="367">Farnworth (Dec1935-Mar1974)</option>
+<option value="368">Farringdon (to Mar1838)</option>
+<option value="369">Faversham (to Mar1941)</option>
+<option value="370">Fenland (from Sep1980)</option>
+<option value="371">Ffestiniog (to Sep1935)</option>
+<option value="372">Finsbury (Jun1930-Mar1965)</option>
+<option value="373">Fleetwood (Jun1974-Mar1982)</option>
+<option value="374">Flegg (to 1923)</option>
+<option value="375">Flintshire East (from Jun1996)</option>
+<option value="376">Flintshire West (from Jun1996)</option>
+<option value="377">Foleshill (to Mar1932)</option>
+<option value="378">Folkestone (Jun1941-Mar1974)</option>
+<option value="379">Forden (Sep1870-1935)</option>
+<option value="380">Fordingbridge (to Sep1932)</option>
+<option value="381">Forehoe (to 1938)</option>
+<option value="382">Forest of Dean (from Jun1937)</option>
+<option value="383">Freebridge Lynn (to 1938)</option>
+<option value="384">Frome (to Mar1974)</option>
+<option value="385">Fulham (from Jun1875)</option>
+<option value="386">Fylde (to Mar1974)</option>
+<option value="74">Gainsborough</option>
+<option value="75">Garstang (to Mar1998)</option>
+<option value="76">Gateshead</option>
+<option value="77">Gipping (Jun1935-Mar1983)</option>
+<option value="78">Gipping &amp; Hartismere (from Jun1983)</option>
+<option value="79">Glanford Brigg (to Sep1938)</option>
+<option value="80">Glendale (to 1936)</option>
+<option value="81">Glossop (Jun1898-Mar1974)</option>
+<option value="82">Gloucester (to Mar1937)</option>
+<option value="83">Gloucester (from Jun1974)</option>
+<option value="84">Gloucester City (Jun1937-Mar1974)</option>
+<option value="85">Gloucester Rural (Jun1937-Mar1974)</option>
+<option value="86">Glyndwr (Jun1974-Mar1996)</option>
+<option value="87">Godstone (to Mar1934)</option>
+<option value="88">Goole</option>
+<option value="89">Gosport (Dec1932-Mar1974)</option>
+<option value="90">Gower (Sep1858-1934)</option>
+<option value="93">Grantham &amp; West Kesteven (1934-Mar1974)</option>
+<option value="91">Grantham (to 1933)</option>
+<option value="92">Grantham (from Jun1974)</option>
+<option value="94">Gravesend (to Mar1941)</option>
+<option value="95">Gravesend (from 1980)</option>
+<option value="96">Great Boughton (to 1869)</option>
+<option value="97">Great Ouseburn (Sep1854-1946)</option>
+<option value="98">Great Yarmouth (from 1939)</option>
+<option value="99">Greenwich</option>
+<option value="100">Grimsby (Jun1897-Mar1996)</option>
+<option value="101">Guildford (to Mar1934)</option>
+<option value="102">Guiltcross (to Mar1902)</option>
+<option value="103">Guisborough (to Sep1936)</option>
+<option value="448">Hackney</option>
+<option value="449">Hailsham (to Mar1976)</option>
+<option value="450">Halifax</option>
+<option value="451">Halstead (to 1972)</option>
+<option value="452">Halton (from Jun1974)</option>
+<option value="453">Haltwhistle (to 1936)</option>
+<option value="454">Hambledon (to Mar1934)</option>
+<option value="455">Hammersmith (from Sep1915)</option>
+<option value="456">Hampstead (Sep1848-Sep1977)</option>
+<option value="457">Hardingstone (to 1923)</option>
+<option value="458">Haringey (from Jun1965)</option>
+<option value="459">Harlow (from Jun1974)</option>
+<option value="460">Harrow (from Dec1947)</option>
+<option value="461">Hartismere (to Mar1983)</option>
+<option value="462">Hartlepool (Jun1859-Jun1938)</option>
+<option value="463">Hartlepool (Jun1967-Mar1974)</option>
+<option value="464">Hartlepool (from Jun1996)</option>
+<option value="465">Hartley Wintney (to Sep1932)</option>
+<option value="466">Harwich (Sep1939-Sep1957)</option>
+<option value="467">Haslingden (to Mar1974)</option>
+<option value="469">Hastings &amp; Rother (from Jun1977)</option>
+<option value="468">Hastings (to Mar1977)</option>
+<option value="470">Hatfield</option>
+<option value="471">Havant (to Sep1932)</option>
+<option value="472">Haverfordwest</option>
+<option value="473">Havering (from Jun1965)</option>
+<option value="474">Hawarden (1903-Mar1974)</option>
+<option value="475">Hay</option>
+<option value="476">Hayfield (1838-Mar1938)</option>
+<option value="477">Haywards Heath (from Dec1980)</option>
+<option value="478">Headington (to 1932)</option>
+<option value="479">Helmsley (to Sep1936)</option>
+<option value="480">Helston (to Jun1936)</option>
+<option value="481">Hemel Hempstead (to Mar1974)</option>
+<option value="482">Hemsworth (Sep1850-Mar1974)</option>
+<option value="483">Hendon (to Sep1947)</option>
+<option value="484">Hendon (Dec1947-Mar1999)</option>
+<option value="485">Henley</option>
+<option value="486">Henstead (to 1938)</option>
+<option value="487">Hereford</option>
+<option value="488">Hertford (to Mar1974)</option>
+<option value="489">Hertford &amp; Ware (from Jun1974)</option>
+<option value="490">Hexham (to 1936)</option>
+<option value="491">Heywood (Jun1934-Mar1974)</option>
+<option value="492">High Peak (to 1837)</option>
+<option value="493">High Peak (from Jun1974)</option>
+<option value="494">Highworth (to Mar1899)</option>
+<option value="495">Hillingdon (from Jun1965)</option>
+<option value="496">Hinckley (to 1999)</option>
+<option value="497">Hiraethog (Dec1935-Mar1974)</option>
+<option value="498">Hitchin (to Mar1996)</option>
+<option value="499">Hitchin &amp; Stevenage (from 1996)</option>
+<option value="500">Holbeach (to 1935)</option>
+<option value="501">Holbeck (Dec1862-Sep1925)</option>
+<option value="502">Holborn (to Mar1965)</option>
+<option value="503">Holderness (Jun1937-Mar1974)</option>
+<option value="504">Hollingbourne (to Mar1941)</option>
+<option value="505">Holsworthy (to Mar1998)</option>
+<option value="506">Holyhead (1885-Mar1937)</option>
+<option value="507">Holywell (to Mar1974)</option>
+<option value="508">Honiton (to Mar1998)</option>
+<option value="509">Hoo (to Jun1923)</option>
+<option value="510">Horncastle</option>
+<option value="511">Horsham</option>
+<option value="512">Horwich (Dec1935-1967)</option>
+<option value="513">Houghton le Spring (to Jun1938)</option>
+<option value="514">Hounslow (from Jun1965)</option>
+<option value="515">Hove (Jun1935-1998)</option>
+<option value="516">Howden (to Mar1937)</option>
+<option value="517">Howdenshire (Jun1937-Mar1974)</option>
+<option value="518">Hoxne (to Jun1907)</option>
+<option value="519">Huddersfield</option>
+<option value="520">Hull</option>
+<option value="521">Hungerford (to Mar1937)</option>
+<option value="522">Hunslet (1845-1928)</option>
+<option value="523">Huntingdon</option>
+<option value="524">Huntingdonshire North (1934-1967)</option>
+<option value="525">Hursley (to Sep1837)</option>
+<option value="526">Hyde (Jun1937-Mar1974)</option>
+<option value="527">Hyndburn &amp; Rossendale (from Jun1974)</option>
+<option value="1146">Ilford (Sep1939-Mar1965)</option>
+<option value="1147">Ilkeston (Jun1938-Mar1997)</option>
+<option value="1148">Ince (Sep1936-Mar1974)</option>
+<option value="1149">Ipswich</option>
+<option value="1151">Isle of Wight</option>
+<option value="1150">Isles of Scilly (from Jun1901)</option>
+<option value="1152">Islington</option>
+<option value="1153">Jarrow (from Jun1974)</option>
+<option value="849">Keighley (to 1946)</option>
+<option value="850">Keighley (from Jun1974)</option>
+<option value="851">Kendal (to Sep1937)</option>
+<option value="852">Kendal (from Jun1974)</option>
+<option value="853">Kensington (to Jun1981)</option>
+<option value="854">Kensington &amp; Chelsea (from Sep1981)</option>
+<option value="855">Kerrier (from Sep1936)</option>
+<option value="856">Kettering</option>
+<option value="857">Ketton (1934-Mar1974)</option>
+<option value="858">Keynsham (to Mar1936)</option>
+<option value="859">Kidderminster</option>
+<option value="863">Kings Lynn</option>
+<option value="865">Kings Norton (1913-Sep1924)</option>
+<option value="864">Kings Norton (to 1912)</option>
+<option value="860">Kingsbridge (to Mar1998)</option>
+<option value="862">Kingsclere &amp; Whitchurch (from Dec1932)</option>
+<option value="861">Kingsclere (to Sep1932)</option>
+<option value="866">Kingston (to Mar1934)</option>
+<option value="867">Kingston upon Thames (from Jun1965)</option>
+<option value="868">Kingswinford (Sep1934-Mar1937)</option>
+<option value="869">Kingswood (Jun1937-Mar1974)</option>
+<option value="870">Kington (to 1838)</option>
+<option value="871">Kington (Jun1870-1870)</option>
+<option value="872">Kington (from 1871)</option>
+<option value="873">Kirk Deighton (Sep1861-Jun1869)</option>
+<option value="874">Kirkstall (Dec1862-Jun1869)</option>
+<option value="875">Knaresborough (to 1946)</option>
+<option value="876">Knighton (to Mar1933)</option>
+<option value="877">Knowsley (from Jun1974)</option>
+<option value="889">Lambeth</option>
+<option value="890">Lampeter (to Jun1936)</option>
+<option value="891">Lancaster</option>
+<option value="892">Lanchester (to Sep1837)</option>
+<option value="893">Lanchester (Jun1875-Jun1938)</option>
+<option value="894">Langport (to Mar1936)</option>
+<option value="895">Launceston</option>
+<option value="896">Ledbury</option>
+<option value="897">Leeds (to 1928)</option>
+<option value="898">Leeds (from Jun1939)</option>
+<option value="899">Leeds North (1929-Mar1939)</option>
+<option value="900">Leeds South (1929-Mar1939)</option>
+<option value="901">Leek (to Mar1974)</option>
+<option value="902">Leicester (to Mar1974)</option>
+<option value="903">Leicestershire Central (Dec1949-Mar1997)</option>
+<option value="904">Leigh (to Sep1995)</option>
+<option value="905">Leighton Buzzard (to Jun1999)</option>
+<option value="906">Leominster</option>
+<option value="907">Lewes</option>
+<option value="908">Lewisham</option>
+<option value="909">Lexden (to Jun1939)</option>
+<option value="910">Leyburn (to Sep1936)</option>
+<option value="911">Lichfield</option>
+<option value="912">Limehouse (Sep1921-1925)</option>
+<option value="913">Lincoln</option>
+<option value="914">Linton (to Mar1935)</option>
+<option value="915">Liskeard</option>
+<option value="916">Littleborough (Dec1936-Mar1974)</option>
+<option value="917">Liverpool (to Sep1934)</option>
+<option value="918">Liverpool (from Dec1969)</option>
+<option value="919">Liverpool North (Dec1934-Sep1969)</option>
+<option value="920">Liverpool South (Dec1934-Sep1969)</option>
+<option value="921">Llandilofawr (to Jun1935)</option>
+<option value="922">Llandovery (to Jun1935)</option>
+<option value="923">Llanelli (from Jun1974)</option>
+<option value="924">Llanelly (to Mar1974)</option>
+<option value="925">Llanfyllin (to Mar1982)</option>
+<option value="926">Llanrwst (to Sep1935)</option>
+<option value="927">Loddon (to 1938)</option>
+<option value="928">London City</option>
+<option value="929">Long Ashton (Jun1899-Mar1936)</option>
+<option value="930">Longtown (to Mar1939)</option>
+<option value="931">Lothingland (Jun1935-Mar1974)</option>
+<option value="932">Loughborough (to 1999)</option>
+<option value="933">Louth</option>
+<option value="934">Lower Agbrigg (1939-Mar1974)</option>
+<option value="935">Ludlow</option>
+<option value="936">Lunesdale (Sep1869-Mar1974)</option>
+<option value="937">Luton</option>
+<option value="938">Lutterworth (to Mar1974)</option>
+<option value="939">Lymington (to Sep1932)</option>
+<option value="940">Macclesfield (to Mar1998)</option>
+<option value="941">Machynlleth</option>
+<option value="942">Madeley (to Sep1935)</option>
+<option value="943">Maelor (1954-Mar1974)</option>
+<option value="944">Maidenhead (Jun1896-Mar1974)</option>
+<option value="945">Maidstone</option>
+<option value="946">Maldon (to 1972)</option>
+<option value="947">Maldon (Jun1974-Jun1974)</option>
+<option value="948">Malling (to Mar1941)</option>
+<option value="949">Malmesbury (to Mar1936)</option>
+<option value="950">Malton (to Sep1936)</option>
+<option value="951">Malvern (from Jun1952)</option>
+<option value="952">Manchester (to 1924)</option>
+<option value="953">Manchester (from Jun1939)</option>
+<option value="954">Manchester North (1925-Mar1939)</option>
+<option value="955">Manchester South (1925-Mar1939)</option>
+<option value="956">Mansfield</option>
+<option value="957">March (Jun1938-Jun1980)</option>
+<option value="958">Market Bosworth (to Mar1974)</option>
+<option value="959">Market Drayton (to Sep1935)</option>
+<option value="960">Market Harborough (to 1999)</option>
+<option value="961">Marlborough (to Sep1998)</option>
+<option value="963">Martley (Sep1934-Jun1976)</option>
+<option value="962">Martley (to Mar1913)</option>
+<option value="964">Marylebone (to 1901)</option>
+<option value="965">Matlock (to 1838)</option>
+<option value="966">Medway (to Mar1941)</option>
+<option value="967">Medway (from Jun1998)</option>
+<option value="968">Melksham (to Mar1936)</option>
+<option value="969">Melton &amp; Rutland (Jun1995-Mar1997)</option>
+<option value="970">Melton Mowbray (to Mar1995)</option>
+<option value="971">Melton Mowbray (Jun1997-1999)</option>
+<option value="972">Mendip (from Jun1974)</option>
+<option value="973">Mere (to 1977)</option>
+<option value="974">Meriden (to 1977)</option>
+<option value="975">Merioneth East (Dec1935-Mar1974)</option>
+<option value="976">Merioneth North (Dec1935-Mar1974)</option>
+<option value="977">Merioneth South (Dec1935-Mar1974)</option>
+<option value="978">Merthyr Tydfil</option>
+<option value="979">Merton (from Jun1965)</option>
+<option value="980">Mid Devon (from Sep1978)</option>
+<option value="981">Mid Glamorgan (Dec1970-Mar1974)</option>
+<option value="982">Mid Powys (from 1988)</option>
+<option value="983">Mid Surrey (from Dec1996)</option>
+<option value="984">Mid Warwickshire (from Dec1985)</option>
+<option value="985">Middlesbrough (Dec1875-Mar1968)</option>
+<option value="986">Middlesbrough (from Jun1996)</option>
+<option value="987">Middlesex South (Dec1947-Mar1965)</option>
+<option value="988">Middleton (Dec1933-Mar1974)</option>
+<option value="990">Midhurst &amp; Petworth (Jun1935-Mar1974)</option>
+<option value="989">Midhurst (to Mar1935)</option>
+<option value="991">Mildenhall (to Jun1938)</option>
+<option value="992">Mile End Old Town (Dec1857-1925)</option>
+<option value="993">Millom (from Jun1939)</option>
+<option value="994">Milton (to Mar1941)</option>
+<option value="995">Milton Keynes (from Jun1985)</option>
+<option value="996">Mitford (to 1938)</option>
+<option value="997">Monmouth (to Mar1939)</option>
+<option value="998">Monmouthshire (from Jun1996)</option>
+<option value="999">Montgomery (to Jun1870)</option>
+<option value="1000">Morpeth (to 1936)</option>
+<option value="1001">Mutford (to Mar1935)</option>
+<option value="11">Nantwich (to Mar1937)</option>
+<option value="12">Narberth (to Mar1973)</option>
+<option value="13">Neath (to Sep1970)</option>
+<option value="14">Neath (Jun1974-Mar1996)</option>
+<option value="15">Neath Port Talbot (from Jun1996)</option>
+<option value="16">Nelson (Jun1936-Mar1974)</option>
+<option value="23">New Forest</option>
+<option value="17">Newark</option>
+<option value="18">Newbury (to Mar1998)</option>
+<option value="19">Newcastle in Emlyn (to Jun1936)</option>
+<option value="20">Newcastle under Lyme</option>
+<option value="21">Newcastle upon Tyne</option>
+<option value="22">Newent (to Mar1937)</option>
+<option value="24">Newham (from 1968)</option>
+<option value="25">Newhaven (to Mar1839)</option>
+<option value="26">Newhaven (Dec1901-Mar1935)</option>
+<option value="27">Newington (to 1869)</option>
+<option value="29">Newmarket (Sep1938-Mar1989)</option>
+<option value="28">Newmarket (to Jun1938)</option>
+<option value="30">Newport M</option>
+<option value="32">Newport Pagnell (to Mar1935)</option>
+<option value="31">Newport S (to Sep1935)</option>
+<option value="33">Newton (Jun1934-Mar1974)</option>
+<option value="34">Newton Abbot (to 1996)</option>
+<option value="35">Newtown</option>
+<option value="36">North Aylesford (to 1884)</option>
+<option value="37">North Bierley (1892-1938)</option>
+<option value="38">North Bucks (Jun1935-Mar1985)</option>
+<option value="39">North Cleveland (Jun1974-Mar1996)</option>
+<option value="40">North Cotswold (from Jun1937)</option>
+<option value="41">North Devon (from Jun1998)</option>
+<option value="42">North Dorset (from Jun1974)</option>
+<option value="43">North East Cheshire (Jun1937-Mar1974)</option>
+<option value="44">North East Hampshire (from Jun1974)</option>
+<option value="45">North East Lincolnshire (from Jun1996)</option>
+<option value="46">North Kesteven (1934-Mar1974)</option>
+<option value="47">North Lincolnshire (from Jun1996)</option>
+<option value="48">North Shropshire (from 1970)</option>
+<option value="49">North Somerset (from Jun1996)</option>
+<option value="50">North Surrey (from Dec1996)</option>
+<option value="51">North Tyneside (from Jun1985)</option>
+<option value="52">North Tyneside East (Jun1974-Mar1985)</option>
+<option value="53">North Tyneside West (Jun1974-Mar1985)</option>
+<option value="54">North Walsham (from 1939)</option>
+<option value="55">North Warwickshire (from Jun1974)</option>
+<option value="56">North Witchford (to Mar1938)</option>
+<option value="57">Northallerton (to Sep1998)</option>
+<option value="60">Northampton &amp; Hardingstone (1924-Jun1936)</option>
+<option value="58">Northampton (to 1923)</option>
+<option value="59">Northampton (from Sep1936)</option>
+<option value="61">Northleach (to Mar1937)</option>
+<option value="62">Northumberland Central (from 1937)</option>
+<option value="63">Northumberland North First (from 1937)</option>
+<option value="64">Northumberland North Second (from 1937)</option>
+<option value="65">Northumberland South (Dec1936-Mar1974)</option>
+<option value="66">Northumberland West (from 1937)</option>
+<option value="67">Northwich (to Mar1974)</option>
+<option value="68">Norton Radstock (Jun1936-Mar1974)</option>
+<option value="69">Norwich</option>
+<option value="70">Norwich Outer (1939-Mar1991)</option>
+<option value="71">Nottingham</option>
+<option value="72">Nuneaton (to Sep1985)</option>
+<option value="73">Nuneaton &amp; Bedworth (from Dec1985)</option>
+<option value="434">Oakham (to Mar1974)</option>
+<option value="435">Ogwr (Jun1974-Mar1996)</option>
+<option value="436">Okehampton (to Jun1997)</option>
+<option value="437">Oldbury (Sep1934-Mar1966)</option>
+<option value="438">Oldham (from Jun1848)</option>
+<option value="439">Ongar (to Jun1939)</option>
+<option value="440">Ormskirk (to Mar1974)</option>
+<option value="441">Orsett (to Jun1939)</option>
+<option value="442">Oswestry</option>
+<option value="443">Otley (to Sep1869)</option>
+<option value="444">Oundle (to Mar1974)</option>
+<option value="445">Oundle &amp; Thrapston (from Jun1974)</option>
+<option value="446">Overton (Dec1935-1953)</option>
+<option value="447">Oxford</option>
+<option value="639">Paddington (1885-1977)</option>
+<option value="640">Pancras (to 1901)</option>
+<option value="641">Pateley Bridge (to 1946)</option>
+<option value="642">Patrington (to Mar1937)</option>
+<option value="643">Pembroke (to 1982)</option>
+<option value="644">Penistone (1911-1946)</option>
+<option value="645">Penkridge (to Mar1877)</option>
+<option value="646">Penllyn (from Jun1974)</option>
+<option value="647">Penrith</option>
+<option value="648">Penzance</option>
+<option value="649">Pershore</option>
+<option value="650">Peterborough</option>
+<option value="651">Petersfield</option>
+<option value="652">Petworth (to Mar1935)</option>
+<option value="653">Pewsey (to Mar1936)</option>
+<option value="654">Pickering (to Sep1936)</option>
+<option value="655">Plomesgate (to Mar1935)</option>
+<option value="657">Ploughley &amp; Bullingdon (Dec1932-Sep1964)</option>
+<option value="656">Ploughley (from Dec1964)</option>
+<option value="658">Plymouth</option>
+<option value="660">Plympton (Sep1936-Mar1974)</option>
+<option value="659">Plympton St Mary (to Jun1936)</option>
+<option value="661">Pocklington (to Mar1937)</option>
+<option value="662">Pocklington (from Jun1974)</option>
+<option value="663">Pontardawe (Sep1875-1934)</option>
+<option value="664">Pontefract</option>
+<option value="665">Pontypool (to Mar1996)</option>
+<option value="666">Pontypridd (from Sep1863)</option>
+<option value="668">Poole (from 1959)</option>
+<option value="667">Poole (to 1958)</option>
+<option value="670">Poplar &amp; Bethnal Green (1966-1982)</option>
+<option value="669">Poplar (to 1965)</option>
+<option value="671">Portsea Island (to Jun1900)</option>
+<option value="672">Portsmouth (from Sep1900)</option>
+<option value="673">Potterspury (to Mar1935)</option>
+<option value="674">Prescot (to Mar1974)</option>
+<option value="675">Presteigne (to Jun1877)</option>
+<option value="676">Preston (to Mar1974)</option>
+<option value="677">Preston &amp; South Ribble (from Jun1974)</option>
+<option value="678">Prestwich (Dec1874-1924)</option>
+<option value="680">Pwllheli &amp; Porthmadog (Jun1974-1996)</option>
+<option value="681">Pwllheli &amp; Portmadoc (Jun1937-Mar1974)</option>
+<option value="679">Pwllheli (to Mar1937)</option>
+<option value="139">Radford (to Jun1880)</option>
+<option value="140">Radnorshire East (from Jun1933)</option>
+<option value="141">Radnorshire West (Jun1933-1987)</option>
+<option value="143">Reading &amp; Wokingham (Jun1974-Mar1998)</option>
+<option value="142">Reading (to Mar1974)</option>
+<option value="144">Redbridge (from Jun1965)</option>
+<option value="145">Redcar &amp; Cleveland (from Jun1996)</option>
+<option value="146">Redditch (from Dec1994)</option>
+<option value="147">Redruth (to Mar1974)</option>
+<option value="148">Reeth (Sep1840-Sep1936)</option>
+<option value="149">Reigate (to Mar1934)</option>
+<option value="150">Repton (1937-Mar1974)</option>
+<option value="151">Rhayader (to Mar1933)</option>
+<option value="152">Rhuddlan (Jun1974-Mar1996)</option>
+<option value="153">Ribble Valley (from Jun1974)</option>
+<option value="154">Richmond Sry (to Mar1934)</option>
+<option value="156">Richmond upon Thames (from Jun1965)</option>
+<option value="155">Richmond Yk (to Sep1998)</option>
+<option value="158">Ringwood &amp; Fordingbridge (Jun1974-Jun1999)</option>
+<option value="157">Ringwood (to Sep1932)</option>
+<option value="159">Ripon (to 1946)</option>
+<option value="160">Risbridge (to Jun1938)</option>
+<option value="161">Rochdale</option>
+<option value="162">Rochford (to Mar1974)</option>
+<option value="163">Romford (to Mar1965)</option>
+<option value="164">Romney Marsh (to Mar1941)</option>
+<option value="167">Romsey &amp; Stockbridge (Dec1932-Mar1974)</option>
+<option value="165">Romsey (to Sep1932)</option>
+<option value="166">Romsey (from Jun1974)</option>
+<option value="168">Ross</option>
+<option value="169">Rothbury (to 1936)</option>
+<option value="170">Rother Valley (Jun1938-Mar1974)</option>
+<option value="171">Rotherham</option>
+<option value="172">Rotherhithe (to 1869)</option>
+<option value="173">Rowley Regis (Jun1935-Mar1966)</option>
+<option value="174">Royston (to Sep1939)</option>
+<option value="175">Rugby</option>
+<option value="176">Runcorn (to Mar1974)</option>
+<option value="177">Rushcliffe (from Jun1974)</option>
+<option value="178">Ruthin (to Mar1974)</option>
+<option value="179">Rutland (Jun1974-Mar1995)</option>
+<option value="180">Rutland (from Jun1997)</option>
+<option value="181">Rye (to Mar1935)</option>
+<option value="182">Ryedale (Dec1936-Sep1998)</option>
+<option value="195">Saddleworth (to Mar1974)</option>
+<option value="196">Saffron Walden (to Mar1974)</option>
+<option value="197">Salford</option>
+<option value="198">Salisbury (to Mar1869)</option>
+<option value="199">Salisbury (from Sep1895)</option>
+<option value="200">Samford (to Mar1974)</option>
+<option value="201">Sandwell (from Jun1974)</option>
+<option value="202">Scarborough (to Sep1998)</option>
+<option value="203">Scilly Islands (to Mar1901)</option>
+<option value="204">Sculcoates (to Mar1937)</option>
+<option value="205">Scunthorpe (Dec1938-Mar1996)</option>
+<option value="206">Sedbergh (to Mar1974)</option>
+<option value="207">Sedgefield (to 1837)</option>
+<option value="208">Sedgefield (1896-Jun1938)</option>
+<option value="209">Sedgemoor (from Jun1974)</option>
+<option value="210">Sefton North (from Jun1980)</option>
+<option value="211">Sefton South (from Jun1980)</option>
+<option value="212">Seisdon (to 1838)</option>
+<option value="213">Seisdon (Jun1966-Mar1974)</option>
+<option value="214">Selby (to Sep1998)</option>
+<option value="215">Settle (to 1946)</option>
+<option value="216">Sevenoaks (to Mar1941)</option>
+<option value="217">Shaftesbury (to Mar1937)</option>
+<option value="218">Shardlow (to Mar1974)</option>
+<option value="219">Sheffield</option>
+<option value="220">Sheppey (to 1979)</option>
+<option value="221">Shepton Mallet (to Mar1936)</option>
+<option value="222">Shepway (Jun1974-Mar1998)</option>
+<option value="223">Sherborne (to Mar1937)</option>
+<option value="224">Shifnal (to Sep1935)</option>
+<option value="225">Shipston on Stour (to Sep1985)</option>
+<option value="226">Shoreditch (to Mar1965)</option>
+<option value="227">Shrewsbury (to Sep1871)</option>
+<option value="228">Shrewsbury (from Dec1935)</option>
+<option value="229">Sidcup (Dec1952-Mar1965)</option>
+<option value="230">Sittingbourne (Jun1941-1979)</option>
+<option value="231">Skipton (to 1946)</option>
+<option value="232">Skirlaugh (to Mar1937)</option>
+<option value="235">Sleaford &amp; East Kesteven (1934-Mar1974)</option>
+<option value="234">Sleaford (from Jun1974)</option>
+<option value="233">Sleaford (to 1933)</option>
+<option value="236">Slough (from Jun1974)</option>
+<option value="237">Smallburgh (1870-1938)</option>
+<option value="238">Smethwick (Dec1932-Mar1966)</option>
+<option value="239">Sodbury (Jun1937-Mar1996)</option>
+<option value="240">Solihull (to 1977)</option>
+<option value="241">Solihull North (from 1978)</option>
+<option value="242">Solihull South (from 1978)</option>
+<option value="245">South Cheshire (Sep1991-Mar1998)</option>
+<option value="246">South Derbyshire (from Jun1997)</option>
+<option value="247">South Dorset (from Jun1997)</option>
+<option value="248">South East Hampshire (from Jun1974)</option>
+<option value="249">South East Surrey (from Dec1996)</option>
+<option value="251">South Glamorgan (Jun1974-Mar1996)</option>
+<option value="252">South Gloucestershire (from Jun1996)</option>
+<option value="253">South Molton (to Jun1936)</option>
+<option value="254">South Pembrokeshire (from 1983)</option>
+<option value="256">South Shields</option>
+<option value="257">South Staffordshire (from Jun1974)</option>
+<option value="258">South Stoneham (to Mar1927)</option>
+<option value="260">South Warwickshire (from Dec1985)</option>
+<option value="243">Southam (to Sep1985)</option>
+<option value="244">Southampton</option>
+<option value="250">Southend on Sea (from Sep1939)</option>
+<option value="255">Southport (Jun1934-Mar1980)</option>
+<option value="259">Southwark (from Jun1901)</option>
+<option value="261">Southwell (to Mar1974)</option>
+<option value="262">Spalding</option>
+<option value="263">Spen Valley (1939-Mar1974)</option>
+<option value="264">Spilsby</option>
+<option value="116">St Albans</option>
+<option value="117">St Asaph (to Mar1974)</option>
+<option value="118">St Austell</option>
+<option value="119">St Columb (to Jun1936)</option>
+<option value="120">St Faiths (to 1938)</option>
+<option value="121">St George Hanover Square (to Sep1933)</option>
+<option value="122">St George in the East (to 1925)</option>
+<option value="123">St George Southwark (to 1869)</option>
+<option value="124">St Germans</option>
+<option value="125">St Giles (to Mar1930)</option>
+<option value="126">St Helens (from Sep1935)</option>
+<option value="127">St Ives (to 1967)</option>
+<option value="128">St James Westminster (to Jun1870)</option>
+<option value="129">St Luke (to Jun1869)</option>
+<option value="130">St Martin (Sep1913-Sep1933)</option>
+<option value="131">St Martin in the Fields (to Jun1868)</option>
+<option value="132">St Marylebone (1902-1977)</option>
+<option value="133">St Neots (to Mar1970)</option>
+<option value="134">St Olave Bermondsey (1902-Mar1934)</option>
+<option value="135">St Olave Southwark (to 1901)</option>
+<option value="136">St Pancras (1902-Sep1977)</option>
+<option value="137">St Saviour Southwark (to Mar1901)</option>
+<option value="138">St Thomas (to Jun1936)</option>
+<option value="265">Stafford</option>
+<option value="266">Staffordshire Moorlands (from Jun1974)</option>
+<option value="267">Staincliffe (1947-Sep1998)</option>
+<option value="268">Staincross (Sep1938-Mar1974)</option>
+<option value="269">Staines (to Sep1947)</option>
+<option value="270">Stamford</option>
+<option value="272">Stepney (1926-1982)</option>
+<option value="271">Stepney (to Jun1921)</option>
+<option value="273">Stevenage (Jun1975-Mar1996)</option>
+<option value="274">Steyning (to Mar1935)</option>
+<option value="275">Stockbridge (to Sep1932)</option>
+<option value="276">Stockport</option>
+<option value="277">Stockton (to Jun1938)</option>
+<option value="278">Stockton on Tees (from Jun1996)</option>
+<option value="284">Stoke and Wolstanton (Sep1922-1934)</option>
+<option value="279">Stoke Damerel (to Sep1898)</option>
+<option value="280">Stoke Newington (Jun1930-Jun1979)</option>
+<option value="281">Stoke on Trent (from 1935)</option>
+<option value="282">Stoke upon Trent (to Jun1922)</option>
+<option value="283">Stokesley (to Sep1936)</option>
+<option value="285">Stone (to Mar1937)</option>
+<option value="286">Stourbridge</option>
+<option value="287">Stow (to Mar1935)</option>
+<option value="288">Stow on the Wold (to Mar1937)</option>
+<option value="289">Strand (to Jun1913)</option>
+<option value="290">Stratford upon Avon (to Sep1985)</option>
+<option value="291">Stratton</option>
+<option value="294">Strood &amp; Hoo (Sep1923-Mar1941)</option>
+<option value="292">Strood (1885-Jun1923)</option>
+<option value="293">Stroud (1837 onw)</option>
+<option value="296">Sturminster (1959-Mar1974)</option>
+<option value="295">Sturminster (to 1958)</option>
+<option value="297">Sudbury</option>
+<option value="298">Sunderland</option>
+<option value="299">Surrey Mid Eastern (Jun1934-Sep1996)</option>
+<option value="302">Surrey North Eastern (Jun1934-Mar1965)</option>
+<option value="303">Surrey North Western (Jun1934-Sep1996)</option>
+<option value="300">Surrey Northern (Sep1948-Mar1965)</option>
+<option value="301">Surrey Northern (Jun1965-Sep1996)</option>
+<option value="304">Surrey South Eastern (Jun1934-Sep1996)</option>
+<option value="305">Surrey South Western (Jun1934-Sep1996)</option>
+<option value="306">Sutton (from Jun1965)</option>
+<option value="307">Sutton Coldfield (Jun1932-Mar1974)</option>
+<option value="308">Swadlincote (Jun1974-Mar1997)</option>
+<option value="309">Swaffham (to 1938)</option>
+<option value="310">Swale (1980-Mar1998)</option>
+<option value="311">Swansea</option>
+<option value="312">Swindon (from Jun1899)</option>
+<option value="313">Tadcaster (to 1946)</option>
+<option value="314">Tameside (from Jun1974)</option>
+<option value="315">Tamworth (to Sep1939)</option>
+<option value="316">Taunton (to Mar1974)</option>
+<option value="317">Taunton (from Jun1996)</option>
+<option value="318">Taunton Deane (Jun1974-Mar1996)</option>
+<option value="319">Tavistock (to Jun1997)</option>
+<option value="320">Teesdale (to Jun1938)</option>
+<option value="321">Teesside (Dec1971-Mar1974)</option>
+<option value="322">Teesside North (Jun1968-Sep1971)</option>
+<option value="323">Teesside South (Jun1968-Sep1971)</option>
+<option value="324">Teignbridge (from 1997)</option>
+<option value="325">Tenbury</option>
+<option value="326">Tendring (to Jun1939)</option>
+<option value="327">Tenterden (to Mar1941)</option>
+<option value="328">Tetbury (to Mar1937)</option>
+<option value="329">Tewkesbury (to Mar1937)</option>
+<option value="330">Thakeham (to Mar1935)</option>
+<option value="331">Thame (to Sep1932)</option>
+<option value="332">Thanet (to Mar1998)</option>
+<option value="333">Thanet with Dover (from Jun1998)</option>
+<option value="334">Thetford (to 1938)</option>
+<option value="335">Thingoe (to Mar1908)</option>
+<option value="336">Thirsk (to Mar1980)</option>
+<option value="337">Thornbury (to Sep1981)</option>
+<option value="338">Thorne (to 1946)</option>
+<option value="339">Thrapston (to Mar1974)</option>
+<option value="340">Thurrock (from Sep1939)</option>
+<option value="341">Ticehurst (to Mar1935)</option>
+<option value="342">Tisbury (to Mar1936)</option>
+<option value="343">Tiverton (to Jun1978)</option>
+<option value="344">Todmorden</option>
+<option value="345">Tonbridge (to 1979)</option>
+<option value="346">Torbay (from Jun1968)</option>
+<option value="347">Torfaen (from Jun1996)</option>
+<option value="348">Torridge (from Jun1998)</option>
+<option value="349">Torrington (to Jun1936)</option>
+<option value="350">Totnes (to Mar1968)</option>
+<option value="351">Towcester</option>
+<option value="352">Tower Hamlets (from 1983)</option>
+<option value="353">Toxteth Park (1881-Sep1922)</option>
+<option value="354">Trafford (from Jun1974)</option>
+<option value="355">Tregaron (to Jun1936)</option>
+<option value="356">Trowbridge (from Jun1936)</option>
+<option value="357">Truro</option>
+<option value="358">Tunbridge Wells (from 1980)</option>
+<option value="359">Tunstead (to 1869)</option>
+<option value="360">Tynemouth (to Mar1974)</option>
+<option value="878">Uckfield (to 1999)</option>
+<option value="879">Ulverston</option>
+<option value="880">Upper Agbrigg (Sep1939-Mar1974)</option>
+<option value="881">Uppingham (to Mar1974)</option>
+<option value="882">Upton upon Severn (to Mar1952)</option>
+<option value="883">Uttlesford (from Jun1974)</option>
+<option value="884">Uttoxeter (to Sep1939)</option>
+<option value="885">Uxbridge (to Mar1965)</option>
+<option value="886">Vale of Glamorgan (from Jun1996)</option>
+<option value="887">Vale Royal (Jun1974-Mar1998)</option>
+<option value="888">Vaynor (Dec1934-Mar1974)</option>
+<option value="528">Wainford (Jun1935-Jun1948)</option>
+<option value="529">Wakefield</option>
+<option value="530">Wallasey (1936-Mar1998)</option>
+<option value="531">Wallingford</option>
+<option value="532">Walsall</option>
+<option value="533">Walsingham (to 1938)</option>
+<option value="534">Waltham Forest (from Jun1965)</option>
+<option value="535">Wandsworth</option>
+<option value="536">Wangford (to Mar1935)</option>
+<option value="537">Wantage</option>
+<option value="538">Ware (to Mar1974)</option>
+<option value="539">Wareham (to Mar1937)</option>
+<option value="540">Warley (1969-Mar1974)</option>
+<option value="541">Warley East (Jun1966-1968)</option>
+<option value="542">Warley West (Jun1966-1968)</option>
+<option value="543">Warminster</option>
+<option value="544">Warrington</option>
+<option value="546">Warwick &amp; Leamington (Jun1932-Sep1985)</option>
+<option value="545">Warwick (to Mar1932)</option>
+<option value="547">Watford</option>
+<option value="548">Waveney (from Jun1974)</option>
+<option value="549">Wayland</option>
+<option value="550">Weardale (to Jun1938)</option>
+<option value="551">Wednesbury (Dec1932-Mar1966)</option>
+<option value="552">Wellingborough</option>
+<option value="554">Wellington Sal (to Mar1974)</option>
+<option value="553">Wellington Som (to Mar1936)</option>
+<option value="555">Wells (to Mar1974)</option>
+<option value="556">Welshpool (1936-Mar1982)</option>
+<option value="557">Welshpool &amp; Llanfyllin (from Jun1982)</option>
+<option value="558">Welton (Dec1938-Mar1974)</option>
+<option value="559">Wem (to Sep1935)</option>
+<option value="560">Wenlock (Dec1935-Jun1948)</option>
+<option value="561">Wensleydale (Dec1936-Sep1998)</option>
+<option value="562">Weobley (to Mar1997)</option>
+<option value="563">West Ashford (to Mar1941)</option>
+<option value="564">West Bromwich (to Mar1974)</option>
+<option value="568">West Cheshire (Jun1937-Mar1974)</option>
+<option value="569">West Derby (to Sep1934)</option>
+<option value="570">West Devon (from Sep1997)</option>
+<option value="571">West Dorset (from Jun1997)</option>
+<option value="572">West Firle (to 1837)</option>
+<option value="573">West Glamorgan (1935-Mar1974)</option>
+<option value="574">West Ham (to 1967)</option>
+<option value="576">West Hartlepool (Sep1938-Mar1967)</option>
+<option value="577">West Lancashire (from Jun1974)</option>
+<option value="578">West London (Jun1838-1869)</option>
+<option value="585">West Oxfordshire (from Jun1982)</option>
+<option value="586">West Somerset (from Jun1974)</option>
+<option value="587">West Surrey (from Dec1996)</option>
+<option value="588">West Ward (to Sep1937)</option>
+<option value="565">Westbourne (to Mar1935)</option>
+<option value="566">Westbury (to Mar1936)</option>
+<option value="567">Westbury on Severn (to Mar1937)</option>
+<option value="575">Westhampnett (to Mar1935)</option>
+<option value="579">Westminster (Sep1870-Jun1913)</option>
+<option value="580">Westminster (from Jun1965)</option>
+<option value="581">Westminster St Margaret (to Jun1870)</option>
+<option value="582">Westmorland North (Dec1937-Mar1974)</option>
+<option value="583">Westmorland South (Dec1937-Mar1974)</option>
+<option value="584">Weston super Mare (Jun1936-Mar1996)</option>
+<option value="589">Wetherby (Sep1854-1946)</option>
+<option value="591">Weymouth (1959-Mar1997)</option>
+<option value="590">Weymouth (to 1958)</option>
+<option value="592">Wharfedale (Sep1861-Jun1981)</option>
+<option value="593">Wheatenhurst (to Mar1937)</option>
+<option value="594">Whitby (to Sep1998)</option>
+<option value="595">Whitchurch H (to Sep1932)</option>
+<option value="597">Whitchurch S (Sep1853-1969)</option>
+<option value="596">Whitchurch S (to Sep1837)</option>
+<option value="598">Whitechapel (to 1925)</option>
+<option value="599">Whitehaven</option>
+<option value="600">Whittlesey (to Mar1974)</option>
+<option value="601">Widnes (Dec1964-Mar1974)</option>
+<option value="602">Wigan (to Sep1995)</option>
+<option value="603">Wigan &amp; Leigh (from Sep1995)</option>
+<option value="604">Wigton</option>
+<option value="605">Willesden (Dec1909-Mar1965)</option>
+<option value="606">Williton (to Mar1936)</option>
+<option value="607">Wilton (to Mar1936)</option>
+<option value="608">Wimborne (to Mar1937)</option>
+<option value="609">Wincanton (to Mar1974)</option>
+<option value="610">Winchcomb (to Mar1937)</option>
+<option value="611">Winchester</option>
+<option value="612">Windsor (to Mar1974)</option>
+<option value="613">Windsor &amp; Maidenhead (from Jun1974)</option>
+<option value="614">Winslow (to Mar1935)</option>
+<option value="615">Wirral (to Mar1974)</option>
+<option value="616">Wisbech (to Jun1980)</option>
+<option value="617">Witham (to Jun1880)</option>
+<option value="618">Witney (to Mar1982)</option>
+<option value="619">Woburn (to Sep1899)</option>
+<option value="620">Wokingham (to Mar1974)</option>
+<option value="621">Wolstanton (to Jun1922)</option>
+<option value="622">Wolverhampton</option>
+<option value="624">Wood Green (Dec1947-Mar1965)</option>
+<option value="623">Woodbridge (to Mar1935)</option>
+<option value="625">Woodstock (to Sep1932)</option>
+<option value="626">Woolwich (Sep1868-Sep1969)</option>
+<option value="627">Worcester</option>
+<option value="628">Worksop</option>
+<option value="629">Worsley (Jun1841-1849)</option>
+<option value="632">Worth Valley (1947-Mar1974)</option>
+<option value="630">Worthing (to 1869)</option>
+<option value="631">Worthing (from Jun1935)</option>
+<option value="633">Wortley (Dec1838-Mar1974)</option>
+<option value="634">Wrekin (Jun1974-Mar1998)</option>
+<option value="635">Wrexham (to Mar1974)</option>
+<option value="636">Wrexham (from Jun1996)</option>
+<option value="637">Wrexham Maelor (Jun1974-Mar1996)</option>
+<option value="638">Wycombe (to 1998)</option>
+<option value="683">Yarmouth &amp; Flegg (1924-1938)</option>
+<option value="682">Yarmouth (to 1923)</option>
+<option value="684">Yeovil</option>
+<option value="685">Ynys Mon (from Jun1974)</option>
+<option value="686">York (to 1937)</option>
+<option value="687">York (from 1938)</option>
+<option value="688">Ystradgynlais (from Dec1934)</option>
+</select></div><div id="districtvis" style="visibility:hidden"><font color="red"><i><span id="districtmultiple">One district</span> selected - <a href="javascript:selectAll('district')">select all</a></i></font></div>
+<script type="text/javascript">
+<!--
+displaySelected('district')
+-->
+</script>
+</div></td></tr>
+<tr><td>Surname</td><td><input type="text" name="surname" value="smith"><div data-lastpass-icon-root="" style="position: relative !important; height: 0px !important; width: 0px !important; display: initial !important; float: left !important;"></div></td><td>&nbsp;</td></tr>
+<tr><td>First name(s)</td><td><input type="text" name="given" value="john"></td><td>&nbsp;</td></tr>
+<tr><td>Spouse/Mother surname</td><td><input type="text" name="s_surname"><div data-lastpass-icon-root="" style="position: relative !important; height: 0px !important; width: 0px !important; display: initial !important; float: left !important;"></div></td></tr>
+<tr><td>Spouse first name(s)</td><td><input type="text" name="s_given"></td><td>&nbsp;</td></tr>
+<tr><td>Death age/DoB</td><td><input type="text" name="aad">&nbsp;</td></tr>
+<tr><td>Date range from</td><td><select name="sq">
+<option selected="" value="1">Mar</option>
+<option value="2">Jun</option>
+<option value="3">Sep</option>
+<option value="4">Dec</option>
+</select><input type="text" name="start" value="1850" size="4"></td></tr>
+<tr><td>Date range to</td><td><select name="eq">
+<option value="1">Mar</option>
+<option value="2">Jun</option>
+<option value="3">Sep</option>
+<option selected="" value="4">Dec</option>
+</select><input type="text" name="end" value="1850" size="4"></td></tr>
+<tr><td>Volume/Page</td><td><input type="text" name="vol" size="4"> / <input type="text" name="pgno" size="5"></td><td class="" rowspan="5" style="padding-left:5%;">Counties<div><select name="countyid" id="countylist" size="6" multiple="multiple" onchange="displaySelected('county'); limitDistrictsToCounty()">
+<option value="all">All Counties</option>
+<option value="AGY,134,185">Anglesey (to Mar1974)</option>
+<option value="AVN,96,166">Avon (from Jun1974)</option>
+<option value="BDF,66,133,153,161,211">Bedfordshire</option>
+<option value="BRK,7,69,110,124,130,151,152,156,169,171,197">Berkshire</option>
+<option value="BRE,3,71,148,182,190,214">Breconshire (to Mar1974)</option>
+<option value="BKM,22,28,119,132,151,196,211">Buckinghamshire</option>
+<option value="CAE,126,180,185,217">Caernarvonshire (to Mar1974)</option>
+<option value="CAM,17,39,63,66,72,79,170,175,176,212">Cambridgeshire</option>
+<option value="CGN,8,123,210,219,228">Cardiganshire (to Mar1974)</option>
+<option value="CMN,2,8,210,213,214,215">Carmarthenshire (to Mar1974)</option>
+<option value="CHS,1,53,104,105,149,158,168,174,220,232">Cheshire</option>
+<option value="CLV,29">Cleveland (from Jun1974)</option>
+<option value="CWD,48">Clwyd (from Jun1974)</option>
+<option value="DUR,45,46,106,107,191">Co. Durham</option>
+<option value="CON,59,61">Cornwall</option>
+<option value="CUL,131">Cumberland (to Mar1974)</option>
+<option value="CMA,135,188">Cumbria (from Jun1974)</option>
+<option value="DEN,58,81,142,174,216,217,233">Denbighshire (to Mar1974)</option>
+<option value="DBY,47,77,78,91,113,136,137,149,172,173">Derbyshire</option>
+<option value="DEV,23,61,114,138,229">Devon</option>
+<option value="DOR,31,93,138,195,222,229">Dorset</option>
+<option value="DFD,101">Dyfed (from Jun1974)</option>
+<option value="ERY,87,88,90,181">East Riding of Yorkshire (to Mar1974)</option>
+<option value="SXE,144">East Sussex (from Jun1974)</option>
+<option value="ESS,72,74,79,111,164,194,201,212">Essex</option>
+<option value="FLN,53,58,143,168,174,202">Flintshire (to Mar1974)</option>
+<option value="GLA,3,19,51,215">Glamorgan (to Mar1974)</option>
+<option value="GLS,12,30,75,76,94,95,96,110,117,118,124,171,184,189,223,230,231">Gloucestershire</option>
+<option value="GTL,14,56,160,164,187,235">Greater London (from Jun1965)</option>
+<option value="GTM,73,105,112">Greater Manchester (from Jun1974)</option>
+<option value="GNT,20">Gwent (from Jun1974)</option>
+<option value="GWN,128">Gwynedd (from Jun1974)</option>
+<option value="HAM,7,13,32,125,156,177,195,197,236">Hampshire</option>
+<option value="HWR,70,76,116,199,205">Hereford and Worcester (from Jun1974)</option>
+<option value="HEF,12,75,115,129,148,162,179,200,208,218,223">Herefordshire (to Mar1974)</option>
+<option value="HRT,57,79,132,153,186,187,194,201">Hertfordshire</option>
+<option value="HUM,50,155">Humberside (from Jun1974)</option>
+<option value="HUN,63,66,102,121,157,175">Huntingdonshire (to Mar1974)</option>
+<option value="IOW,236">Isle of Wight (from Sep1946)</option>
+<option value="KEN,26,55,56,83,234,235">Kent</option>
+<option value="LAN,5,62,73,84,104,105,122,188,203">Lancashire</option>
+<option value="LEI,44,52,80,82,91,137,139,192,209,221">Leicestershire</option>
+<option value="LIN,6,33,49,50,52,102,103,154,175,176,225,226">Lincolnshire</option>
+<option value="LND,55,60,65,67">London (to Mar1965)</option>
+<option value="MER,126,183,219,224,233">Merionethshire (to Mar1974)</option>
+<option value="MSY,62,89,158">Merseyside (from Jun1974)</option>
+<option value="MGM,140">Mid Glamorgan (from Jun1974)</option>
+<option value="MDX,60,64,186,201,207">Middlesex (to Mar1965)</option>
+<option value="MON,19,129,178,190,223,230">Monmouthshire (to Mar1974)</option>
+<option value="MGY,24,127,216,219,224">Montgomeryshire (to Mar1974)</option>
+<option value="NFK,37,120,154,170">Norfolk</option>
+<option value="NRY,40,54,87,106,181">North Riding of Yorkshire (to Mar1974)</option>
+<option value="NYK,41,107">North Yorkshire (from Jun1974)</option>
+<option value="NTH,22,42,80,99,102,103,121,161,175,176,184,196,209,221">Northamptonshire</option>
+<option value="NBL,10,11,191">Northumberland</option>
+<option value="NTT,6,43,91,172,173,192,225,226">Nottinghamshire</option>
+<option value="OXF,119,124,130,151,167,171,184,196,197,231">Oxfordshire</option>
+<option value="PEM,2,8,147,228">Pembrokeshire (to Mar1974)</option>
+<option value="POW,25">Powys (from Jun1974)</option>
+<option value="RAD,68,71,148,179,208">Radnorshire (to Mar1974)</option>
+<option value="RUT,102,139,204,209">Rutland (to Mar1974)</option>
+<option value="SAL,21,34,108,109,115,116,127,142,163,168,199,202,205,208,218,220">Shropshire</option>
+<option value="SOM,35,93,114,166,189,198,222,229">Somerset</option>
+<option value="SGM,100">South Glamorgan (from Jun1974)</option>
+<option value="SYK,78,92,226">South Yorkshire (from Jun1974)</option>
+<option value="STS,9,21,108,109,113,136,159,163,193,199,205,206,220,227,232">Staffordshire</option>
+<option value="SFK,17,18,72,111,120">Suffolk</option>
+<option value="SRY,16,67,125,146,160,169,207,234,235">Surrey</option>
+<option value="SSX,15,83,125,146,177">Sussex (to Mar1974)</option>
+<option value="TWR,11,36,46">Tyne and Wear (from Jun1974)</option>
+<option value="WAR,38,44,80,94,95,97,98,99,113,163,184,193,199,206,231">Warwickshire</option>
+<option value="WGM,4">West Glamorgan (from Jun1974)</option>
+<option value="WMD,86,98,109,159">West Midlands (from Jun1974)</option>
+<option value="WRY,27,49,54,77,84,90,172,181,225">West Riding of Yorkshire (to Mar1974)</option>
+<option value="SXW,150">West Sussex (from Jun1974)</option>
+<option value="WYK,122,145">West Yorkshire (from Jun1974)</option>
+<option value="WES,165,203">Westmorland (to Mar1974)</option>
+<option value="WIL,13,85,117,124,152,156,198,222">Wiltshire</option>
+<option value="WOR,12,94,97,108,110,115,118,141,163,200,206,227">Worcestershire (to Mar1974)</option>
+</select></div><div id="countyvis" style="visibility:hidden"><font color="red"><i><span id="countymultiple">One county</span> selected - <a href="javascript:selectAll('county')">select all</a></i></font></div>
+<script type="text/javascript">
+<!--
+displaySelected('county')
+-->
+</script>
+
+
+<script type="text/javascript">
+<!--
+limitDistrictsToCounty()
+-->
+</script>
+</td></tr>
+<tr><td rowspan="5">Options</td><td><input type="checkbox" name="mono" value="on">Mono</td><td>&nbsp;</td></tr><tr><td><input type="checkbox" name="exactgiven" value="on">Exact match on first names</td><td>&nbsp;</td></tr>
+<tr><td><input type="checkbox" name="sndx" value="on">Phonetic search surnames</td><td>&nbsp;</td></tr>
+<tr><td><input type="checkbox" name="agepresent" value="on">Match only recorded ages/DoB</td><td>&nbsp;</td></tr>
+<tr><td><input type="checkbox" name="spouseidonly" value="on">Identifiable spouses only</td><td>&nbsp;</td></tr>
+<input type="hidden" name="db" value="bmd_1763869701">
+<input type="hidden" name="v" value="MTc2NzAyMTYzMjo3YmRkZGYwZjVhY2ZjNTM5MWQ1ZTAxYmRiYTJhN2MzYjAwNjllOGRj">
+<input type="hidden" name="js" value="">
+<script type="text/javascript">
+<!--
+document.write("<INPUT TYPE=hidden NAME=jsexec VALUE=1>");
+//-->
+</script><input type="hidden" name="jsexec" value="1">
+<tr valign="top"><td align="center" colspan="2" style="padding-top:10px">
+<input type="image" name="find" src="/btnFindLg.gif" alt="Click to display entries" onclick="pressed(this,&quot;/btnFindLgP.gif&quot;); checkData=1" style="margin:5px">
+<input type="image" name="count" src="/btnCount.gif" alt="Click to count entries" onclick="pressed(this,&quot;/btnCountP.gif&quot;); checkData=1" style="margin:5px;margin-bottom:10px">
+<input type="image" name="reset" src="/btnReset.gif" alt="Click to reset the form" onclick="document.search.reset(); return false;" style="margin:5px;margin-bottom:10px"><br><font size="-1">FreeBMD will <u>never</u> ask for credit<br> card details to search - if you get such<br> a request please take a screenshot<br> and send to <a href="/iindex.shtml#reporting">FreeBMD Support</a></font><p><a href="/advanced-facilities.html">Advanced Facilities</a></p></td>
+
+<script type="text/javascript">
+<!--
+document.write("<TD ROWSPAN=2 style='padding-left:5%;' class='non_mobile_list'>Saved search<TABLE CELLPADDING=3 BORDER=1 RULES=none FRAME=border><TR><TD id='savedsearchfile'>Filename: <BR>&nbsp;&nbsp;&nbsp;<INPUT TYPE=file NAME=savedsearch SIZE=35><\/TD><\/TR><TR><TD><TABLE><TR><TD WIDTH=70 ALIGN=center><INPUT TYPE=submit NAME=action VALUE='Find Additional' onclick='savedSearchAction=1'><\/TD><TD WIDTH=70 ALIGN=center><INPUT TYPE=submit NAME=action VALUE='View Saved' onclick='savedSearchAction=1'><\/TD><TD WIDTH=70 ALIGN=center><A HREF='/saved-search-help.html' TARGET=bmd-help>Help<\/A><\/TD><\/TR><\/TABLE><\/TD><\/TR><\/TABLE>");
+//-->
+</script><td rowspan="2" style="padding-left:5%;" class="non_mobile_list">Saved search<table cellpadding="3" border="1" rules="none" frame="border"><tbody><tr><td id="savedsearchfile">Filename: <br>&nbsp;&nbsp;&nbsp;<input type="file" name="savedsearch" size="35"></td></tr><tr><td><table><tbody><tr><td width="70" align="center"><input type="submit" name="action" value="Find Additional" onclick="savedSearchAction=1"></td><td width="70" align="center"><input type="submit" name="action" value="View Saved" onclick="savedSearchAction=1"></td><td width="70" align="center"><a href="/saved-search-help.html" target="bmd-help">Help</a></td></tr></tbody></table></td></tr></tbody></table>
+</td>
+</tr><tr>
+
+<script type="text/javascript">
+<!--
+document.write("<TD ROWSPAN=2 class='mobile_list'><TABLE CELLPADDING=3 BORDER=1 RULES=none FRAME=border><TR><TD id='savedsearchfile'>Filename: <BR>&nbsp;&nbsp;&nbsp;<INPUT TYPE=file NAME=savedsearch SIZE=35><\/TD><\/TR><TR><TD><TABLE><TR><TD WIDTH=70 ALIGN=center><INPUT TYPE=submit NAME=action VALUE='Find Additional' onclick='savedSearchAction=1'><\/TD><TD WIDTH=70 ALIGN=center><INPUT TYPE=submit NAME=action VALUE='View Saved' onclick='savedSearchAction=1'><\/TD><TD WIDTH=70 ALIGN=center><A HREF='/saved-search-help.html' TARGET=bmd-help>Help<\/A><\/TD><\/TR><\/TABLE><\/TD><\/TR><\/TABLE>");
+//-->
+</script><td rowspan="2" class="mobile_list"><table cellpadding="3" border="1" rules="none" frame="border"><tbody><tr><td id="savedsearchfile">Filename: <br>&nbsp;&nbsp;&nbsp;<input type="file" name="savedsearch" size="35"></td></tr><tr><td><table><tbody><tr><td width="70" align="center"><input type="submit" name="action" value="Find Additional" onclick="savedSearchAction=1"></td><td width="70" align="center"><input type="submit" name="action" value="View Saved" onclick="savedSearchAction=1"></td><td width="70" align="center"><a href="/saved-search-help.html" target="bmd-help">Help</a></td></tr></tbody></table></td></tr></tbody></table>
+</td>
+</tr><tr><td valign="bottom" colspan="3"><a href="/">FreeBMD Main Page</a></td></tr></tbody></table></form>
+</div><div class="grid__item desk-wide-one-third desk-one-third float--right" id="advert_div" style="position: sticky; top:0; align-self: start;"><div id="advert_publift" data-fuse-combo="Vrec_Sticky" class="fuse-zone-combo-V2-300x250"><div id="fuse-injected-Vrec_Sticky-1" data-fuse="Vrec_Sticky" data-fuse-injected-at="1767021633403" class="fuse-slot-comboZone" data-fuse-code="fuse-slot-Vrec_Sticky-1" data-fuse-zone-instance="zone-instance-Vrec_Sticky-1" data-fuse-slot="fuse-slot-Vrec_Sticky-1" data-gpid="/71161633,4004514/FRBMD_freebmdorguk/Vrec_Sticky#single-1" data-fuse-processed-at="2039"><div id="fuse-slot-Vrec_Sticky-1" class="fuse-slot" data-google-query-id="CK6FgsiM45EDFarzdQkdPv4b1A" style="max-width: inherit; max-height: inherit;"><div id="google_ads_iframe_/71161633,4004514/FRBMD_freebmdorguk/Vrec_Sticky_0__container__" style="border: 0pt none; margin: auto; text-align: center; width: 300px; height: 250px;"><iframe frameborder="0" src="https://ac4de398c55463439d4d3c3e60bbe1bc.safeframe.googlesyndication.com/safeframe/1-0-45/html/container.html" id="google_ads_iframe_/71161633,4004514/FRBMD_freebmdorguk/Vrec_Sticky_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="300" height="250" data-is-safeframe="true" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="private-state-token-redemption;attribution-reporting" aria-label="Advertisement" tabindex="0" data-google-container-id="1" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div></div></div><div id="fuse-injected-Vrec_Sticky-2" data-fuse="Vrec_Sticky" data-fuse-injected-at="1767021633404" class="fuse-slot-comboZone" data-fuse-code="fuse-slot-Vrec_Sticky-2" data-fuse-zone-instance="zone-instance-Vrec_Sticky-2" data-fuse-slot="fuse-slot-Vrec_Sticky-2" data-gpid="/71161633,4004514/FRBMD_freebmdorguk/Vrec_Sticky#single-2" data-fuse-processed-at="2039"><div id="fuse-slot-Vrec_Sticky-2" class="fuse-slot" data-google-query-id="CKTB_8eM45EDFarzdQkdPv4b1A" style="max-width: inherit; max-height: inherit;"><div id="google_ads_iframe_/71161633,4004514/FRBMD_freebmdorguk/Vrec_Sticky_1__container__" style="border: 0pt none; margin: auto; text-align: center; width: 300px; height: 250px;"><iframe frameborder="0" src="https://ac4de398c55463439d4d3c3e60bbe1bc.safeframe.googlesyndication.com/safeframe/1-0-45/html/container.html" id="google_ads_iframe_/71161633,4004514/FRBMD_freebmdorguk/Vrec_Sticky_1" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="300" height="250" data-is-safeframe="true" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="private-state-token-redemption;attribution-reporting" aria-label="Advertisement" tabindex="0" data-google-container-id="2" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div></div></div></div></div></div><style>.sixty-percent-width {width: 60%;}</style><script>
+        var screen_width = window.matchMedia("(max-width: 1200px)");
+        if (screen_width.matches) {
+          var element1 = document.getElementById("form_grid");
+          element1.classList.remove("grid");
+          var element2 = document.getElementById("form_div");
+          element2.classList.remove("grid__item", "sixty-percent-width", "desk-one-half");
+        } else {
+          var element1 = document.getElementById("form_grid");
+          var element2 = document.getElementById("form_div");
+          element1.classList.add("grid");
+          element2.classList.add("grid__item", "sixty-percent-width", "desk-one-half");
+        }
+ </script><hr><table border="0" cellspacing="0" width="100%">
+<tbody><tr><td valign="top"><font size="-1">Search engine, layout and database
+Copyright © 1998-2025 Free UK Genealogy CIO, a charity registered in England and Wales, Number 1167484.
+<br>We make no warranty whatsoever as to the accuracy or completeness of the FreeBMD data.
+<br>Use of the FreeBMD website is conditional upon acceptance of the <a href="/terms.html">Terms and Conditions</a><br><br><style>body {margin-bottom:120px;}</style><br><link type="text/css" rel="stylesheet" href="/style/myheritage.css"><br></font></td>
+<td><a href="/cgi/Explore.pl"><img src="/ExploreBackground.png" alt="Explore FreeBMD" style="border:0"></a></td></tr></tbody></table>
+
+<table><tbody><tr>
+ <td><a href="http://validator.w3.org/check?uri=referer"><img src="https://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a></td>
+</tr></tbody></table><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;747b6ef5a5f7467badf31a4d32646f81&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+<style id="publift-widget-sticky_footer-styles">
+.publift-widget-sticky_footer-container {
+  direction: ltr;
+  z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 95px;
+  transition: transform .3s linear, height .3s linear;
+  
+  left: 0;
+}
+
+.publift-widget-sticky_footer-container-background {
+  background-color: #FFFFFF;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.publift-widget-sticky_footer-button {
+  width: 40px;
+  margin-left: 2px;
+  height: 20px;
+  background-color: #808080;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  display: none;
+  transition: top .3s linear;
+  border-radius: 2px 2px 0 0; top: -20px;
+}
+.publift-widget-sticky_footer-button :first-child, .publift-widget-sticky_footer-button :last-child  {
+  background-color: #000000;
+  width: 13px;
+  height: 3px;
+  border-radius: 2px;
+}
+.publift-widget-sticky_footer-button :first-child {
+  transform: rotate(30deg) translateX(2px);
+}
+.publift-widget-sticky_footer-button :last-child {
+  transform: rotate(-30deg) translateX(-2px);
+}
+.publift-widget-sticky_footer {
+  width: 100%;
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform .3s linear, height .3s linear;
+  border-top: 5px solid #808080;
+  
+}
+.publift-widget-sticky_footer-container.closed {
+  height: 5px !important;
+}
+.publift-widget-sticky_footer-container.closed .publift-widget-sticky_footer-button {
+  visibility: visible;
+  
+}
+.publift-widget-sticky_footer-container.closed .publift-widget-sticky_footer-button :first-child {
+  transform: rotate(-30deg) translateX(2px);
+}
+.publift-widget-sticky_footer-container.closed .publift-widget-sticky_footer-button :last-child {
+  transform: rotate(30deg) translateX(-2px);
+}
+
+</style><div class="publift-widget-sticky_footer-container" style="display: block">
+<div class="publift-widget-sticky_footer-container-background">
+</div>
+  <div class="publift-widget-sticky_footer-button" style="display: flex;">
+    <div></div>
+    <div></div>
+  </div>
+  <div class="publift-widget-sticky_footer">
+  <div id="fuse-injected-sticky_footer-1" data-fuse="sticky_footer" data-fuse-injected-at="1767021633381" class="fuse-slot-sticky" data-fuse-code="fuse-slot-sticky_footer-1" data-fuse-zone-instance="zone-instance-sticky_footer-1" data-fuse-slot="fuse-slot-sticky_footer-1" data-gpid="/71161633,4004514/FRBMD_freebmdorguk/sticky_footer#single-1" data-fuse-processed-at="2021"><div id="fuse-slot-sticky_footer-1" class="fuse-slot" data-google-query-id="CKXB_8eM45EDFarzdQkdPv4b1A" style="max-width: inherit; max-height: inherit;"><div id="google_ads_iframe_/71161633,4004514/FRBMD_freebmdorguk/sticky_footer_0__container__" style="border: 0pt none; margin: auto; text-align: center; width: 970px; height: 90px;"><iframe frameborder="0" src="https://ac4de398c55463439d4d3c3e60bbe1bc.safeframe.googlesyndication.com/safeframe/1-0-45/html/container.html" id="google_ads_iframe_/71161633,4004514/FRBMD_freebmdorguk/sticky_footer_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="970" height="90" data-is-safeframe="true" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="private-state-token-redemption;attribution-reporting" aria-label="Advertisement" tabindex="0" data-google-container-id="3" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div></div></div></div>
+</div><style id="publift-fuse-combozone-styles">
+      .fuse-zone-combo-V2-300x250, .fuse-zone-combo-V2-728x90 {
+        display: flex;
+        flex-direction: column;
+      }
+      .fuse-zone-combo-V2-300x250 .fuse-slot-comboZone, .fuse-zone-combo-V2-728x90 .fuse-slot-comboZone {
+        margin-bottom: 10px;
+      }
+      .fuse-zone-combo-H2-300x250, .fuse-zone-combo-H3-300x250 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .fuse-zone-combo-H2-300x250 .fuse-slot-comboZone, .fuse-zone-combo-H3-300x250 .fuse-slot-comboZone {
+        padding-right: 10px;
+      }
+    </style><iframe style="width: 0px; height: 0px; display: none; position: fixed; left: -999px; top: -999px;"></iframe><iframe name="cnftComm" style="width: 0px; height: 0px; display: none; position: fixed; left: -999px; top: -999px;"></iframe><div id="confiant_tag_holder" style="display:none"></div><style id="publift-fuse-styles">
+    .fuse-slot-scroll-to-stick .fuse-slot {
+      z-index: 9999;
+      top: 0px;
+      position: fixed;
+      width: 100%;
+      pointer-events: auto;
+    }
+    .publift-widget-interscroller {
+      top: 0px;
+    }</style><iframe src="https://gum.criteo.com/syncframe?origin=publishertag&amp;topUrl=www.freebmd.org.uk#{&quot;uid&quot;:{&quot;origin&quot;:0},&quot;lwid&quot;:{&quot;origin&quot;:0},&quot;bundle&quot;:{&quot;value&quot;:&quot;wb2ZKF9jMW14TzJMejBDbVEycyUyRklVdG5hZDZBUEJmcno5UEI2dSUyRlZOOXpwVW92d3hFdUloQm1LSmVVc1FONlAxemZxYUJPTEJuc0pxMUluSjJ0Q2pHYzZwYkpjR0lhVFZScktIRDclMkZ3Q3lhekkybjBDRVRrOFBCdG15bGV1bVdjenhPWUxlM2F4SHBjZnBvWWp1NEQxYW82eHclM0QlM0Q&quot;,&quot;origin&quot;:3},&quot;optout&quot;:{&quot;value&quot;:false,&quot;origin&quot;:0},&quot;sid&quot;:{&quot;origin&quot;:0},&quot;tld&quot;:&quot;freebmd.org.uk&quot;,&quot;topUrl&quot;:&quot;www.freebmd.org.uk&quot;,&quot;version&quot;:144,&quot;cw&quot;:true,&quot;lsw&quot;:true,&quot;origin&quot;:&quot;publishertag&quot;,&quot;requestId&quot;:&quot;0.34905622366695277&quot;}" width="0" height="0" frameborder="0" title="Criteo GUM iframe" style="border-width: 0px; margin: 0px; display: none;"></iframe><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body></html>

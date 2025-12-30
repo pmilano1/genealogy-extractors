@@ -166,6 +166,45 @@ class FindAGraveExtractor(BaseRecordExtractor):
         record['match_score'] = self.calculate_match_score(record, search_params)
         return record
 
+    def _extract_from_text(self, content: str, memorial_id: str, search_params: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract basic record info from text when HTML parsing fails"""
+        # Build basic record with memorial ID
+        url = f"https://www.findagrave.com/memorial/{memorial_id}"
+
+        # Try to extract name near the memorial ID
+        # Look for pattern like "Name\n/memorial/12345"
+        pattern = rf'([A-Z][a-zA-Z\s]+)\s*/memorial/{memorial_id}'
+        name_match = re.search(pattern, content)
+        name = name_match.group(1).strip() if name_match else None
+
+        # Try to find dates near the memorial ID
+        # Look within ~200 chars of memorial ID
+        memorial_pos = content.find(f'/memorial/{memorial_id}')
+        if memorial_pos > 0:
+            context = content[max(0, memorial_pos-200):memorial_pos+200]
+            # Find years
+            year_matches = re.findall(r'\b(1[7-9]\d{2}|20[0-2]\d)\b', context)
+            birth_year = int(year_matches[0]) if year_matches else None
+            death_year = int(year_matches[1]) if len(year_matches) > 1 else None
+        else:
+            birth_year = None
+            death_year = None
+
+        if not name:
+            return None
+
+        record = {
+            'name': name,
+            'birth_year': birth_year,
+            'death_year': death_year,
+            'url': url,
+            'memorial_id': memorial_id,
+            'source': self.source_name
+        }
+
+        record['match_score'] = self.calculate_match_score(record, search_params)
+        return record
+
     def _extract_record_from_lines(self, lines: List[str], start_idx: int, search_params: Dict[str, Any]) -> Dict[str, Any]:
         """Extract a single record from consecutive lines
 
