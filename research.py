@@ -54,9 +54,11 @@ def search_source(source_key: str, params: Dict[str, Any], person_id: str, verbo
     Marks the person+source as processed after search (unless bot check or daily limit).
     """
     tracker = get_tracker()
+    start_time = time.time()
 
     try:
         result = extract_from_source(source_key, params, test_mode=False, verbose=verbose)
+        elapsed = time.time() - start_time
 
         # Don't mark as processed if bot check - we want to retry after user clears it
         if result.get('bot_check'):
@@ -65,7 +67,8 @@ def search_source(source_key: str, params: Dict[str, Any], person_id: str, verbo
                 'success': False,
                 'records': [],
                 'error': result.get('error'),
-                'bot_check': True
+                'bot_check': True,
+                'elapsed': elapsed
             }
 
         # Don't mark as processed if daily limit - skip for rest of session
@@ -76,7 +79,8 @@ def search_source(source_key: str, params: Dict[str, Any], person_id: str, verbo
                 'success': False,
                 'records': [],
                 'error': result.get('error'),
-                'daily_limit': True
+                'daily_limit': True,
+                'elapsed': elapsed
             }
 
         # Mark as processed (even if no results - we tried)
@@ -86,9 +90,11 @@ def search_source(source_key: str, params: Dict[str, Any], person_id: str, verbo
             'source': source_key,
             'success': result.get('success', False),
             'records': result.get('records', []),
-            'error': result.get('error')
+            'error': result.get('error'),
+            'elapsed': elapsed
         }
     except Exception as e:
+        elapsed = time.time() - start_time
         # Still mark as processed to avoid retrying broken sources
         tracker.mark_processed(person_id, source_key)
 
@@ -96,7 +102,8 @@ def search_source(source_key: str, params: Dict[str, Any], person_id: str, verbo
             'source': source_key,
             'success': False,
             'records': [],
-            'error': str(e)
+            'error': str(e),
+            'elapsed': elapsed
         }
 
 
@@ -260,19 +267,22 @@ def run_research(
             results = search_all_sources_parallel(params, unprocessed_sources, person_id, verbose, max_workers)
 
             for source_key, result in results.items():
+                elapsed = result.get('elapsed', 0)
                 if not result['success']:
                     # Special message for bot checks
                     if result.get('bot_check'):
-                        print(f"    ⚠️  {source_key}: BOT CHECK - Please verify in browser and retry")
+                        print(f"    ⚠️  {source_key}: BOT CHECK ({elapsed:.1f}s) - Please verify in browser and retry")
                     elif result.get('daily_limit'):
-                        print(f"    ⚠️  {source_key}: DAILY LIMIT - Try again tomorrow")
+                        print(f"    ⚠️  {source_key}: DAILY LIMIT ({elapsed:.1f}s) - Try again tomorrow")
                     elif verbose:
-                        print(f"    {source_key}: ERROR - {result.get('error', 'unknown')[:40]}")
+                        print(f"    {source_key}: ERROR ({elapsed:.1f}s) - {result.get('error', 'unknown')[:40]}")
                     continue
 
                 records = result.get('records', [])
 
                 if not records:
+                    if verbose:
+                        print(f"    {source_key}: 0 results ({elapsed:.1f}s)")
                     continue
 
                 # Stage high-quality matches
@@ -293,8 +303,7 @@ def run_research(
                         person_staged += 1
                         total_staged += 1
 
-                if records:
-                    print(f"    {source_key}: {len(records)} results, {staged_count} staged")
+                print(f"    {source_key}: {len(records)} results, {staged_count} staged ({elapsed:.1f}s)")
         else:
             # SEQUENTIAL: Search sources one at a time
             for source_key in unprocessed_sources:
