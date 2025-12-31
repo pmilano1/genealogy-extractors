@@ -185,7 +185,13 @@ def run_research(
     print(f"Mode: {'PARALLEL' if parallel else 'SEQUENTIAL'} (max {max_workers} workers)")
     print(f"Limit: {limit or 'No limit'}")
     print(f"Min score: {min_score}")
-    print(f"Database: {staging.db_config['host']}:{staging.db_config['port']}/{staging.db_config['database']}")
+    # Show database info from config
+    from genealogy_extractors.config import get_database_config
+    db_cfg = get_database_config()
+    if db_cfg.get('type') == 'postgresql':
+        print(f"Database: {db_cfg['host']}:{db_cfg['port']}/{db_cfg['database']}")
+    else:
+        print(f"Database: SQLite ({db_cfg.get('sqlite_path', 'default')})")
     print("=" * 70)
 
     # Track progress
