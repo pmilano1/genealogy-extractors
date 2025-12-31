@@ -29,8 +29,8 @@ def _get_chrome_url() -> str:
     port = config.get('debug_port', 9222)
     return f"http://{host}:{port}"
 
-# Semaphore to limit concurrent browser tabs (Chrome can handle ~4 concurrent tabs reliably)
-_browser_semaphore = threading.Semaphore(4)
+# Semaphore to limit concurrent browser connections (reduced from 4 to 2 to prevent CDP overload)
+_browser_semaphore = threading.Semaphore(2)
 
 # Track last cleanup time to avoid cleaning too frequently
 _last_cleanup_time = 0
