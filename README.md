@@ -2,7 +2,15 @@
 
 Extract genealogy records from 16+ online sources. Includes both single-search CLI and batch research runner with staging/review workflow.
 
-**Integrates with [Kindred](https://github.com/pmilano1/genealogy-frontend)** - the family tree management app. This package searches external genealogy sites and submits findings to Kindred's GraphQL API.
+## Companion to Kindred
+
+This tool is designed to work with **[Kindred](https://github.com/pmilano1/kindred)** - a self-hostable genealogy web application. It uses Kindred's Research Tasks API to:
+- Fetch people needing ancestry research
+- Search external genealogy sites for records
+- Stage findings for human review
+- Submit approved findings back to your family tree
+
+> ⚠️ **Use at your own risk.** This tool automates web scraping of genealogy sites, which may violate their terms of service. Always review findings before submitting to your tree.
 
 ## Installation
 
