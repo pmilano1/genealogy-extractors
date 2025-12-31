@@ -27,11 +27,17 @@ class MatchIDExtractor(BaseRecordExtractor):
 
     BASE_URL = "https://deces.matchid.io/deces/api/v1"
     SOURCE_NAME = "MatchID"
+    # Default token - can be overridden via MATCHID_API_TOKEN env var or constructor
+    DEFAULT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicGV0ZXJtQG1pbGFuZXNlLmxpZmUiLCJwYXNzd29yZCI6IjEzNDExOCIsInNjb3BlcyI6WyJ1c2VyIl0sImlhdCI6MTc2NzE5NTY4NCwiZXhwIjoxNzY5Nzg3Njg0LCJqdGkiOiIxNzY3MTk1Njg0In0.yZ1dxqHHlWKciu2CvP6Tru1eVT3VrLs3Bs63-e0-T-k"
 
     def __init__(self, api_token: str | None = None):
-        """Initialize with optional API token for unlimited requests."""
+        """Initialize with optional API token for unlimited requests.
+
+        Token priority: 1) constructor arg, 2) MATCHID_API_TOKEN env var, 3) default token
+        """
+        import os
         super().__init__("MatchID")
-        self.api_token = api_token
+        self.api_token = api_token or os.environ.get("MATCHID_API_TOKEN") or self.DEFAULT_TOKEN
 
     def build_search_url(
         self,
@@ -212,7 +218,7 @@ class MatchIDExtractor(BaseRecordExtractor):
 
             return record
         except Exception as e:
-            print(f"[WARN] Failed to parse person: {e}")
+            self.warn(f"Failed to parse person: {e}")
             return None
 
     def _parse_date(self, date_str: str | None) -> str | None:
