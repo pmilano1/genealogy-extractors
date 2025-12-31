@@ -36,6 +36,10 @@ _browser_semaphore = threading.Semaphore(2)
 _last_cleanup_time = 0
 _cleanup_interval = 60  # Cleanup at most once per minute
 
+# Track active fetches to prevent cleanup during parallel operations
+_active_fetches = 0
+_active_fetches_lock = threading.Lock()
+
 
 def cleanup_stale_tabs(force: bool = False) -> int:
     """Close stale about:blank tabs to prevent tab accumulation.
@@ -47,6 +51,11 @@ def cleanup_stale_tabs(force: bool = False) -> int:
         Number of tabs closed
     """
     global _last_cleanup_time
+
+    # Skip cleanup if any fetches are in progress (could close tabs being used)
+    with _active_fetches_lock:
+        if _active_fetches > 0:
+            return 0
 
     current_time = time.time()
     if not force and (current_time - _last_cleanup_time) < _cleanup_interval:
@@ -125,12 +134,22 @@ def fetch_page_content(url: str, source_name: str = None, wait_for_selector: str
         BotCheckDetected: If bot verification requires human intervention
         DailyLimitReached: If source daily limit is hit
     """
+    global _active_fetches
+
     # Cleanup stale tabs before each fetch (rate-limited to once per minute)
     cleanup_stale_tabs()
 
-    # Acquire semaphore to limit concurrent tabs (max 4 at a time)
-    with _browser_semaphore:
-        return _fetch_with_playwright(url, source_name=source_name, wait_for_selector=wait_for_selector)
+    # Track active fetches to prevent cleanup from closing tabs we're using
+    with _active_fetches_lock:
+        _active_fetches += 1
+
+    try:
+        # Acquire semaphore to limit concurrent tabs (max 2 at a time)
+        with _browser_semaphore:
+            return _fetch_with_playwright(url, source_name=source_name, wait_for_selector=wait_for_selector)
+    finally:
+        with _active_fetches_lock:
+            _active_fetches -= 1
 
 
 def _check_daily_limit(page, source_name: str = None) -> bool:
@@ -268,57 +287,66 @@ def _fetch_with_playwright(url: str, source_name: str = None, wait_for_selector:
         BotCheckDetected: If bot verification requires human intervention
         DailyLimitReached: If daily limit reached
     """
+    global _active_fetches
     from playwright.sync_api import sync_playwright
 
     # Cleanup stale about:blank tabs periodically
     cleanup_stale_tabs()
 
-    with sync_playwright() as p:
-        browser = p.chromium.connect_over_cdp(_get_chrome_url(), timeout=30000)
-        context = browser.contexts[0]
+    # Track active fetches to prevent cleanup from closing tabs we're using
+    with _active_fetches_lock:
+        _active_fetches += 1
 
-        # Handle dialogs at context level before page creation
-        def handle_dialog(dialog):
-            try:
-                dialog.accept()
-            except Exception:
-                pass
-        context.on("dialog", handle_dialog)
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.connect_over_cdp(_get_chrome_url(), timeout=30000)
+            context = browser.contexts[0]
 
-        page = context.new_page()
-        should_close_tab = True
-
-        try:
-            page.goto(url, timeout=30000, wait_until="load")
-
-            # Wait for specific selector if provided
-            if wait_for_selector:
+            # Handle dialogs at context level before page creation
+            def handle_dialog(dialog):
                 try:
-                    page.wait_for_selector(wait_for_selector, timeout=20000)
-                except Exception:
-                    pass  # Continue anyway
-
-            # Small delay for final rendering
-            time.sleep(2)
-
-            # Check for bot verification
-            try:
-                _handle_bot_check(page, source_name)
-            except BotCheckDetected:
-                should_close_tab = False
-                raise
-
-            # Check for daily limit
-            if _check_daily_limit(page, source_name):
-                raise DailyLimitReached(
-                    f"{source_name} daily search limit reached. Try again tomorrow."
-                )
-
-            return page.content()
-
-        finally:
-            if should_close_tab:
-                try:
-                    page.close(run_before_unload=False)
+                    dialog.accept()
                 except Exception:
                     pass
+            context.on("dialog", handle_dialog)
+
+            page = context.new_page()
+            should_close_tab = True
+
+            try:
+                page.goto(url, timeout=30000, wait_until="load")
+
+                # Wait for specific selector if provided
+                if wait_for_selector:
+                    try:
+                        page.wait_for_selector(wait_for_selector, timeout=20000)
+                    except Exception:
+                        pass  # Continue anyway
+
+                # Small delay for final rendering
+                time.sleep(2)
+
+                # Check for bot verification
+                try:
+                    _handle_bot_check(page, source_name)
+                except BotCheckDetected:
+                    should_close_tab = False
+                    raise
+
+                # Check for daily limit
+                if _check_daily_limit(page, source_name):
+                    raise DailyLimitReached(
+                        f"{source_name} daily search limit reached. Try again tomorrow."
+                    )
+
+                return page.content()
+
+            finally:
+                if should_close_tab:
+                    try:
+                        page.close(run_before_unload=False)
+                    except Exception:
+                        pass
+    finally:
+        with _active_fetches_lock:
+            _active_fetches -= 1
