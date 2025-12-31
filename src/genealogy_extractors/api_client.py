@@ -1,33 +1,47 @@
 """
 GraphQL API Client for Genealogy Research Tasks
-Connects extractors to the family.milanese.life API
+Connects extractors to the Kindred API
 """
 
 import json
 import subprocess
 from typing import List, Dict, Any, Optional
 
-API_ENDPOINT = "https://family.milanese.life/api/graphql"
-API_KEY = "390095c80355901c6ffc3e5cc7d4f9194d54faa5b47e98eb5ff662769bc20976"
+from .config import get_api_config
+
+
+def _get_api_settings():
+    """Get API endpoint and key from config."""
+    config = get_api_config()
+    endpoint = config.get('endpoint', '')
+    key = config.get('key', '')
+    if not endpoint or not key:
+        raise ValueError(
+            "API not configured. Please add 'api.endpoint' and 'api.key' to "
+            "~/.genealogy-extractors/config.json"
+        )
+    return endpoint, key
 
 
 def _execute_query(query: str, variables: Optional[Dict] = None) -> Dict[str, Any]:
     """Execute a GraphQL query using curl subprocess"""
+    endpoint, key = _get_api_settings()
+
     payload = {"query": query}
     if variables:
         payload["variables"] = variables
-    
+
     cmd = [
-        'curl', '-s', '-X', 'POST', API_ENDPOINT,
+        'curl', '-s', '-X', 'POST', endpoint,
         '-H', 'Content-Type: application/json',
-        '-H', f'X-API-Key: {API_KEY}',
+        '-H', f'X-API-Key: {key}',
         '-d', json.dumps(payload)
     ]
-    
+
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         raise Exception(f"API call failed: {result.stderr}")
-    
+
     return json.loads(result.stdout)
 
 

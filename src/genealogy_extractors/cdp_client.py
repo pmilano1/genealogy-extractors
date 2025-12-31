@@ -16,8 +16,18 @@ import time
 import os
 from typing import Optional
 
+from .config import get_chrome_config
+
 # Suppress Node.js deprecation warnings from Playwright
 os.environ['NODE_OPTIONS'] = '--no-deprecation'
+
+
+def _get_chrome_url() -> str:
+    """Get Chrome debug URL from config."""
+    config = get_chrome_config()
+    host = config.get('debug_host', '127.0.0.1')
+    port = config.get('debug_port', 9222)
+    return f"http://{host}:{port}"
 
 # Semaphore to limit concurrent browser tabs (Chrome can handle ~4 concurrent tabs reliably)
 _browser_semaphore = threading.Semaphore(4)
@@ -47,8 +57,9 @@ def cleanup_stale_tabs(force: bool = False) -> int:
 
     try:
         # Get list of tabs from Chrome debug port
+        chrome_url = _get_chrome_url()
         result = subprocess.run(
-            ['curl', '-s', 'http://localhost:9222/json'],
+            ['curl', '-s', f'{chrome_url}/json'],
             capture_output=True,
             text=True,
             timeout=5
@@ -71,7 +82,7 @@ def cleanup_stale_tabs(force: bool = False) -> int:
             if tab_id:
                 try:
                     subprocess.run(
-                        ['curl', '-s', f'http://localhost:9222/json/close/{tab_id}'],
+                        ['curl', '-s', f'{chrome_url}/json/close/{tab_id}'],
                         capture_output=True,
                         timeout=2
                     )
@@ -263,7 +274,7 @@ def _fetch_with_playwright(url: str, source_name: str = None, wait_for_selector:
     cleanup_stale_tabs()
 
     with sync_playwright() as p:
-        browser = p.chromium.connect_over_cdp("http://localhost:9222")
+        browser = p.chromium.connect_over_cdp(_get_chrome_url())
         context = browser.contexts[0]
 
         # Handle dialogs at context level before page creation

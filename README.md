@@ -34,14 +34,33 @@ genealogy-extractors/
 └── tests/                        # Test files
 ```
 
-## Prerequisites
+## Configuration
 
-**PostgreSQL database** for tracking processed searches and staging findings:
-```bash
-# Default connection (configurable via env vars)
-Host: 192.168.20.10:5432
-Database: genealogy_local
-Tables: search_log, staged_findings
+Configuration is stored in `~/.genealogy-extractors/config.json`.
+
+**Default behavior** (no config needed): Uses SQLite at `~/.genealogy-extractors/genealogy.db`
+
+**For PostgreSQL or API access**, create the config file:
+
+```json
+{
+  "database": {
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 5432,
+    "database": "genealogy",
+    "user": "postgres",
+    "password": "your_password"
+  },
+  "api": {
+    "endpoint": "https://your-kindred-instance.com/api/graphql",
+    "key": "your_api_key"
+  },
+  "chrome": {
+    "debug_port": 9222,
+    "debug_host": "127.0.0.1"
+  }
+}
 ```
 
 **Chrome with debug port** (required for sites needing login):
@@ -204,17 +223,15 @@ class NewSiteExtractor(BaseRecordExtractor):
 
 ---
 
-## Environment Variables
+## Data Storage
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `POSTGRES_HOST` | 192.168.20.10 | PostgreSQL host |
-| `POSTGRES_PORT` | 5432 | PostgreSQL port |
-| `POSTGRES_DB` | genealogy_local | Database name |
-| `POSTGRES_USER` | postgres | Database user |
-| `POSTGRES_PASSWORD` | (see code) | Database password |
-| `MATCHID_API_TOKEN` | (has default) | MatchID API token |
-| `GENEALOGY_API_KEY` | - | Family tree API key |
+| Config | Storage | Notes |
+|--------|---------|-------|
+| No config file | SQLite | `~/.genealogy-extractors/genealogy.db` |
+| `database.type: "sqlite"` | SQLite | Uses `database.sqlite_path` |
+| `database.type: "postgresql"` | PostgreSQL | Uses host/port/database/user/password |
+
+Tables created automatically: `search_log`, `staged_findings`
 
 ---
 

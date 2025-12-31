@@ -1,17 +1,43 @@
 """
 Processed Tracker - Tracks which person+source combinations have been searched
 
-Uses PostgreSQL search_log table to persist across runs.
+Uses database (SQLite or PostgreSQL) to persist across runs.
 Prevents redundant searches across multiple runs.
 """
 
-import os
-from datetime import datetime
 from threading import Lock
 from typing import Dict, List, Optional
 
-import psycopg2
-from psycopg2.extras import execute_values
+from .database import get_database, DatabaseBackend
+
+
+# SQL for creating the search_log table
+CREATE_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS search_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id TEXT NOT NULL,
+    source_name TEXT NOT NULL,
+    searched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    result_count INTEGER DEFAULT 0,
+    had_error BOOLEAN DEFAULT FALSE,
+    error_message TEXT,
+    UNIQUE(person_id, source_name)
+)
+"""
+
+# PostgreSQL version uses SERIAL instead of AUTOINCREMENT
+CREATE_TABLE_SQL_PG = """
+CREATE TABLE IF NOT EXISTS search_log (
+    id SERIAL PRIMARY KEY,
+    person_id TEXT NOT NULL,
+    source_name TEXT NOT NULL,
+    searched_at TIMESTAMP DEFAULT NOW(),
+    result_count INTEGER DEFAULT 0,
+    had_error BOOLEAN DEFAULT FALSE,
+    error_message TEXT,
+    UNIQUE(person_id, source_name)
+)
+"""
 
 
 class ProcessedTracker:
@@ -19,33 +45,39 @@ class ProcessedTracker:
 
     def __init__(self):
         self.lock = Lock()
-        self.db_config = {
-            'host': os.environ.get('POSTGRES_HOST', '192.168.20.10'),
-            'port': int(os.environ.get('POSTGRES_PORT', 5432)),
-            'database': os.environ.get('POSTGRES_DB', 'genealogy_local'),
-            'user': os.environ.get('POSTGRES_USER', 'postgres'),
-            'password': os.environ.get('POSTGRES_PASSWORD', 'changeme_shared_postgres_password')
-        }
-        # Local cache to reduce DB queries (refreshed periodically)
+        self._db: Optional[DatabaseBackend] = None
         self._cache: Dict[str, set] = {}
         self._cache_loaded = False
 
-    def _get_conn(self):
-        """Get database connection"""
-        return psycopg2.connect(**self.db_config)
+    def _get_db(self) -> DatabaseBackend:
+        """Get database connection, creating table if needed."""
+        if self._db is None:
+            self._db = get_database()
+            self._ensure_table()
+        return self._db
+
+    def _ensure_table(self):
+        """Create table if it doesn't exist."""
+        from .config import is_postgresql
+        try:
+            sql = CREATE_TABLE_SQL_PG if is_postgresql() else CREATE_TABLE_SQL
+            self._db.execute(sql)
+        except Exception as e:
+            print(f"[TRACKER] Warning: Could not create table: {e}")
 
     def _ensure_cache(self):
         """Load cache from database if not loaded"""
         if self._cache_loaded:
             return
         try:
-            with self._get_conn() as conn:
-                with conn.cursor() as cur:
-                    cur.execute("SELECT person_id, source_name FROM search_log")
-                    for person_id, source_name in cur.fetchall():
-                        if person_id not in self._cache:
-                            self._cache[person_id] = set()
-                        self._cache[person_id].add(source_name)
+            db = self._get_db()
+            rows = db.fetchall("SELECT person_id, source_name FROM search_log")
+            for row in rows:
+                person_id = row['person_id']
+                source_name = row['source_name']
+                if person_id not in self._cache:
+                    self._cache[person_id] = set()
+                self._cache[person_id].add(source_name)
             self._cache_loaded = True
         except Exception as e:
             print(f"[TRACKER] Failed to load cache: {e}")
@@ -61,16 +93,14 @@ class ProcessedTracker:
         """Mark person+source as processed"""
         with self.lock:
             try:
-                with self._get_conn() as conn:
-                    with conn.cursor() as cur:
-                        cur.execute("""
-                            INSERT INTO search_log (person_id, source_name, result_count, had_error, error_message)
-                            VALUES (%s, %s, %s, %s, %s)
-                            ON CONFLICT (person_id, source_name)
-                            DO UPDATE SET searched_at = NOW(), result_count = EXCLUDED.result_count,
-                                          had_error = EXCLUDED.had_error, error_message = EXCLUDED.error_message
-                        """, (person_id, source, result_count, had_error, error_message))
-                    conn.commit()
+                db = self._get_db()
+                db.execute("""
+                    INSERT INTO search_log (person_id, source_name, result_count, had_error, error_message)
+                    VALUES (%s, %s, %s, %s, %s)
+                    ON CONFLICT (person_id, source_name)
+                    DO UPDATE SET searched_at = NOW(), result_count = excluded.result_count,
+                                  had_error = excluded.had_error, error_message = excluded.error_message
+                """, (person_id, source, result_count, had_error, error_message))
 
                 # Update cache
                 if person_id not in self._cache:
@@ -91,22 +121,22 @@ class ProcessedTracker:
         """Get processing statistics"""
         with self.lock:
             try:
-                with self._get_conn() as conn:
-                    with conn.cursor() as cur:
-                        cur.execute("SELECT COUNT(DISTINCT person_id) FROM search_log")
-                        total_people = cur.fetchone()[0]
+                db = self._get_db()
 
-                        cur.execute("SELECT COUNT(*) FROM search_log")
-                        total_searches = cur.fetchone()[0]
+                row = db.fetchone("SELECT COUNT(DISTINCT person_id) as cnt FROM search_log")
+                total_people = row['cnt'] if row else 0
 
-                        cur.execute("SELECT source_name, COUNT(*) FROM search_log GROUP BY source_name")
-                        by_source = dict(cur.fetchall())
+                row = db.fetchone("SELECT COUNT(*) as cnt FROM search_log")
+                total_searches = row['cnt'] if row else 0
 
-                        return {
-                            'total_people': total_people,
-                            'total_searches': total_searches,
-                            'by_source': by_source
-                        }
+                rows = db.fetchall("SELECT source_name, COUNT(*) as cnt FROM search_log GROUP BY source_name")
+                by_source = {r['source_name']: r['cnt'] for r in rows}
+
+                return {
+                    'total_people': total_people,
+                    'total_searches': total_searches,
+                    'by_source': by_source
+                }
             except Exception as e:
                 print(f"[TRACKER] Failed to get stats: {e}")
                 return {'total_people': 0, 'total_searches': 0, 'by_source': {}}
@@ -115,10 +145,8 @@ class ProcessedTracker:
         """Clear all tracking data"""
         with self.lock:
             try:
-                with self._get_conn() as conn:
-                    with conn.cursor() as cur:
-                        cur.execute("TRUNCATE search_log")
-                    conn.commit()
+                db = self._get_db()
+                db.execute("DELETE FROM search_log")
                 self._cache = {}
                 self._cache_loaded = False
                 print("[TRACKER] Cleared all search history")
