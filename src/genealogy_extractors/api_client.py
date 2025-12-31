@@ -93,6 +93,7 @@ def get_research_tasks(
               id
               name_full
               birth_year
+              estimated_birth_year
               birth_place
             }
           }
@@ -199,6 +200,7 @@ def get_all_people(
             name_given
             name_surname
             birth_year
+            estimated_birth_year
             birth_place
             death_year
             death_place
@@ -252,13 +254,20 @@ def get_all_people_iterator(batch_size: int = 100):
 
 
 def person_to_search_params(person: Dict[str, Any]) -> Dict[str, Any]:
-    """Convert a person record to search parameters for extractors."""
+    """Convert a person record to search parameters for extractors.
+
+    Uses birth_year if available, falls back to estimated_birth_year.
+    """
+    # Use actual birth_year, fall back to estimated_birth_year
+    birth_year = person.get("birth_year") or person.get("estimated_birth_year")
+
     return {
         "surname": person.get("name_surname", ""),
         "given_name": person.get("name_given", ""),
-        "year_min": person.get("birth_year") - 5 if person.get("birth_year") else None,
-        "year_max": person.get("birth_year") + 5 if person.get("birth_year") else None,
+        "year_min": birth_year - 5 if birth_year else None,
+        "year_max": birth_year + 5 if birth_year else None,
         "location": person.get("birth_place", ""),
+        "is_estimated_year": person.get("birth_year") is None and birth_year is not None,
     }
 
 

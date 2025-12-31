@@ -220,17 +220,20 @@ def run_research(
                 print(f"[{processed}/{total_to_process}] {person['name_full']} - SKIP (no surname)")
             continue
 
-        # Add birth_year if available
-        if person.get("birth_year"):
+        # Add birth_year if available, fall back to estimated_birth_year
+        birth_year = person.get("birth_year") or person.get("estimated_birth_year")
+        if birth_year:
             # Skip ancient/medieval people - no useful records before 1200
-            if person["birth_year"] < 1200:
+            if birth_year < 1200:
                 if verbose:
-                    print(f"[{processed}/{total_to_process}] {person['name_full']} - SKIP (born {person['birth_year']}, too ancient)")
+                    print(f"[{processed}/{total_to_process}] {person['name_full']} - SKIP (born {birth_year}, too ancient)")
                 continue
-            params["birth_year"] = person["birth_year"]
+            params["birth_year"] = birth_year
+            params["is_estimated_year"] = person.get("birth_year") is None
         else:
-            # Default to a wide range if no birth year
+            # Default to a wide range if no birth year at all
             params["birth_year"] = 1850
+            params["is_estimated_year"] = True
 
         person_start = time.time()
         person_id = person["id"]
