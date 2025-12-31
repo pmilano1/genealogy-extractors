@@ -190,8 +190,8 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
     FreeBMD requires POST form submission to get results.
     Has a 3000 record limit - auto-narrows date range if exceeded.
     """
-    from error_tracker import log_error
-    from cdp_client import _browser_semaphore, cleanup_stale_tabs
+    from genealogy_extractors.error_tracker import log_error
+    from genealogy_extractors.cdp_client import _browser_semaphore, cleanup_stale_tabs
     import os
 
     try:

@@ -571,7 +571,7 @@ Examples:
     elif args.submit_approved:
         submit_approved()
     elif args.errors:
-        from error_tracker import get_error_tracker
+        from genealogy_extractors.error_tracker import get_error_tracker
         tracker = get_error_tracker()
         summary = tracker.get_summary()
         print("=" * 50)
