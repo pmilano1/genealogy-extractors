@@ -21,6 +21,7 @@ wheels/
 *.egg
 
 # Virtual environments
+.venv/
 venv/
 ENV/
 env/
@@ -36,16 +37,23 @@ env/
 .DS_Store
 Thumbs.db
 
-# Test outputs
+# Test/pytest
 *.log
-test_results.json
 .cache/
+.pytest_cache/
 
 # Chrome debugging
 .chrome-debug-profile/
 
-# Documentation (keep local only)
-docs/
+# Runtime data files (do not commit)
+*.db
+*.sqlite
+*.sqlite3
+error_log.json
+processed_searches.json
+staged_findings.json
+staged_findings.json.bak
+safe_to_apply.json
 
-# Test fixtures (too large for git)
-tests/
+# Large fixtures (download separately)
+tests/fixtures/*.html

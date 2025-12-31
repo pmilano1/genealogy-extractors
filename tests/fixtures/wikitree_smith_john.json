@@ -1,0 +1,73 @@
+[
+  {
+    "total": 5,
+    "matches": [
+      {
+        "Id": "12345678",
+        "Name": "Smith-12345",
+        "FirstName": "John",
+        "MiddleName": "William",
+        "LastName": "Smith",
+        "BirthDate": "1875-03-15",
+        "DeathDate": "1942-11-20",
+        "BirthLocation": "London, England",
+        "DeathLocation": "New York, New York, USA",
+        "Father": "98765432",
+        "Mother": "87654321"
+      },
+      {
+        "Id": "23456789",
+        "Name": "Smith-23456",
+        "FirstName": "John",
+        "MiddleName": "",
+        "LastName": "Smith",
+        "BirthDate": "1880-00-00",
+        "DeathDate": "1955-06-10",
+        "BirthLocation": "Manchester, Lancashire, England",
+        "DeathLocation": "Chicago, Illinois, USA",
+        "Father": "11111111",
+        "Mother": "22222222"
+      },
+      {
+        "Id": "34567890",
+        "Name": "Smith-34567",
+        "FirstName": "John",
+        "MiddleName": "Robert",
+        "LastName": "Smith",
+        "BirthDate": "1862-08-22",
+        "DeathDate": "1935-00-00",
+        "BirthLocation": "Dublin, Ireland",
+        "DeathLocation": "Boston, Massachusetts, USA",
+        "Father": null,
+        "Mother": null
+      },
+      {
+        "Id": "45678901",
+        "Name": "Smith-45678",
+        "FirstName": "John",
+        "MiddleName": "Henry",
+        "LastName": "Smith",
+        "BirthDate": "1890-12-01",
+        "DeathDate": "1967-03-25",
+        "BirthLocation": "Birmingham, Warwickshire, England",
+        "DeathLocation": "Los Angeles, California, USA",
+        "Father": "33333333",
+        "Mother": "44444444"
+      },
+      {
+        "Id": "56789012",
+        "Name": "Smith-56789",
+        "FirstName": "John",
+        "MiddleName": "Thomas",
+        "LastName": "Smith",
+        "BirthDate": "1845-05-10",
+        "DeathDate": "1912-09-15",
+        "BirthLocation": "Edinburgh, Scotland",
+        "DeathLocation": "Philadelphia, Pennsylvania, USA",
+        "Father": "55555555",
+        "Mother": "66666666"
+      }
+    ]
+  }
+]
+

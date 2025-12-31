@@ -6,7 +6,7 @@ Usage:
     # Production: Extract from live sources
     python extract.py --surname Smith --given-name John --birth-year 1850 --source findagrave
     python extract.py --surname Smith --given-name John --birth-year 1850 --all-sources
-    
+
     # Testing: Use fixtures
     python extract.py --test
     python extract.py --test --source findagrave
@@ -19,30 +19,35 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
+# Add src to path for package imports
+sys.path.insert(0, str(Path(__file__).parent / "src"))
+
 # Import all extractors
-from extraction.find_a_grave_extractor import FindAGraveExtractor
-from extraction.antenati_extractor import AntenatiExtractor
-from extraction.geneanet_extractor import GeneanetExtractor
-from extraction.wikitree_extractor import WikiTreeExtractor
-from extraction.familysearch_extractor import FamilySearchExtractor
-from extraction.ancestry_extractor import AncestryExtractor
-from extraction.myheritage_extractor import MyHeritageExtractor
-from extraction.freebmd_extractor import FreeBMDExtractor
-from extraction.filae_extractor import FilaeExtractor
-from extraction.geni_extractor import GeniExtractor
-from extraction.matchid_extractor import MatchIDExtractor
-from extraction.billiongraves_extractor import BillionGravesExtractor
-from extraction.digitalarkivet_extractor import DigitalarkivetExtractor
-from extraction.irishgenealogy_extractor import IrishGenealogyExtractor
-from extraction.matricula_extractor import MatriculaExtractor
-from extraction.scotlandspeople_extractor import ScotlandsPeopleExtractor
-from extraction.anom_extractor import ANOMExtractor
+from genealogy_extractors.extractors import (
+    FindAGraveExtractor,
+    AntenatiExtractor,
+    GeneanetExtractor,
+    WikiTreeExtractor,
+    FamilySearchExtractor,
+    AncestryExtractor,
+    MyHeritageExtractor,
+    FreeBMDExtractor,
+    FilaeExtractor,
+    GeniExtractor,
+    MatchIDExtractor,
+    BillionGravesExtractor,
+    DigitalarkivetExtractor,
+    IrishGenealogyExtractor,
+    MatriculaExtractor,
+    ScotlandsPeopleExtractor,
+    ANOMExtractor,
+)
 
 # Import CDP client for production fetching
-from cdp_client import fetch_page_content, BotCheckDetected, DailyLimitReached
-from rate_limiter import get_rate_limiter
-from error_tracker import log_error
-from debug_log import debug, info, warn, error, set_verbose, is_verbose
+from genealogy_extractors.cdp_client import fetch_page_content, BotCheckDetected, DailyLimitReached
+from genealogy_extractors.rate_limiter import get_rate_limiter
+from genealogy_extractors.error_tracker import log_error
+from genealogy_extractors.debug_log import debug, info, warn, error, set_verbose, is_verbose
 import requests
 
 
