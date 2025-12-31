@@ -274,7 +274,7 @@ def _fetch_with_playwright(url: str, source_name: str = None, wait_for_selector:
     cleanup_stale_tabs()
 
     with sync_playwright() as p:
-        browser = p.chromium.connect_over_cdp(_get_chrome_url())
+        browser = p.chromium.connect_over_cdp(_get_chrome_url(), timeout=30000)
         context = browser.contexts[0]
 
         # Handle dialogs at context level before page creation
