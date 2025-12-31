@@ -19,6 +19,9 @@ Usage:
 
     # Submit approved findings to API
     python3 research.py --submit-approved
+
+    # Reset searches for people with newly estimated birth years
+    python3 research.py --reset-estimated
 """
 
 import argparse
@@ -46,6 +49,97 @@ SKIP_SOURCES = {'wikitree', 'scotlandspeople', 'billiongraves', 'irishgenealogy'
 
 # Track sources that hit daily limit during this session (cleared on restart)
 _daily_limit_sources = set()
+
+
+def reset_estimated_birth_year_searches(verbose: bool = False):
+    """
+    Reset search history for people who now have estimated_birth_year but no birth_year.
+
+    This allows re-searching with the correct year range now that we can estimate
+    birth years from relatives.
+
+    Run this after deploying the estimated_birth_year feature.
+    """
+    from genealogy_extractors.database import get_database
+
+    print("=" * 60)
+    print("RESET SEARCHES FOR PEOPLE WITH ESTIMATED BIRTH YEARS")
+    print("=" * 60)
+
+    # Collect person IDs with estimated birth year but no actual birth year
+    print("\nFetching people with estimated birth years...")
+    people_to_reset = []
+
+    for person in get_all_people_iterator(batch_size=100):
+        birth_year = person.get("birth_year")
+        estimated = person.get("estimated_birth_year")
+
+        # Only reset if: no actual birth_year, but has estimated_birth_year
+        if birth_year is None and estimated is not None:
+            people_to_reset.append({
+                "id": person["id"],
+                "name": person["name_full"],
+                "estimated": estimated
+            })
+
+    if not people_to_reset:
+        print("\nNo people found with estimated birth years (but no actual birth year).")
+        print("Make sure the estimated_birth_year feature is deployed.")
+        return
+
+    print(f"\nFound {len(people_to_reset)} people to reset:")
+    if verbose:
+        for p in people_to_reset[:20]:
+            print(f"  - {p['name']} (estimated ~{p['estimated']})")
+        if len(people_to_reset) > 20:
+            print(f"  ... and {len(people_to_reset) - 20} more")
+
+    # Delete search_log entries for these people
+    db = get_database()
+    person_ids = [p["id"] for p in people_to_reset]
+
+    # Get count before deletion
+    placeholders = ",".join(["%s"] * len(person_ids))
+    result = db.fetchone(
+        f"SELECT COUNT(*) as cnt FROM search_log WHERE person_id IN ({placeholders})",
+        person_ids
+    )
+    count_before = result["cnt"] if result else 0
+
+    if count_before == 0:
+        print(f"\nNo existing search history found for these {len(people_to_reset)} people.")
+        print("They will be searched on the next research run.")
+        return
+
+    # Confirm deletion
+    print(f"\nWill delete {count_before} search log entries for {len(people_to_reset)} people.")
+    confirm = input("Proceed? [y/N]: ").strip().lower()
+
+    if confirm != 'y':
+        print("Aborted.")
+        return
+
+    # Delete in batches to avoid huge queries
+    batch_size = 500
+    deleted = 0
+    for i in range(0, len(person_ids), batch_size):
+        batch = person_ids[i:i + batch_size]
+        placeholders = ",".join(["%s"] * len(batch))
+        db.execute(
+            f"DELETE FROM search_log WHERE person_id IN ({placeholders})",
+            batch
+        )
+        deleted += len(batch)
+        if verbose:
+            print(f"  Processed {deleted}/{len(person_ids)} people...")
+
+    # Refresh tracker cache
+    tracker = get_tracker()
+    tracker.refresh_cache()
+
+    print(f"\n✓ Reset complete! Deleted {count_before} search entries.")
+    print(f"  {len(people_to_reset)} people will be re-searched with estimated birth years.")
+    print("\nRun 'python research.py --limit 10' to start re-searching.")
 
 
 def search_source(source_key: str, params: Dict[str, Any], person_id: str, verbose: bool = False) -> Dict[str, Any]:
@@ -572,6 +666,8 @@ Examples:
                         help="Show processing statistics")
     parser.add_argument("--reset", action="store_true",
                         help="Reset processed tracking (re-search everything)")
+    parser.add_argument("--reset-estimated", action="store_true",
+                        help="Reset searches for people with estimated birth years (re-search with correct year range)")
 
     args = parser.parse_args()
 
@@ -614,6 +710,8 @@ Examples:
         tracker = get_tracker()
         tracker.clear()
         print("Processed tracking cleared - next run will search all sources")
+    elif args.reset_estimated:
+        reset_estimated_birth_year_searches(verbose=args.verbose)
     elif args.limit or args.all or args.source:
         if not args.all and not args.limit:
             args.limit = 10  # Default safety limit
