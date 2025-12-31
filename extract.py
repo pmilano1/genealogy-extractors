@@ -30,6 +30,13 @@ from extraction.myheritage_extractor import MyHeritageExtractor
 from extraction.freebmd_extractor import FreeBMDExtractor
 from extraction.filae_extractor import FilaeExtractor
 from extraction.geni_extractor import GeniExtractor
+from extraction.matchid_extractor import MatchIDExtractor
+from extraction.billiongraves_extractor import BillionGravesExtractor
+from extraction.digitalarkivet_extractor import DigitalarkivetExtractor
+from extraction.irishgenealogy_extractor import IrishGenealogyExtractor
+from extraction.matricula_extractor import MatriculaExtractor
+from extraction.scotlandspeople_extractor import ScotlandsPeopleExtractor
+from extraction.anom_extractor import ANOMExtractor
 
 # Import CDP client for production fetching
 from cdp_client import fetch_page_content, BotCheckDetected, DailyLimitReached
@@ -111,6 +118,62 @@ SOURCES = {
         'url_template': None,  # Uses Playwright form fill
         'test_fixture': 'tests/fixtures/freebmd_smith_john.html',
         'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+    },
+    # === NEW SOURCES ===
+    'matchid': {
+        'name': 'MatchID',
+        'extractor': MatchIDExtractor(),
+        'url_template': None,  # Uses API
+        'test_fixture': 'tests/fixtures/matchid_sample.json',
+        'test_params': {'surname': 'Dupont', 'given_name': 'Marie', 'birth_year': 1920}
+    },
+    'billiongraves': {
+        'name': 'BillionGraves',
+        'extractor': BillionGravesExtractor(),
+        'url_template': 'https://billiongraves.com/site/search/results?given_names={given_name}&family_names={surname}&year={birth_year}&year_range=5',
+        'test_fixture': 'tests/fixtures/billiongraves_sample.html',
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+    },
+    'digitalarkivet': {
+        'name': 'Digitalarkivet',
+        'extractor': DigitalarkivetExtractor(),
+        'url_template': 'https://www.digitalarkivet.no/en/search/persons?fornavn={given_name}&etternavn={surname}&fodtfra={birth_year}&fodttil={birth_year_end}',
+        'test_fixture': 'tests/fixtures/digitalarkivet_sample.html',
+        'test_params': {'surname': 'Hansen', 'given_name': 'Ole', 'birth_year': 1850}
+    },
+    'irishgenealogy': {
+        'name': 'IrishGenealogy.ie',
+        'extractor': IrishGenealogyExtractor(),
+        'url_template': 'https://www.irishgenealogy.ie/en/civil-records/search-civil-records?surname={surname}&firstname={given_name}&yearfrom={birth_year}&yearto={birth_year_end}',
+        'test_fixture': 'tests/fixtures/irishgenealogy_sample.html',
+        'test_params': {'surname': "O'Brien", 'given_name': 'Patrick', 'birth_year': 1870}
+    },
+    # NOTE: Matricula is NOT name-searchable - it's a location-based parish register browser
+    # The search at /en/suchen/ only allows searching by place name, not person name
+    # Keeping for reference but marking as disabled
+    # 'matricula': {
+    #     'name': 'Matricula',
+    #     'extractor': MatriculaExtractor(),
+    #     'url_template': None,  # No name search available
+    #     'test_fixture': 'tests/fixtures/matricula_sample.html',
+    #     'test_params': {'surname': 'Mueller', 'given_name': 'Johann', 'birth_year': 1850},
+    #     'disabled': True,
+    #     'note': 'Location-based only - browse by parish at https://data.matricula-online.eu/en/suchen/'
+    # },
+    'scotlandspeople': {
+        'name': 'ScotlandsPeople',
+        'extractor': ScotlandsPeopleExtractor(),
+        'url_template': 'https://www.scotlandspeople.gov.uk/record-results?surname={surname}&forename={given_name}&from_year={birth_year}&to_year={birth_year_end}',
+        'test_fixture': 'tests/fixtures/scotlandspeople_sample.html',
+        'test_params': {'surname': 'MacDonald', 'given_name': 'James', 'birth_year': 1860}
+    },
+    'anom': {
+        'name': 'ANOM',
+        'extractor': ANOMExtractor(),
+        # Correct URL: form-based search that produces results at /archive/resultats/basebagne/
+        'url_template': 'https://recherche-anom.culture.gouv.fr/archive/resultats/basebagne/n:174?RECH_nom={surname}&RECH_prenom={given_name}&type=basebagne',
+        'test_fixture': 'tests/fixtures/anom_sample.html',
+        'test_params': {'surname': 'Martin', 'given_name': 'Jean', 'birth_year': 1850}
     }
 }
 
@@ -122,6 +185,7 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
     Has a 3000 record limit - auto-narrows date range if exceeded.
     """
     from error_tracker import log_error
+    from cdp_client import _browser_semaphore, cleanup_stale_tabs
     import os
 
     try:
@@ -130,6 +194,9 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
 
         # Suppress Node.js deprecation warnings
         os.environ['NODE_OPTIONS'] = '--no-deprecation'
+
+        # Cleanup stale tabs before search
+        cleanup_stale_tabs()
 
         surname = params.get('surname', '') or ''
         given_name = params.get('given_name', '') or ''
@@ -140,7 +207,8 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
         if verbose:
             print(f"[FreeBMD] Searching for {given_name} {surname} ({birth_year}-{birth_year_end})")
 
-        with sync_playwright() as p:
+        # Acquire semaphore to limit concurrent browser tabs
+        with _browser_semaphore, sync_playwright() as p:
             # Connect to existing Chrome
             browser = p.chromium.connect_over_cdp("http://localhost:9222")
             context = browser.contexts[0]
@@ -293,6 +361,28 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
                 elif source_key == 'freebmd':
                     # FreeBMD requires Playwright form submission
                     content = fetch_freebmd_with_playwright(params, verbose)
+
+                elif source_key == 'matchid':
+                    # MatchID API - French death records (1970-present)
+                    # Returns records directly, not HTML content
+                    extractor = source['extractor']
+                    records = extractor.search(
+                        surname=params.get('surname', ''),
+                        given_name=params.get('given_name', ''),
+                        birth_year=params.get('birth_year'),
+                        size=20
+                    )
+
+                    if verbose:
+                        print(f"[MatchID API] Found {len(records)} records")
+
+                    # MatchID returns records directly, skip normal extraction
+                    return {
+                        'source': source['name'],
+                        'success': True,
+                        'count': len(records),
+                        'records': records
+                    }
 
                 else:
                     raise NotImplementedError(f"{source['name']} requires API implementation")

@@ -1,0 +1,200 @@
+<html><head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <script src="js/caomec2.js" type="text/javascript"> // </script>
+        <link href="css/caomBDI.css" rel="stylesheet" type="text/css">
+        <link href="css/sdx.css" rel="stylesheet" type="text/css">
+    	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<title>ANOM, Etat Civil, choix d'un territoire</title>
+	<script type="text/javascript">
+		// objet div d'un calque affiche
+		var region_layer;
+
+		/* La methode qui affiche un calque */
+		function region_show(id) {
+			if (!document.getElementById) {
+				return;
+			}
+			var o = document.getElementById(id);
+    		if (!o || !o.style) {
+				return alert(id + " momentan&eacute;ment indisponible.");
+			}
+    		if (region_layer && region_layer.style) {
+				region_layer.style.visibility='hidden';
+			}
+    		o.style.visibility='visible';
+    		region_layer=o;
+		}
+</script>
+</head>
+<body id="accueil">
+	<div id="header">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Placement du logo IREL" class="logo">
+    <tbody><tr>
+      <td><a href="http://anom.archivesnationales.culture.gouv.fr/egf"><img src="images/logoIrel.gif" alt="Site Internet IREL - ANOM " title="Site Internet IREL - ANOM " width="758" height="103" border="0"></a></td>
+      <td width="99%" class="fond"></td>
+      <td><a href="http://www.archivesnationales.culture.gouv.fr/anom/fr/"><img src="images/logoCAOM.gif" onmouseover="this.src='images/logoCAOM_On.gif'" onmouseout="this.src='images/logoCAOM.gif'" alt="Site des ANOM" title="Site des ANOM" width="186" height="103" border="0"></a></td>
+    </tr>
+  </tbody></table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Placement de la navigation dans la base IREL" class="NavIrel">
+    <tbody><tr>
+      <td><a rel="help" href="http://anom.archivesnationales.culture.gouv.fr/egf"><img src="images/IREL_vierge.gif" alt="Bas du logo IREL" width="347" height="50" border="0"></a></td>
+      <td class="lien"><a href="http://anom.archivesnationales.culture.gouv.fr/"><img src="images/invDet.gif" alt="Revenir aux inventaires détaillés" width="206" height="50" border="0" title="Revenir aux inventaires détaillés"></a></td>
+      <td><a href="http://anom.archivesnationales.culture.gouv.fr/egf"><img src="images/EtatGeneral_Off.gif" onmouseover="this.src='images/EtatGeneral_On.gif'" onmouseout="this.src='images/EtatGeneral_Off.gif'" alt="Voir l'état général des fonds" width="206" height="50" border="0" title="Voir l'état général des fonds"></a></td>
+      <td width="99%" class="fond"></td>
+      <td><img src="images/bandeauBas.gif" alt="*" width="186" height="50"></td>
+    </tr>
+  </tbody></table>
+</div>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Placement du contenu de la page">
+		<tbody><tr>
+			<!-- Partie gauche : formulaire -->
+			<td align="left" valign="top">
+				<div>
+					<img src="images/formulaire.gif" alt="Formulaire de recherche simple" width="348" height="350" border="0" usemap="#Map2">
+<map name="Map2">
+    <area shape="rect" alt="" coords="249,41,318,62" href="http://anom.archivesnationales.culture.gouv.fr/">
+    <area shape="rect" alt="" coords="50,70,200,108" href="./" title="Carte de sélection d'un territoire.">
+    <area shape="rect" alt="" coords="250,70,320,108" href="./a-propos.php" title="Informations générales sur les états civils.">
+</map>
+					<table style="position:absolute; width:300px; left: 48px; top: 301px;" id="formSimple" border="0" cellspacing="5" width="300" cellpadding="0" summary="Formulaire de recherche dans l'état civil de la France d'Outre-mer">
+						<tbody><tr>
+							<td nowrap="nowrap">
+								<form name="simple" action="recherche.php">
+									<select name="territoire" onchange="
+        this.form.action='recherche.php';
+        var url = this.form.action + '?territoire=' + this.options[this.selectedIndex].value;
+        window.location.href=url;
+        "><option value="">Choisir un territoire</option>
+	<option value="ALGERIE">Algérie</option>
+	<option value="CAMBODGE">Cambodge</option>
+	<option value="CAMEROUN">Cameroun</option>
+	<option value="CANADA">Canada</option>
+	<option value="CAP DE BONNE ESPERANCE">Cap de Bonne-Espérance</option>
+	<option value="CHINE">Chine</option>
+	<option value="COMORES">Comores</option>
+	<option value="CONGO">Congo</option>
+	<option value="COTE D IVOIRE">Côte d'Ivoire</option>
+	<option value="COTE FRANCAISE DES SOMALIS">Côte française des Somalis</option>
+	<option value="DAHOMEY">Dahomey</option>
+	<option value="EGYPTE">Egypte</option>
+	<option value="ETATS-UNIS">Etats-Unis</option>
+	<option value="GABON">Gabon</option>
+	<option value="GAMBIE">Gambie</option>
+	<option value="GUADELOUPE">Guadeloupe</option>
+	<option value="GUINEE">Guinée</option>
+	<option value="GUYANE">Guyane</option>
+	<option value="HAUTE-VOLTA">Haute-Volta</option>
+	<option value="ILE DE FRANCE">Ile de France</option>
+	<option value="ILE ROYALE">Ile Royale</option>
+	<option value="ILES AUSTRALES">Iles Australes</option>
+	<option value="ILES DU VENT">Iles du Vent</option>
+	<option value="ILES GAMBIER">Iles Gambier</option>
+	<option value="ILES MARQUISES">Iles Marquises</option>
+	<option value="ILES TUAMOTU">Iles Tuamotu</option>
+	<option value="ILES-SOUS-LE-VENT">Iles-Sous-le-Vent</option>
+	<option value="INDE">Inde</option>
+	<option value="LAOS">Laos</option>
+	<option value="LOUISIANE">Louisiane</option>
+	<option value="MADAGASCAR">Madagascar</option>
+	<option value="MARTINIQUE">Martinique</option>
+	<option value="MAURITANIE">Mauritanie</option>
+	<option value="MAYOTTE">Mayotte</option>
+	<option value="NIGER">Niger</option>
+	<option value="NOUVELLE-CALEDONIE">Nouvelle-Calédonie</option>
+	<option value="NOUVELLES-HEBRIDES">Nouvelles-Hébrides</option>
+	<option value="OUBANGUI-CHARI">Oubangui-Chari</option>
+	<option value="REUNION">Réunion</option>
+	<option value="SAINT-BARTHELEMY">Saint-Barthélémy</option>
+	<option value="SAINT-DOMINGUE">Saint-Domingue</option>
+	<option value="SAINT-MARTIN">Saint-Martin</option>
+	<option value="SAINT-PIERRE-ET-MIQUELON">Saint-Pierre-et-Miquelon</option>
+	<option value="SAINTE-LUCIE">Sainte-Lucie</option>
+	<option value="LES SEYCHELLES">Seychelles</option>
+	<option value="SENEGAL">Sénégal</option>
+	<option value="SOUDAN">Soudan français</option>
+	<option value="TCHAD">Tchad</option>
+	<option value="TOUS TERRITOIRES (HOPITAUX)">Tous territoires (Hôpitaux)</option>
+	<option value="TURQUIE">Turquie</option>
+	<option value="INDOCHINE">Vietnam</option>
+	<option value="WALLIS-ET-FUTUNA">Wallis-et-Futuna</option>
+	</select>								</form>
+							</td>
+						</tr>
+					</tbody></table>
+				</div>
+			</td>
+
+			<td width="99%" align="center" valign="top" class="presentation">
+
+				<div style="width:527px;position:relative">
+
+					<!-- La Polynesie -->
+					<div id="polynesie" class="terrlist" style="left:400px; top: 130px; visibility: hidden;">
+						<div>Polynésie</div>
+						<div class="terr"><a href="recherche.php?territoire=ILES+AUSTRALES">Iles Australes</a></div><div class="terr"><a href="recherche.php?territoire=ILES+DU+VENT">Iles du Vent</a></div><div class="terr"><a href="recherche.php?territoire=ILES+GAMBIER">Iles Gambier</a></div><div class="terr"><a href="recherche.php?territoire=ILES+MARQUISES">Iles Marquises</a></div><div class="terr"><a href="recherche.php?territoire=ILES+TUAMOTU">Iles Tuamotu</a></div><div class="terr"><a href="recherche.php?territoire=ILES-SOUS-LE-VENT">Iles-Sous-le-Vent</a></div>					</div>
+
+					<!-- Les Caraibes -->
+					<div id="caraibes" class="terrlist" style="left:71px; top:180px; visibility: hidden">
+						<div>Caraïbes</div>
+						<div class="terr"><a href="recherche.php?territoire=GUADELOUPE">Guadeloupe</a></div><div class="terr"><a href="recherche.php?territoire=GUYANE">Guyane</a></div><div class="terr"><a href="recherche.php?territoire=MARTINIQUE">Martinique</a></div><div class="terr"><a href="recherche.php?territoire=SAINT-BARTHELEMY">Saint-Barthélémy</a></div><div class="terr"><a href="recherche.php?territoire=SAINT-DOMINGUE">Saint-Domingue</a></div><div class="terr"><a href="recherche.php?territoire=SAINT-MARTIN">Saint-Martin</a></div><div class="terr"><a href="recherche.php?territoire=SAINTE-LUCIE">Sainte-Lucie</a></div>					</div>
+
+					<!-- L'Amerique du Nord -->
+					<div id="amerNord" class="terrlist" style="left:126px; top:115px;  visibility: hidden">
+						<div>Amérique du Nord</div>
+						<div class="terr"><a href="recherche.php?territoire=CANADA">Canada</a></div><div class="terr"><a href="recherche.php?territoire=ETATS-UNIS">Etats-Unis</a></div><div class="terr"><a href="recherche.php?territoire=ILE+ROYALE">Ile Royale</a></div><div class="terr"><a href="recherche.php?territoire=LOUISIANE">Louisiane</a></div><div class="terr"><a href="recherche.php?territoire=SAINT-PIERRE-ET-MIQUELON">Saint-Pierre-et-Miquelon</a></div>					</div>
+
+					<!-- L'Afrique -->
+					<div id="afrique" class="terrlist" style="left:188px; top:186px; visibility: hidden">
+						<div>Afrique</div>
+						<div class="terr"><a href="recherche.php?territoire=ALGERIE">Algérie</a></div><div class="terr"><a href="recherche.php?territoire=CAMEROUN">Cameroun</a></div><div class="terr"><a href="recherche.php?territoire=CAP+DE+BONNE+ESPERANCE">Cap de Bonne-Espérance</a></div><div class="terr"><a href="recherche.php?territoire=CONGO">Congo</a></div><div class="terr"><a href="recherche.php?territoire=COTE+D+IVOIRE">Côte d'Ivoire</a></div><div class="terr"><a href="recherche.php?territoire=COTE+FRANCAISE+DES+SOMALIS">Côte française des Somalis</a></div><div class="terr"><a href="recherche.php?territoire=DAHOMEY">Dahomey</a></div><div class="terr"><a href="recherche.php?territoire=EGYPTE">Egypte</a></div><div class="terr"><a href="recherche.php?territoire=GABON">Gabon</a></div><div class="terr"><a href="recherche.php?territoire=GAMBIE">Gambie</a></div><div class="terr"><a href="recherche.php?territoire=GUINEE">Guinée</a></div><div class="terr"><a href="recherche.php?territoire=HAUTE-VOLTA">Haute-Volta</a></div><div class="terr"><a href="recherche.php?territoire=MAURITANIE">Mauritanie</a></div><div class="terr"><a href="recherche.php?territoire=NIGER">Niger</a></div><div class="terr"><a href="recherche.php?territoire=OUBANGUI-CHARI">Oubangui-Chari</a></div><div class="terr"><a href="recherche.php?territoire=SENEGAL">Sénégal</a></div><div class="terr"><a href="recherche.php?territoire=SOUDAN">Soudan français</a></div><div class="terr"><a href="recherche.php?territoire=TCHAD">Tchad</a></div><div class="terr"><a href="recherche.php?territoire=TOUS+TERRITOIRES+%28HOPITAUX%29">Tous territoires (Hôpitaux)</a></div>					</div>
+
+					<!-- Les Iles de l'Ocean Indien -->
+					<div id="ziles" class="terrlist" style="left:286px; top:243px;  visibility: hidden">
+						<div>Océan Indien</div>
+						<div class="terr"><a href="recherche.php?territoire=COMORES">Comores</a></div><div class="terr"><a href="recherche.php?territoire=ILE+DE+FRANCE">Ile de France</a></div><div class="terr"><a href="recherche.php?territoire=MADAGASCAR">Madagascar</a></div><div class="terr"><a href="recherche.php?territoire=MAYOTTE">Mayotte</a></div><div class="terr"><a href="recherche.php?territoire=REUNION">Réunion</a></div><div class="terr"><a href="recherche.php?territoire=LES+SEYCHELLES">Seychelles</a></div>					</div>
+
+					<!-- Inde -->
+					<div id="inde" class="terrlist" style="left:347px; top:179px; visibility: hidden">
+						<div>Asie du Sud-Est</div>
+						<div class="terr"><a href="recherche.php?territoire=CAMBODGE">Cambodge</a></div><div class="terr"><a href="recherche.php?territoire=CHINE">Chine</a></div><div class="terr"><a href="recherche.php?territoire=INDE">Inde</a></div><div class="terr"><a href="recherche.php?territoire=LAOS">Laos</a></div><div class="terr"><a href="recherche.php?territoire=INDOCHINE">Vietnam</a></div>					</div>
+
+					<!-- Nouvelle Caledonie -->
+					<div id="caledonie" class="terrlist" style="left:407px; top:263px; visibility: hidden">
+						<div>Nouvelle Calédonie</div>
+						<div class="terr"><a href="recherche.php?territoire=NOUVELLE-CALEDONIE">Nouvelle-Calédonie</a></div><div class="terr"><a href="recherche.php?territoire=NOUVELLES-HEBRIDES">Nouvelles-Hébrides</a></div><div class="terr"><a href="recherche.php?territoire=WALLIS-ET-FUTUNA">Wallis-et-Futuna</a></div>					</div>
+				</div>
+
+                 <!-- la planisphere -->
+                <img src="images/mappemonde.gif" alt="Planisphere" width="527" height="345" border="0" usemap="#carte" title="Survoler une zone et sélectionner un territoire" style="z-index:1;">
+
+                <map name="carte">
+                    <!-- coords="13,160,45,212" -->
+                    <area shape="rect" alt="Polynésie" coords="493,165,525,217" href="#" onmouseover="region_show('polynesie');">
+                    <area shape="rect" alt="Afrique" coords="204,134,300,208" href="#" onmouseover="region_show('afrique');">
+                    <area shape="rect" alt="Caraïbes" coords="86,147,143,193" href="#" onmouseover="region_show('caraibes');">
+                    <area shape="rect" alt="Océan Indien" coords="294,216,326,260" href="#" onmouseover="region_show('ziles');">
+                    <area shape="rect" alt="Nouvelle Calédonie" coords="477,228,508,259" href="#" onmouseover="region_show('caledonie');">
+                    <area shape="rect" alt="Amérique du Nord" coords="140,96,176,134" href="#" onmouseover="region_show('amerNord');">
+                    <area shape="rect" alt="Asie du Sud-Est" coords="342,151,431,218" href="#" onmouseover="region_show('inde');">
+                </map>
+                <p style="text-align: left; margin-left: 1em;">
+					<a target="avertissement" href="avertissement.htm" onclick="return ecran(this, 820, 750)">Avertissement</a>
+                </p>
+
+        	</td>
+        	<td><img src="images/px.gif" alt="*" width="33" height="1"></td>
+		</tr>
+		<tr>
+			<td align="left" valign="top"></td>
+			<td align="left" valign="middle" class="BdP">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Bas de page">
+					<tbody><tr>
+						<td width="99%">DERNIÈRE MISE À JOUR LE : 2025-11-14 16:31:52 (Guyane)</td>
+              			<td><a href="aide.php" target="aide" onclick="return ecran(this, 500, 600)"><img src="images/bando_pied.gif" alt="Afficher l'aide" width="72" height="50" border="0" title="Afficher l'aide"></a></td>
+            		</tr>
+          		</tbody></table>
+			</td>
+     	</tr>
+	</tbody></table>
+
+</body></html>

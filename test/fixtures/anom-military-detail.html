@@ -1,0 +1,133 @@
+<html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ANOM, Registres matricules militaires</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="all" href="/osdanom/css/osdanom.css?_t=1767116690">
+    <link rel="stylesheet" type="text/css" media="print" href="/osdanom/css/osdanom_print.css?_t=1767116690">
+    <script src="/osdanom/js/vendor/jquery/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/osdanom/js/vendor/jqueryui/jquery-ui.min.css">
+    <script src="/osdanom/js/vendor/jqueryui/jquery-ui.min.js"></script>
+    <script src="/osdanom/js/vendor/jquery-inview/jquery.inview.min.js"></script>
+</head>
+<body class="view">
+    <table class="layout" style="width: 933px; height: 436px;">
+        <caption>Pour la mise en page seulement</caption>
+
+        <!-- Titre et bouton aide -->
+        <tbody><tr class="header">
+            <td colspan="2">
+                <a id="helpbtn" class="help" href="/osdanom/aideosd.html" target="helpOsd">Aide</a>
+                                
+<div class="regmatmil_title">
+    <div>cote : FR ANOM 1 RM 18</div>
+    <div><strong>Martin François</strong></div>
+    <div>classe : 1880</div>
+</div>
+            </td>
+        </tr>
+        <!-- Barre d'icones -->
+        <tr class="toolbar">
+            <td colspan="2">
+                <div class="btn right" id="full-page" title="Passage en plein écran" style="display: inline-block; position: relative;"></div>
+                <div class="right">
+                    <a href="#" id="printlnk" title="Imprimer"><img src="/osdanom/img/printer.png" alt=""></a>
+                    <form id="printfrm" method="post" action="/osdanom/print.php" target="_blank">
+                        <input type="hidden" id="input_title" name="title">
+                        <input type="hidden" id="input_subtitle" name="subtitle">
+                        <input type="hidden" id="input_url" name="url">
+                        <input type="hidden" id="input_mode" name="mode">
+                        <input type="hidden" id="input_tilesource" name="tilesource">
+                        <input type="hidden" id="input_app" name="app" value="regmatmil">
+                        <input type="hidden" id="input_initialimgwidth" name="initialimgwidth" value="3093">
+                        <input type="hidden" id="input_imgbounds" name="imgbounds">
+                        <input type="hidden" id="input_imgrotation" name="imgrotation">
+                        <input type="hidden" id="input_valid" name="zoom">
+                    </form>
+                </div>
+                  <div class="btn right" id="print-selection" title="Imprimer la sélection"> <!-- -->
+                    <form id="printfrm_sel" method="post" action="/osdanom/print.php" target="_blank">
+                        <input type="hidden" id="input_title_sel" name="title">
+                        <input type="hidden" id="input_subtitle_sel" name="subtitle">
+                        <input type="hidden" id="input_url_sel" name="url">
+                        <input type="hidden" id="input_mode_sel" name="mode">
+                        <input type="hidden" id="input_tilesource_sel" name="tilesource">
+                        <input type="hidden" id="input_app_sel" name="app" value="regmatmil">
+                        <input type="hidden" id="input_initialimgwidth_sel" name="initialimgwidth">
+                        <input type="hidden" id="input_imgbounds_sel" name="imgbounds">
+                        <input type="hidden" id="input_imgrotation_sel" name="imgrotation">
+                        <input type="hidden" id="input_valid_sel" name="select">
+                    </form>
+                </div>
+                <div class="btn" id="zoom-in" title="Zoom+" style="display: inline-block; position: relative;"></div>
+                <div class="btn" id="zoom-out" title="Zoom-" style="display: inline-block; position: relative;"></div>
+                <div class="btn" id="zoom-selection" title="Zoom sur sélection"></div>
+                <div class="btn" id="rotate-left" title="Rotation gauche" style="display: inline-block; position: relative;"></div>
+                <div class="btn" id="rotate-right" title="Rotation droite" style="display: inline-block; position: relative;"></div>
+                <div id="filters">
+                    <div class="filter">
+                        <label>contraste :</label>
+                        <input type="range" id="contrast" min="0.4" max="1.6" step="0.1" value="1" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                    </div>
+                    <div class="filter">
+                        <label>luminosité :</label>
+                        <input type="range" id="brightness" min="-100" max="100" step="10" value="0" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                    </div>
+                </div>
+                <div class="razdiv">
+                    <input id="raz" type="button" value="R.A.Z" title="Remise à zéro">
+                </div>
+                <div class="wddiv">
+                    <div class="absdiv">
+                        <img id="whole-doc" title="Voir l'image dans son ensemble" src="/osdanom/img/doc_page_entiere.png">
+                    </div>
+                </div>
+                <div id="notoolbar" style="display: none;"></div>
+            </td>
+        </tr>
+        <tr>
+            <!-- Navigateur et vignettes -->
+            <td id="leftbar">
+                <div id="navwrapper">
+                    
+                <div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: static; display: inline-block; height: 100%; width: 100%;"><div id="navigator" class=" navigator" style="touch-action: none; margin: 0px; padding: 0px; display: inline-block; position: relative;"><div class="openseadragon-container" style="background: none transparent; border: none; margin: 0px; padding: 0px; position: relative; width: 100%; height: 100%; overflow: hidden; left: 0px; top: 0px; text-align: left;"><div class="openseadragon-canvas" tabindex="-1" dir="ltr" style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; width: 100%; height: 100%; overflow: hidden; top: 0px; left: 0px; touch-action: none; text-align: left;"><canvas width="640" height="880" style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; width: 100%; height: 100%;"></canvas><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: static;"></div></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; left: 0px; top: 0px;"></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; right: 0px; top: 0px;"></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; right: 0px; bottom: 0px;"></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; left: 0px; bottom: 0px;"></div><div id="navigator-displayregioncontainer" class="displayregioncontainer" style="background: none transparent; border: none; margin: 0px; padding: 0px; position: static; width: 100%; height: 100%; transform: rotate(0deg);"><div id="navigator-displayregion" class="displayregion" style="background: transparent; border: 2px solid rgb(153, 0, 0); margin: 0px; padding: 0px; position: relative; top: 0px; left: 5px; font-size: 0px; overflow: hidden; float: left; z-index: 999999999; cursor: default; transform: rotate(0deg); display: block; width: 147px; height: 67px;"></div></div></div></div></div></div>
+                            </td>
+            <!-- Visionneuse -->
+            <td id="maintd">
+                <div id="osdview" style="width: 761px; height: 353px;"><div class="openseadragon-container" style="background: none transparent; border: none; margin: 0px; padding: 0px; position: relative; width: 100%; height: 100%; overflow: hidden; left: 0px; top: 0px; text-align: left;"><div class="openseadragon-canvas" tabindex="0" dir="ltr" style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; width: 100%; height: 100%; overflow: hidden; top: 0px; left: 0px; touch-action: none; text-align: left;"><canvas width="3044" height="1412" style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; width: 100%; height: 100%;"></canvas><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: static;"></div></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; left: 0px; top: 0px;"></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; right: 0px; top: 0px;"></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; right: 0px; bottom: 0px;"></div><div style="background: none transparent; border: none; margin: 0px; padding: 0px; position: absolute; left: 0px; bottom: 0px;"></div></div></div>
+            </td>
+            </tr>
+    </tbody></table>
+    
+    <div id="errorscreen" style="display: none;">
+        <div id="imgnotfoundmsg">
+            <h2>Image non trouvée</h2>
+        </div>
+    </div>
+
+    <script src="/osdanom/openseadragon/openseadragon.min.js"></script>
+    <script src="/osdanom/openseadragon/openseadragon-filtering.js"></script>
+    <script src="/osdanom/openseadragon/selection/selection.js"></script>
+    <script src="/osdanom/openseadragon/selection/selectionoverlay.js"></script>
+    <script src="/osdanom/openseadragon/selection/selectionrect.js"></script>
+    <script src="/osdanom/js/osdanom.js?_=1767116690" encoding="UTF-8"></script>
+    <script>var viewer = initViewer('/osdanom/', ["\/collection\/regmatmil\/ALGERIE\/ALGER\/01RM0018\/FRANOM45_01RM0018_0133.dzi"], 1,
+                1, 0);
+    </script><div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog-buttons ui-draggable ui-resizable" aria-describedby="print-dialog" aria-labelledby="ui-id-1" style="display: none; position: absolute;"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">Imprimer la vue</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button></div><div id="print-dialog" class="ui-dialog-content ui-widget-content" style="display: block;">
+        <form>
+            <input type="hidden" name="x1" id="print_x1">
+            <input type="hidden" name="y1" id="print_y1">
+            <input type="hidden" name="x2" id="print_x2">
+            <input type="hidden" name="y2" id="print_y2">
+            <p>Mode d'impression :</p>
+            <input id="portrait_format_radio" name="mode" type="radio" value="portrait" checked="checked">
+            <label for="portrait_format_radio">portrait</label>
+            <br>
+            <input id="landscape_format_radio" name="mode" type="radio" value="landscape">
+            <label for="landscape_format_radio">paysage</label>
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </form>
+    </div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-corner-all ui-widget">Imprimer</button><button type="button" class="ui-button ui-corner-all ui-widget">Annuler</button></div></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div></div>
+
+
+</body></html>

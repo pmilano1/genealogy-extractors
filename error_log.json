@@ -1,967 +1,129 @@
 {
   "errors": [
     {
-      "timestamp": "2025-12-29T18:40:56.389994",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "Page.wait_for_function: Timeout 15000ms exceeded.",
+      "timestamp": "2025-12-31T09:27:40.895842",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Cardinal%20Noel%201850&size=20",
+      "search_params": {
+        "surname": "Cardinal",
+        "given_name": "Noel",
+        "year_min": 1845,
+        "year_max": 1855,
+        "location": "Santa Rosa, Sonoma County, California",
+        "birth_year": 1850
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Cardinal%20Noel%201850&size=20\n"
+    },
+    {
+      "timestamp": "2025-12-31T09:28:17.450592",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=De%20Beauharnais%20Hortense%20Eug%C3%A9nie%20C%C3%A9cile%201850&size=20",
+      "search_params": {
+        "surname": "De Beauharnais",
+        "given_name": "Hortense Eug\u00e9nie C\u00e9cile",
+        "year_min": null,
+        "year_max": null,
+        "location": null,
+        "birth_year": 1850
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=De%20Beauharnais%20Hortense%20Eug%C3%A9nie%20C%C3%A9cile%201850&size=20\n"
+    },
+    {
+      "timestamp": "2025-12-31T09:28:55.402951",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Smith%20Richard%201850&size=20",
       "search_params": {
         "surname": "Smith",
-        "given_name": "John",
-        "birth_year": 1850,
-        "location": null
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T20:19:38.876216",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.freebmd.org.uk/cgi/search.pl\", waiting until \"load\"\n",
-      "search_params": {
-        "surname": "Bourjolly",
-        "given_name": "Alfred",
-        "year_min": 1866,
-        "year_max": 1876,
-        "location": "Port-au-Prince, Haiti",
-        "birth_year": 1871
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:36:39.892832",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.freebmd.org.uk/cgi/search.pl\", waiting until \"load\"\n",
-      "search_params": {
-        "surname": "Barreau",
-        "given_name": "Sylvia",
-        "year_min": 1935,
-        "year_max": 1945,
-        "location": "Haiti",
-        "birth_year": 1940
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:10.845610",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:10.857283",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:10.867315",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Ham",
-        "given_name": "Missing Generations to",
+        "given_name": "Richard",
         "year_min": null,
         "year_max": null,
         "location": null,
         "birth_year": 1850
       },
-      "stack_trace": null
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Smith%20Richard%201850&size=20\n"
     },
     {
-      "timestamp": "2025-12-29T21:41:11.349062",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:11.365571",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:11.367012",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
+      "timestamp": "2025-12-31T09:29:26.914360",
+      "source": "findagrave",
+      "error_type": "TIMEOUT",
+      "message": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.findagrave.com/memorial/search?firstname=Richard&lastname=Smith&birthyear=1850&birthyearfilter=5\", waiting until \"load\"\n",
       "search_params": {
-        "surname": "Milanese",
-        "given_name": "Peter Eugene Ulrick",
-        "year_min": 2002,
-        "year_max": 2012,
-        "location": "United States",
-        "birth_year": 2007
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:11.777400",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:11.789585",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:11.794815",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Balthazac",
-        "given_name": "Suzanne Ren\u00e9e",
-        "year_min": 1912,
-        "year_max": 1922,
-        "location": "Lunac, Aveyron, France",
-        "birth_year": 1917
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.149703",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.160103",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.162687",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Thompson",
-        "given_name": "James E.",
-        "year_min": 1848,
-        "year_max": 1858,
-        "location": "Starksboro, Addison, Vermont, United States",
-        "birth_year": 1853
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.532952",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.534403",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(1900BC-Deceased)",
-        "given_name": "Ri'lah bint Mudad ibn 'Amr al-Jurhumi",
+        "surname": "Smith",
+        "given_name": "Richard",
         "year_min": null,
         "year_max": null,
         "location": null,
         "birth_year": 1850
       },
-      "stack_trace": null
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 396, in extract_from_source\n    content = fetch_page_content(url, source_name=source['name'], wait_for_selector=wait_selector)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/cdp_client.py\", line 122, in fetch_page_content\n    return _fetch_with_playwright(url, source_name=source_name, wait_for_selector=wait_for_selector)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/cdp_client.py\", line 281, in _fetch_with_playwright\n    page.goto(url, timeout=30000, wait_until=\"load\")\n  File \"/home/petermilanese/.local/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 9050, in goto\n    self._sync(\n  File \"/home/petermilanese/.local/l"
     },
     {
-      "timestamp": "2025-12-29T21:41:12.537899",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.887040",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.900640",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:12.903976",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
+      "timestamp": "2025-12-31T09:40:09.960231",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Cardinal%20Noel%201850&size=20",
       "search_params": {
-        "surname": "(0910BC-Deceased)",
-        "given_name": "Azubah Bat Asa Queen of Judah",
+        "surname": "Cardinal",
+        "given_name": "Noel",
+        "year_min": 1845,
+        "year_max": 1855,
+        "location": "Santa Rosa, Sonoma County, California",
+        "birth_year": 1850
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Cardinal%20Noel%201850&size=20\n"
+    },
+    {
+      "timestamp": "2025-12-31T09:40:26.368057",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=De%20Beauharnais%20Hortense%20Eug%C3%A9nie%20C%C3%A9cile%201850&size=20",
+      "search_params": {
+        "surname": "De Beauharnais",
+        "given_name": "Hortense Eug\u00e9nie C\u00e9cile",
         "year_min": null,
         "year_max": null,
         "location": null,
         "birth_year": 1850
       },
-      "stack_trace": null
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=De%20Beauharnais%20Hortense%20Eug%C3%A9nie%20C%C3%A9cile%201850&size=20\n"
     },
     {
-      "timestamp": "2025-12-29T21:41:13.250963",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:13.259788",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
+      "timestamp": "2025-12-31T09:40:52.520421",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Smith%20Richard%201850&size=20",
       "search_params": {
-        "surname": "MULLER",
-        "given_name": "Louise",
-        "year_min": 1850,
-        "year_max": 1860,
-        "location": null,
-        "birth_year": 1855
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:13.270169",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:13.657574",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(452-Deceased)",
-        "given_name": "Noble Scaramond d'AQUITAINE",
+        "surname": "Smith",
+        "given_name": "Richard",
         "year_min": null,
         "year_max": null,
         "location": null,
         "birth_year": 1850
       },
-      "stack_trace": null
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Smith%20Richard%201850&size=20\n"
     },
     {
-      "timestamp": "2025-12-29T21:41:13.660850",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:13.662545",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.060697",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.063430",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.090655",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
+      "timestamp": "2025-12-31T10:04:04.984095",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Susan%201850&size=20",
       "search_params": {
-        "surname": "(3604BC-2764BC)",
-        "given_name": "Mualeleth bat Enos",
+        "surname": "Susan",
+        "given_name": null,
         "year_min": null,
         "year_max": null,
         "location": null,
         "birth_year": 1850
       },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.464673",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.470662",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.490203",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "DIDIOT",
-        "given_name": "Pierre",
-        "year_min": 1700,
-        "year_max": 1710,
-        "location": "Esnes-en-Argonne, Meuse, France",
-        "birth_year": 1705
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.864949",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.867245",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:14.878931",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(2112BC-2068BC)",
-        "given_name": "Intef II Wahankh",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:15.250818",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:15.257497",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:15.275504",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(1918BC-1788BC)",
-        "given_name": "Naphtali ben Jacob",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:15.645523",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:15.647037",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:15.662694",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Thomas",
-        "given_name": "Rosalie",
-        "year_min": 1842,
-        "year_max": 1852,
-        "location": null,
-        "birth_year": 1847
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.039148",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.041590",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.044465",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Fogacci",
-        "given_name": "Raffaele",
-        "year_min": 1860,
-        "year_max": 1870,
-        "location": "Italy",
-        "birth_year": 1865
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.480599",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.491465",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.507585",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "DIDIOT",
-        "given_name": "Jean",
-        "year_min": 1855,
-        "year_max": 1865,
-        "location": "Th\u00e9ding, Moselle, France",
-        "birth_year": 1860
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.861683",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.889435",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:16.901052",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(0778BC-Deceased)",
-        "given_name": "Mrs Amoz",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:17.342593",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:17.370560",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:17.400295",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(753-Deceased)",
-        "given_name": "Chrothais Rothaid Rolande Carolingeans Laon Austrasia",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:18.095801",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:18.105531",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:41:18.118223",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(1470)",
-        "given_name": "Nicholas Collins",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.198212",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.203795",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.218936",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(510-561)",
-        "given_name": "Rodelinde de Th\u00fcringe",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.574158",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.582019",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Serino",
-        "given_name": "Angelina",
-        "year_min": null,
-        "year_max": null,
-        "location": "Pietradefusi, Avellino, Campania, Italy",
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.591881",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.979477",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.995640",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(3674BC-2764BC)",
-        "given_name": "Cainan ben Enos",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:14.998104",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:15.402542",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "LANDOIS",
-        "given_name": "Rose",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:15.405311",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:15.408435",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:15.791736",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(2245BC-Deceased)",
-        "given_name": "Turk Ibn Japheth",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:15.794826",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:15.797540",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:16.183494",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:16.200114",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:16.201813",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Serino",
-        "given_name": "Carmine",
-        "year_min": 1869,
-        "year_max": 1879,
-        "location": "San Nazzaro Calvi, Benevento, Italy",
-        "birth_year": 1874
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:16.579107",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:16.586533",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:16.606818",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(0940BC-0875BC)",
-        "given_name": "King Omri the Wicked ben Ginath of Israel South Kingdom",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.058634",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "Buttles",
-        "given_name": "John",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.078291",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.081942",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.464978",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.466357",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.472164",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(1056BC-0985BC)",
-        "given_name": "Dawud ibn Isai 17th Prophet of Islam",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.826520",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.831727",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:17.840927",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "(2458BC-2226BC)",
-        "given_name": "Cush ben Ham",
-        "year_min": null,
-        "year_max": null,
-        "location": null,
-        "birth_year": 1850
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:18.230076",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": {
-        "surname": "DIDIOT",
-        "given_name": "Elisabeth Christine",
-        "year_min": 1893,
-        "year_max": 1903,
-        "location": "Th\u00e9ding, Moselle, France",
-        "birth_year": 1898
-      },
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:18.238079",
-      "source": "FamilySearch",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-29T21:44:18.241610",
-      "source": "MyHeritage",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "BrowserType.connect_over_cdp: connect ECONNREFUSED 127.0.0.1:9222\nCall log:\n  - <ws preparing> retrieving websocket url from http://localhost:9222\n",
-      "search_params": null,
-      "stack_trace": null
-    },
-    {
-      "timestamp": "2025-12-30T11:35:41.750020",
-      "source": "freebmd",
-      "error_type": "PLAYWRIGHT_ERROR",
-      "message": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.freebmd.org.uk/cgi/search.pl\", waiting until \"load\"\n",
-      "search_params": {
-        "surname": "Martazzio",
-        "given_name": "Maria",
-        "year_min": 1840,
-        "year_max": 1850,
-        "location": "Rossi di Lumarzo, Genova Province, Liguria, Italy",
-        "birth_year": 1845
-      },
-      "stack_trace": null
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Susan%201850&size=20\n"
     }
   ],
   "counts": {
-    "freebmd:PLAYWRIGHT_ERROR": 33,
-    "MyHeritage:PLAYWRIGHT_ERROR": 29,
-    "FamilySearch:PLAYWRIGHT_ERROR": 29
+    "matchid:UNKNOWN": 7,
+    "findagrave:TIMEOUT": 1
   },
-  "last_updated": "2025-12-30T11:35:41.750360"
+  "last_updated": "2025-12-31T10:04:04.984849"
 }

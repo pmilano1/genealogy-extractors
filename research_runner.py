@@ -33,8 +33,12 @@ from extract import SOURCES, extract_from_source
 from processed_tracker import get_tracker
 
 
-# Sources to skip - WikiTree: API rate-limited (429), web scraping requires 2 pages per person, not worth it
-SKIP_SOURCES = {'wikitree'}
+# Sources to skip:
+# - wikitree: API rate-limited (429), web scraping requires 2 pages per person
+# - scotlandspeople: Requires login, JavaScript search form, returns 404 on direct URLs
+# - billiongraves: Returns 403 Forbidden - actively blocks scraping
+# - irishgenealogy: Site redesigned with JavaScript form, no direct search URLs
+SKIP_SOURCES = {'wikitree', 'scotlandspeople', 'billiongraves', 'irishgenealogy'}
 
 # Track sources that hit daily limit during this session (cleared on restart)
 _daily_limit_sources = set()
@@ -534,14 +538,14 @@ Examples:
                         help="Maximum number of people to process")
     parser.add_argument("--all", action="store_true",
                         help="Process all people (no limit)")
-    parser.add_argument("--min-score", type=float, default=30.0,
-                        help="Minimum match score to stage (default: 30)")
+    parser.add_argument("--min-score", type=float, default=80.0,
+                        help="Minimum match score to stage (default: 80)")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Show detailed output")
     parser.add_argument("--sequential", action="store_true",
                         help="Disable parallel searching (one source at a time)")
-    parser.add_argument("--workers", type=int, default=10,
-                        help="Max parallel workers/tabs (default: 10, one per source)")
+    parser.add_argument("--workers", type=int, default=16,
+                        help="Max parallel workers (default: 16, browser limited to 4 tabs)")
     parser.add_argument("--stats", action="store_true",
                         help="Show processing statistics")
     parser.add_argument("--reset", action="store_true",
