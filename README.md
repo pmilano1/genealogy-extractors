@@ -2,6 +2,8 @@
 
 Extract genealogy records from 16+ online sources. Includes both single-search CLI and batch research runner with staging/review workflow.
 
+**Integrates with [Kindred](https://github.com/pmilano1/genealogy-frontend)** - the family tree management app. This package searches external genealogy sites and submits findings to Kindred's GraphQL API.
+
 ## Installation
 
 ```bash
@@ -163,20 +165,22 @@ python research.py --submit-approved
 
 ---
 
-## API Integration
+## Kindred API Integration
 
-Connects to GraphQL API at `https://family.milanese.life/api/graphql`
+Connects to the Kindred app's GraphQL API to fetch people needing research and submit findings.
 
 ```python
 from genealogy_extractors.api_client import get_all_people_iterator, submit_research
 
-# Get people needing research
+# Get people needing research from Kindred
 for person in get_all_people_iterator():
     print(person['name_full'])
 
-# Submit research finding
+# Submit research finding to Kindred
 submit_research(person_id, parent_type, parent_data, source_citation)
 ```
+
+Default endpoint: `https://family.milanese.life/api/graphql` (configurable via `GENEALOGY_API_KEY`)
 
 ---
 
