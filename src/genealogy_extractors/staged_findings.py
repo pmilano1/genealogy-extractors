@@ -88,9 +88,14 @@ class StagedFindings:
             The ID of the staged finding
         """
         db = self._get_db()
-        # For SQLite, store JSON as string; PostgreSQL uses JSONB
-        record_json = json.dumps(extracted_record) if not is_postgresql() else extracted_record
-        params_json = json.dumps(search_params) if not is_postgresql() else search_params
+        # For SQLite, store JSON as string; PostgreSQL needs Json wrapper
+        if is_postgresql():
+            from psycopg2.extras import Json
+            record_json = Json(extracted_record)
+            params_json = Json(search_params)
+        else:
+            record_json = json.dumps(extracted_record)
+            params_json = json.dumps(search_params)
 
         db.execute("""
             INSERT INTO staged_findings
