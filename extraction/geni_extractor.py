@@ -33,7 +33,7 @@ class GeniExtractor(BaseRecordExtractor):
         # Find all profile rows in the results table
         profile_rows = soup.find_all('tr', class_='profile-layout-grid')
 
-        print(f"[DEBUG] Geni: Found {len(profile_rows)} profile rows")
+        self.debug(f"Geni: Found {len(profile_rows)} profile rows")
 
         for row in profile_rows[:20]:  # Limit to 20 results
             try:
@@ -41,10 +41,10 @@ class GeniExtractor(BaseRecordExtractor):
                 if record and record.get('name'):
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Geni extraction error: {e}")
+                self.debug(f"Geni extraction error: {e}")
                 continue
 
-        print(f"[DEBUG] Geni: Extracted {len(records)} records")
+        self.debug(f"Geni: Extracted {len(records)} records")
         return records
 
     def _extract_profile_from_row(self, row, search_params: Dict[str, Any]) -> Dict[str, Any]:

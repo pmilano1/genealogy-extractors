@@ -21,12 +21,12 @@ class DigitalarkivetExtractor(BaseRecordExtractor):
 
         # Check for no results
         if self._is_no_results(content):
-            print(f"[DEBUG] Digitalarkivet: No results page detected")
+            self.debug(f"Digitalarkivet: No results page detected")
             return []
 
         # Check for error page
         if self._is_error_page(content):
-            print(f"[DEBUG] Digitalarkivet: Error page detected")
+            self.debug(f"Digitalarkivet: Error page detected")
             return []
 
         soup = BeautifulSoup(content, 'html.parser')
@@ -39,20 +39,20 @@ class DigitalarkivetExtractor(BaseRecordExtractor):
         )
 
         if result_rows:
-            print(f"[DEBUG] Digitalarkivet: Found {len(result_rows)} result rows")
+            self.debug(f"Digitalarkivet: Found {len(result_rows)} result rows")
             for row in result_rows[:20]:
                 try:
                     record = self._extract_record(row, search_params)
                     if record:
                         records.append(record)
                 except Exception as e:
-                    print(f"[DEBUG] Digitalarkivet extraction error: {e}")
+                    self.debug(f"Digitalarkivet extraction error: {e}")
                     continue
         else:
             # Fallback: look for links to person/source pages
             person_links = soup.find_all('a', href=re.compile(r'/(person|kilde|source)/'))
             if person_links:
-                print(f"[DEBUG] Digitalarkivet: Found {len(person_links)} person links")
+                self.debug(f"Digitalarkivet: Found {len(person_links)} person links")
                 for link in person_links[:20]:
                     record = self._extract_from_link(link, search_params)
                     if record:

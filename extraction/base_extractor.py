@@ -6,13 +6,31 @@ Abstract base class for all source-specific extractors
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
 import re
+import sys
+import os
+
+# Add parent directory to path for debug_log import
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from debug_log import debug as _debug, warn as _warn, error as _error, is_verbose
 
 
 class BaseRecordExtractor(ABC):
     """Abstract base class for record extraction from search results"""
-    
+
     def __init__(self, source_name: str):
         self.source_name = source_name
+
+    def debug(self, message: str):
+        """Print debug message (only in verbose mode)."""
+        _debug(self.source_name, message)
+
+    def warn(self, message: str):
+        """Print warning message."""
+        _warn(self.source_name, message)
+
+    def error(self, message: str):
+        """Print error message."""
+        _error(self.source_name, message)
     
     @abstractmethod
     def extract_records(self, content: str, search_params: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -95,8 +113,7 @@ class BaseRecordExtractor(ABC):
     
     def _log_parser_failure(self, message: str):
         """Log parser failure for maintenance tracking"""
-        # TODO: Integrate with logging system
-        print(f"[PARSER FAILURE] {self.source_name}: {message}")
+        self.warn(f"PARSER FAILURE: {message}")
     
     def calculate_match_score(self, record: Dict[str, Any], search_params: Dict[str, Any]) -> int:
         """Calculate match confidence score (0-100)

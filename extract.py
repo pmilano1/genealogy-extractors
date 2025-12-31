@@ -42,6 +42,7 @@ from extraction.anom_extractor import ANOMExtractor
 from cdp_client import fetch_page_content, BotCheckDetected, DailyLimitReached
 from rate_limiter import get_rate_limiter
 from error_tracker import log_error
+from debug_log import debug, info, warn, error, set_verbose, is_verbose
 import requests
 
 
@@ -204,8 +205,7 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
         # Start with 2-year range to avoid 3000 limit on common names
         birth_year_end = params.get('birth_year_end', birth_year + 2)
 
-        if verbose:
-            print(f"[FreeBMD] Searching for {given_name} {surname} ({birth_year}-{birth_year_end})")
+        debug("FreeBMD", f"Searching for {given_name} {surname} ({birth_year}-{birth_year_end})")
 
         # Acquire semaphore to limit concurrent browser tabs
         with _browser_semaphore, sync_playwright() as p:
@@ -229,8 +229,7 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
                 page.goto("https://www.freebmd.org.uk/cgi/search.pl", timeout=30000)
                 page.wait_for_selector('form[name="search"]', timeout=10000)
 
-                if verbose:
-                    print("[FreeBMD] Filling form...")
+                debug("FreeBMD", "Filling form...")
 
                 # Check Births checkbox
                 births_checkbox = page.locator('input#typeBirths')
@@ -244,8 +243,7 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
                 page.fill('input[name="start"]', str(birth_year))
                 page.fill('input[name="end"]', str(birth_year_end))
 
-                if verbose:
-                    print("[FreeBMD] Submitting form...")
+                debug("FreeBMD", "Submitting form...")
 
                 # Submit and wait for results
                 page.click('input[name="find"]')
@@ -258,8 +256,7 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
 
                 # Check if we exceeded the 3000 limit
                 if 'maximum number that can be displayed is 3000' in content:
-                    if verbose:
-                        print("[FreeBMD] Exceeded 3000 limit, narrowing to 1-year range...")
+                    debug("FreeBMD", "Exceeded 3000 limit, narrowing to 1-year range...")
 
                     # Retry with just the birth year (1-year range)
                     page.goto("https://www.freebmd.org.uk/cgi/search.pl", timeout=30000)
@@ -281,12 +278,10 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
 
                     # If still exceeded, we can't narrow further
                     if 'maximum number that can be displayed is 3000' in content:
-                        if verbose:
-                            print("[FreeBMD] Still exceeded with 1-year range - name too common")
+                        debug("FreeBMD", "Still exceeded with 1-year range - name too common")
                         return ""
 
-                if verbose:
-                    print(f"[FreeBMD] Got {len(content)} bytes")
+                debug("FreeBMD", f"Got {len(content)} bytes")
 
                 return content
 
@@ -297,24 +292,24 @@ def fetch_freebmd_with_playwright(params: dict, verbose: bool = False) -> str:
     except Exception as e:
         error_msg = str(e)
         log_error('freebmd', 'PLAYWRIGHT_ERROR', error_msg, search_params=params)
-        print(f"[ERROR] FreeBMD Playwright fetch failed: {error_msg}")
+        error("FreeBMD", f"Playwright fetch failed: {error_msg}")
         return ""
 
 
 def extract_from_source(source_key, params, test_mode=False, verbose=False, save_html=False):
     """Extract records from a single source (production or test mode)"""
-    
+
     source = SOURCES[source_key]
-    
+    source_name = source['name']
+
     if verbose:
-        print(f"\n{'='*80}")
-        print(f"Source: {source['name']}")
+        info(f"\n{'='*80}")
+        info(f"Source: {source_name}")
         if test_mode:
-            print(f"Mode: TEST (using fixture)")
-            print(f"Fixture: {source['test_fixture']}")
+            debug(source_name, f"Mode: TEST (using fixture: {source['test_fixture']})")
         else:
-            print(f"Mode: PRODUCTION (live fetch)")
-        print(f"{'='*80}")
+            debug(source_name, "Mode: PRODUCTION (live fetch)")
+        info(f"{'='*80}")
     
     try:
         # Get content (from fixture or live)
@@ -347,8 +342,7 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
                         'fields': 'Id,Name,FirstName,LastNameAtBirth,BirthDate,BirthLocation,DeathDate'
                     }
 
-                    if verbose:
-                        print(f"Fetching WikiTree API: {api_url}")
+                    debug("WikiTree", f"Fetching API: {api_url}")
 
                     def fetch_wikitree():
                         response = requests.get(api_url, params=api_params, timeout=15)
@@ -373,8 +367,7 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
                         size=20
                     )
 
-                    if verbose:
-                        print(f"[MatchID API] Found {len(records)} records")
+                    debug("MatchID", f"Found {len(records)} records")
 
                     # MatchID returns records directly, skip normal extraction
                     return {
@@ -394,8 +387,7 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
 
                 url = source['url_template'].format(**url_params)
 
-                if verbose:
-                    print(f"Fetching: {url}")
+                debug(source_name, f"Fetching: {url}")
 
                 # Pass wait_for_selector if source needs it (for JS-heavy sites)
                 wait_selector = source.get('wait_for_selector')
@@ -410,21 +402,20 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
                 Path('test/fixtures').mkdir(parents=True, exist_ok=True)
                 with open(filename, 'w', encoding='utf-8') as f:
                     f.write(content)
-                print(f"💾 Saved HTML to {filename}")
+                info(f"[{source_name}] 💾 Saved HTML to {filename}")
         
         # Extract records
         records = source['extractor'].extract_records(content, params)
         
-        if verbose:
-            print(f"\n✅ Extracted {len(records)} records")
-            if records:
-                print("\n📋 Top 5 results:")
-                for i, rec in enumerate(records[:5], 1):
-                    name = rec.get('name', 'Unknown')
-                    birth = rec.get('birth_year', '?')
-                    place = rec.get('birth_place') or 'unknown'
-                    score = rec.get('match_score', 0)
-                    print(f"  {i}. {name} (b. {birth}) - {place[:40]} [Score: {score}]")
+        debug(source_name, f"Extracted {len(records)} records")
+        if is_verbose() and records:
+            info(f"[{source_name}] Top 5 results:")
+            for i, rec in enumerate(records[:5], 1):
+                name = rec.get('name', 'Unknown')
+                birth = rec.get('birth_year', '?')
+                place = rec.get('birth_place') or 'unknown'
+                score = rec.get('match_score', 0)
+                info(f"  {i}. {name} (b. {birth}) - {place[:40]} [Score: {score}]")
         
         return {
             'source': source['name'],
@@ -437,11 +428,11 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
         # Special handling for bot verification - don't mark as processed
         # so we can retry after user clears the CAPTCHA
         error_msg = str(e)
-        print(f"\n⚠️  BOT CHECK DETECTED: {source['name']}")
-        print(f"   Please complete the verification in the browser, then retry.")
+        warn(source_name, "BOT CHECK DETECTED")
+        info(f"   Please complete the verification in the browser, then retry.")
 
         return {
-            'source': source['name'],
+            'source': source_name,
             'success': False,
             'error': error_msg,
             'error_type': 'BOT_CHECK',
@@ -452,11 +443,11 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
     except DailyLimitReached as e:
         # Daily limit reached - don't mark as processed, skip this source for today
         error_msg = str(e)
-        print(f"\n⚠️  DAILY LIMIT REACHED: {source['name']}")
-        print(f"   This source has reached its daily search limit. Try again tomorrow.")
+        warn(source_name, "DAILY LIMIT REACHED")
+        info(f"   This source has reached its daily search limit. Try again tomorrow.")
 
         return {
-            'source': source['name'],
+            'source': source_name,
             'success': False,
             'error': error_msg,
             'error_type': 'DAILY_LIMIT',
@@ -490,12 +481,12 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
             stack_trace=stack_trace
         )
 
-        if verbose:
-            print(f"\n❌ Error: {error_msg}")
+        error(source_name, error_msg)
+        if is_verbose():
             traceback.print_exc()
 
         return {
-            'source': source['name'],
+            'source': source_name,
             'success': False,
             'error': error_msg,
             'error_type': error_type,
@@ -555,14 +546,17 @@ def main():
     else:
         sources_to_run = [args.source]
 
+    # Enable verbose logging if requested
+    set_verbose(args.verbose)
+
     # Run extraction
-    print("="*80)
+    info("="*80)
     if args.test:
-        print("GENEALOGY EXTRACTION - TEST MODE")
+        info("GENEALOGY EXTRACTION - TEST MODE")
     else:
-        print("GENEALOGY EXTRACTION - PRODUCTION MODE")
-        print(f"Searching for: {args.given_name} {args.surname} (b. {args.birth_year})")
-    print("="*80)
+        info("GENEALOGY EXTRACTION - PRODUCTION MODE")
+        info(f"Searching for: {args.given_name} {args.surname} (b. {args.birth_year})")
+    info("="*80)
 
     results = []
     for source_key in sources_to_run:
@@ -572,21 +566,21 @@ def main():
         if not args.verbose:
             status = "✅" if result['success'] else "❌"
             count = result.get('count', 0) if result['success'] else 0
-            error = f" ({result.get('error', '')[:40]})" if not result['success'] else ""
-            print(f"{status} {result['source']:20} → {count:3} records{error}")
+            err_msg = f" ({result.get('error', '')[:40]})" if not result['success'] else ""
+            info(f"{status} {result['source']:20} → {count:3} records{err_msg}")
 
     # Summary
-    print("\n" + "="*80)
-    print("SUMMARY")
-    print("="*80)
+    info("\n" + "="*80)
+    info("SUMMARY")
+    info("="*80)
     total_records = sum(r.get('count', 0) for r in results if r['success'])
     successful = sum(1 for r in results if r['success'])
     failed = sum(1 for r in results if not r['success'])
 
-    print(f"Sources tested: {len(results)}")
-    print(f"Successful: {successful}")
-    print(f"Failed: {failed}")
-    print(f"Total records: {total_records}")
+    info(f"Sources tested: {len(results)}")
+    info(f"Successful: {successful}")
+    info(f"Failed: {failed}")
+    info(f"Total records: {total_records}")
 
     # Save results if requested
     if args.output:
@@ -599,7 +593,7 @@ def main():
 
         with open(args.output, 'w') as f:
             json.dump(output_data, f, indent=2, default=str)
-        print(f"\n✅ Results saved to {args.output}")
+        info(f"\n[Output] ✅ Results saved to {args.output}")
 
     # Exit with error code if any tests failed
     sys.exit(0 if failed == 0 else 1)

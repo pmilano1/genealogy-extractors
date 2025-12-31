@@ -21,12 +21,12 @@ class MatriculaExtractor(BaseRecordExtractor):
 
         # Check for no results
         if self._is_no_results(content):
-            print(f"[DEBUG] Matricula: No results page detected")
+            self.debug(f"Matricula: No results page detected")
             return []
 
         # Check for error page
         if self._is_error_page(content):
-            print(f"[DEBUG] Matricula: Error page detected")
+            self.debug(f"Matricula: Error page detected")
             return []
 
         soup = BeautifulSoup(content, 'html.parser')
@@ -39,20 +39,20 @@ class MatriculaExtractor(BaseRecordExtractor):
         )
 
         if result_items:
-            print(f"[DEBUG] Matricula: Found {len(result_items)} result items")
+            self.debug(f"Matricula: Found {len(result_items)} result items")
             for item in result_items[:20]:
                 try:
                     record = self._extract_record(item, search_params)
                     if record:
                         records.append(record)
                 except Exception as e:
-                    print(f"[DEBUG] Matricula extraction error: {e}")
+                    self.debug(f"Matricula extraction error: {e}")
                     continue
         else:
             # Fallback: look for links to register pages
             register_links = soup.find_all('a', href=re.compile(r'/(register|matriken|book)/'))
             if register_links:
-                print(f"[DEBUG] Matricula: Found {len(register_links)} register links")
+                self.debug(f"Matricula: Found {len(register_links)} register links")
                 for link in register_links[:20]:
                     record = self._extract_from_link(link, search_params)
                     if record:

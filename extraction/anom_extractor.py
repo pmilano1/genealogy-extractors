@@ -56,7 +56,7 @@ class ANOMExtractor(BaseRecordExtractor):
                 records = self._extract_military_records(soup, search_params)
 
         if not records:
-            print(f"[DEBUG] No records extracted - returning empty list (NO_MATCH)")
+            self.debug(f"No records extracted - returning empty list (NO_MATCH)")
 
         return records
 
@@ -71,7 +71,7 @@ class ANOMExtractor(BaseRecordExtractor):
         if not result_rows:
             return records
 
-        print(f"[DEBUG] Found {len(result_rows)} military result rows")
+        self.debug(f"Found {len(result_rows)} military result rows")
 
         for row in result_rows[:50]:  # Limit to top 50
             try:
@@ -79,7 +79,7 @@ class ANOMExtractor(BaseRecordExtractor):
                 if record:
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Failed to extract military row: {e}")
+                self.debug(f"Failed to extract military row: {e}")
                 continue
 
         return records
@@ -164,20 +164,20 @@ class ANOMExtractor(BaseRecordExtractor):
         result_rows = soup.find_all('tr', class_=re.compile(r'type-notice'))
 
         if result_rows:
-            print(f"[DEBUG] Found {len(result_rows)} bagne result rows")
+            self.debug(f"Found {len(result_rows)} bagne result rows")
             for row in result_rows[:30]:
                 try:
                     record = self._extract_bagne_row(row, search_params)
                     if record:
                         records.append(record)
                 except Exception as e:
-                    print(f"[DEBUG] Failed to extract bagne row: {e}")
+                    self.debug(f"Failed to extract bagne row: {e}")
                     continue
         else:
             # Fallback: look for ARK IDs
             ark_ids = re.findall(r'ark:/61561/(\d+)', content)
             if ark_ids:
-                print(f"[DEBUG] Found {len(set(ark_ids))} ARK IDs in text")
+                self.debug(f"Found {len(set(ark_ids))} ARK IDs in text")
                 for ark_id in list(set(ark_ids))[:20]:
                     record = self._extract_from_text(content, ark_id, search_params)
                     if record:

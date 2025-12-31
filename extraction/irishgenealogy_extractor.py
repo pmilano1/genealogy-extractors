@@ -21,12 +21,12 @@ class IrishGenealogyExtractor(BaseRecordExtractor):
 
         # Check for no results
         if self._is_no_results(content):
-            print(f"[DEBUG] IrishGenealogy: No results page detected")
+            self.debug(f"IrishGenealogy: No results page detected")
             return []
 
         # Check for error page
         if self._is_error_page(content):
-            print(f"[DEBUG] IrishGenealogy: Error page detected")
+            self.debug(f"IrishGenealogy: Error page detected")
             return []
 
         soup = BeautifulSoup(content, 'html.parser')
@@ -36,20 +36,20 @@ class IrishGenealogyExtractor(BaseRecordExtractor):
         if result_tables:
             for table in result_tables:
                 rows = table.find_all('tr')[1:]  # Skip header
-                print(f"[DEBUG] IrishGenealogy: Found {len(rows)} result rows in table")
+                self.debug(f"IrishGenealogy: Found {len(rows)} result rows in table")
                 for row in rows[:20]:
                     try:
                         record = self._extract_from_table_row(row, search_params)
                         if record:
                             records.append(record)
                     except Exception as e:
-                        print(f"[DEBUG] IrishGenealogy extraction error: {e}")
+                        self.debug(f"IrishGenealogy extraction error: {e}")
                         continue
         else:
             # Fallback: look for result divs or list items
             result_items = soup.find_all(['div', 'li'], class_=re.compile(r'result|record'))
             if result_items:
-                print(f"[DEBUG] IrishGenealogy: Found {len(result_items)} result items")
+                self.debug(f"IrishGenealogy: Found {len(result_items)} result items")
                 for item in result_items[:20]:
                     record = self._extract_from_div(item, search_params)
                     if record:

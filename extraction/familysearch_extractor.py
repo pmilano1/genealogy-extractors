@@ -40,7 +40,7 @@ class FamilySearchExtractor(BaseRecordExtractor):
         # Find all result rows with ark IDs
         person_rows = soup.find_all('tr', attrs={'data-testid': re.compile(r'/ark:/')})
 
-        print(f"[DEBUG] Found {len(person_rows)} person rows in FamilySearch HTML")
+        self.debug(f"Found {len(person_rows)} person rows in FamilySearch HTML")
 
         for row in person_rows[:20]:
             try:
@@ -48,7 +48,7 @@ class FamilySearchExtractor(BaseRecordExtractor):
                 if record:
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Failed to extract person: {e}")
+                self.debug(f"Failed to extract person: {e}")
                 continue
 
         return records

@@ -119,11 +119,103 @@
         "birth_year": 1850
       },
       "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Susan%201850&size=20\n"
+    },
+    {
+      "timestamp": "2025-12-31T10:16:12.446453",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=NN%20Eve%201850&size=20",
+      "search_params": {
+        "surname": "NN",
+        "given_name": "Eve",
+        "year_min": null,
+        "year_max": null,
+        "location": null,
+        "birth_year": 1850
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 369, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=NN%20Eve%201850&size=20\n"
+    },
+    {
+      "timestamp": "2025-12-31T10:16:27.010007",
+      "source": "myheritage",
+      "error_type": "UNKNOWN",
+      "message": "Page.goto: Target page, context or browser has been closed\nCall log:\n  - navigating to \"https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.Eve+fnmo.2+fnmsvos.1+fnmsmi.1+ln.NN+lnmo.4+lnmsdm.1+lnmsmf3.1&qevents-event1=Event+et.birth+ey.1850+epmo.similar&useTranslation=1\", waiting until \"load\"\n",
+      "search_params": {
+        "surname": "NN",
+        "given_name": "Eve",
+        "year_min": null,
+        "year_max": null,
+        "location": null,
+        "birth_year": 1850
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 402, in extract_from_source\n    content = fetch_page_content(url, source_name=source['name'], wait_for_selector=wait_selector)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/cdp_client.py\", line 122, in fetch_page_content\n    return _fetch_with_playwright(url, source_name=source_name, wait_for_selector=wait_for_selector)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/cdp_client.py\", line 281, in _fetch_with_playwright\n    page.goto(url, timeout=30000, wait_until=\"load\")\n  File \"/home/petermilanese/.local/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 9050, in goto\n    self._sync(\n  File \"/home/petermilanese/.local/l"
+    },
+    {
+      "timestamp": "2025-12-31T10:16:48.659948",
+      "source": "freebmd",
+      "error_type": "PLAYWRIGHT_ERROR",
+      "message": "Page.wait_for_selector: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"form[name=\\\"search\\\"]\") to be visible\n",
+      "search_params": {
+        "surname": "NN",
+        "given_name": "Eve",
+        "year_min": null,
+        "year_max": null,
+        "location": null,
+        "birth_year": 1850
+      },
+      "stack_trace": null
+    },
+    {
+      "timestamp": "2025-12-31T10:16:51.071800",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Legrandidier%20S%C3%A9bastien%201850&size=20",
+      "search_params": {
+        "surname": "Legrandidier",
+        "given_name": "S\u00e9bastien",
+        "year_min": null,
+        "year_max": null,
+        "location": null,
+        "birth_year": 1850
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 369, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Legrandidier%20S%C3%A9bastien%201850&size=20\n"
+    },
+    {
+      "timestamp": "2025-12-31T10:17:35.481981",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Pierre-Charles%20Stephanie%201850&size=20",
+      "search_params": {
+        "surname": "Pierre-Charles",
+        "given_name": "Stephanie",
+        "year_min": null,
+        "year_max": null,
+        "location": null,
+        "birth_year": 1850
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 369, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=Pierre-Charles%20Stephanie%201850&size=20\n"
+    },
+    {
+      "timestamp": "2025-12-31T10:35:44.596725",
+      "source": "matchid",
+      "error_type": "UNKNOWN",
+      "message": "422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=MOUTON%20Jules%201836&size=20",
+      "search_params": {
+        "surname": "MOUTON",
+        "given_name": "Jules",
+        "year_min": 1831,
+        "year_max": 1841,
+        "location": "Paris, France",
+        "birth_year": 1836
+      },
+      "stack_trace": "Traceback (most recent call last):\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extract.py\", line 363, in extract_from_source\n    records = extractor.search(\n              ^^^^^^^^^^^^^^^^^\n  File \"/home/petermilanese/workspace/repos/genealogy-extractors/extraction/matchid_extractor.py\", line 88, in search\n    response.raise_for_status()\n  File \"/usr/lib/python3/dist-packages/requests/models.py\", line 1021, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 422 Client Error: Unprocessable Entity for url: https://deces.matchid.io/deces/api/v1/search?q=MOUTON%20Jules%201836&size=20\n"
     }
   ],
   "counts": {
-    "matchid:UNKNOWN": 7,
-    "findagrave:TIMEOUT": 1
+    "matchid:UNKNOWN": 11,
+    "findagrave:TIMEOUT": 1,
+    "myheritage:UNKNOWN": 1,
+    "freebmd:PLAYWRIGHT_ERROR": 1
   },
-  "last_updated": "2025-12-31T10:04:04.984849"
+  "last_updated": "2025-12-31T10:35:44.596915"
 }

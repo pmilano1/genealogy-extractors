@@ -43,7 +43,7 @@ class AntenatiExtractor(BaseRecordExtractor):
         # Find all person items (nominative search uses div.search-item)
         person_items = soup.find_all('div', class_='search-item')
 
-        print(f"[DEBUG] Found {len(person_items)} people in Antenati nominative search")
+        self.debug(f"Found {len(person_items)} people in Antenati nominative search")
 
         for item in person_items[:20]:  # Top 20 results
             try:
@@ -51,7 +51,7 @@ class AntenatiExtractor(BaseRecordExtractor):
                 if record:
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Failed to extract person: {e}")
+                self.debug(f"Failed to extract person: {e}")
                 continue
 
         return records

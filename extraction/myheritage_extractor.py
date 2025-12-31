@@ -37,7 +37,7 @@ class MyHeritageExtractor(BaseRecordExtractor):
         # Find record cards
         result_items = soup.find_all('div', class_='record_card')
 
-        print(f"[DEBUG] Found {len(result_items)} result items in MyHeritage HTML")
+        self.debug(f"Found {len(result_items)} result items in MyHeritage HTML")
 
         for item in result_items[:20]:
             try:
@@ -45,7 +45,7 @@ class MyHeritageExtractor(BaseRecordExtractor):
                 if record:
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Failed to extract person: {e}")
+                self.debug(f"Failed to extract person: {e}")
                 continue
 
         return records

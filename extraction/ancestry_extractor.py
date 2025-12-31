@@ -35,7 +35,7 @@ class AncestryExtractor(BaseRecordExtractor):
         # Find actual result cards (not UI elements)
         result_cards = soup.find_all('div', class_='global-results-card')
 
-        print(f"[DEBUG] Found {len(result_cards)} result cards in Ancestry HTML")
+        self.debug(f"Found {len(result_cards)} result cards in Ancestry HTML")
 
         for card in result_cards[:20]:
             try:
@@ -43,7 +43,7 @@ class AncestryExtractor(BaseRecordExtractor):
                 if record:
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Failed to extract person: {e}")
+                self.debug(f"Failed to extract person: {e}")
                 continue
 
         return records

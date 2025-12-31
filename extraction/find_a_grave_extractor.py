@@ -28,21 +28,21 @@ class FindAGraveExtractor(BaseRecordExtractor):
         memorial_items = soup.find_all('div', class_='memorial-item')
 
         if memorial_items:
-            print(f"[DEBUG] Found {len(memorial_items)} memorial items in HTML")
+            self.debug(f"Found {len(memorial_items)} memorial items in HTML")
             for item in memorial_items[:20]:  # Limit to top 20
                 try:
                     record = self._extract_memorial_from_html(item, search_params)
                     if record:
                         records.append(record)
                 except Exception as e:
-                    print(f"[DEBUG] Failed to extract memorial: {e}")
+                    self.debug(f"Failed to extract memorial: {e}")
                     continue
         else:
             # Fallback: look for memorial IDs in text
-            print(f"[DEBUG] No memorial-item divs found, trying text extraction")
+            self.debug(f"No memorial-item divs found, trying text extraction")
             memorial_ids = re.findall(r'/memorial/(\d+)', content)
             if memorial_ids:
-                print(f"[DEBUG] Found {len(memorial_ids)} memorial IDs in text")
+                self.debug(f"Found {len(memorial_ids)} memorial IDs in text")
                 # Extract basic info from text around each memorial ID
                 for memorial_id in memorial_ids[:20]:
                     record = self._extract_from_text(content, memorial_id, search_params)
@@ -50,7 +50,7 @@ class FindAGraveExtractor(BaseRecordExtractor):
                         records.append(record)
 
         if not records:
-            print(f"[DEBUG] No records extracted - returning empty list (NO_MATCH)")
+            self.debug(f"No records extracted - returning empty list (NO_MATCH)")
 
         return records
 

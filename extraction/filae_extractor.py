@@ -33,7 +33,7 @@ class FilaeExtractor(BaseRecordExtractor):
             soup.find_all('article', class_=re.compile(r'result|record', re.I))
         )
         
-        print(f"[DEBUG] Found {len(result_items)} result items in Filae HTML")
+        self.debug(f"Found {len(result_items)} result items in Filae HTML")
         
         for item in result_items[:20]:
             try:
@@ -41,7 +41,7 @@ class FilaeExtractor(BaseRecordExtractor):
                 if record and record.get('name'):
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Filae extraction error: {e}")
+                self.debug(f"Filae extraction error: {e}")
                 continue
         
         return records

@@ -31,7 +31,7 @@ class GeneanetExtractor(BaseRecordExtractor):
         # Find all result rows (ligne-resultat)
         result_items = soup.find_all('a', class_='ligne-resultat')
 
-        print(f"[DEBUG] Found {len(result_items)} ligne-resultat items in Geneanet HTML")
+        self.debug(f"Found {len(result_items)} ligne-resultat items in Geneanet HTML")
 
         for item in result_items[:20]:  # Limit to first 20 results
             try:
@@ -39,7 +39,7 @@ class GeneanetExtractor(BaseRecordExtractor):
                 if record:
                     records.append(record)
             except Exception as e:
-                print(f"[DEBUG] Failed to extract individual: {e}")
+                self.debug(f"Failed to extract individual: {e}")
                 continue
 
         return records

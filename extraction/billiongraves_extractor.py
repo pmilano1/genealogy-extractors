@@ -22,12 +22,12 @@ class BillionGravesExtractor(BaseRecordExtractor):
 
         # Check for no results
         if self._is_no_results(content):
-            print(f"[DEBUG] BillionGraves: No results page detected")
+            self.debug(f"BillionGraves: No results page detected")
             return []
 
         # Check for error page
         if self._is_error_page(content):
-            print(f"[DEBUG] BillionGraves: Error page detected")
+            self.debug(f"BillionGraves: Error page detected")
             return []
 
         soup = BeautifulSoup(content, 'html.parser')
@@ -41,20 +41,20 @@ class BillionGravesExtractor(BaseRecordExtractor):
         )
 
         if result_items:
-            print(f"[DEBUG] BillionGraves: Found {len(result_items)} result items")
+            self.debug(f"BillionGraves: Found {len(result_items)} result items")
             for item in result_items[:20]:
                 try:
                     record = self._extract_record(item, search_params)
                     if record:
                         records.append(record)
                 except Exception as e:
-                    print(f"[DEBUG] BillionGraves extraction error: {e}")
+                    self.debug(f"BillionGraves extraction error: {e}")
                     continue
         else:
             # Fallback: look for grave links
             grave_links = soup.find_all('a', href=re.compile(r'/grave/\d+'))
             if grave_links:
-                print(f"[DEBUG] BillionGraves: Found {len(grave_links)} grave links")
+                self.debug(f"BillionGraves: Found {len(grave_links)} grave links")
                 for link in grave_links[:20]:
                     record = self._extract_from_link(link, search_params)
                     if record:
