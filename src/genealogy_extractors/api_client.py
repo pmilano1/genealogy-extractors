@@ -205,6 +205,8 @@ def get_all_people(
             death_year
             death_place
             sex
+            research_country
+            research_region
           }
         }
         pageInfo {
@@ -257,6 +259,7 @@ def person_to_search_params(person: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a person record to search parameters for extractors.
 
     Uses birth_year if available, falls back to estimated_birth_year.
+    Includes research_country and research_region for location-filtered searches.
     """
     # Use actual birth_year, fall back to estimated_birth_year
     birth_year = person.get("birth_year") or person.get("estimated_birth_year")
@@ -267,6 +270,8 @@ def person_to_search_params(person: Dict[str, Any]) -> Dict[str, Any]:
         "year_min": birth_year - 5 if birth_year else None,
         "year_max": birth_year + 5 if birth_year else None,
         "location": person.get("birth_place", ""),
+        "country": person.get("research_country", ""),
+        "region": person.get("research_region", ""),
         "is_estimated_year": person.get("birth_year") is None and birth_year is not None,
     }
 

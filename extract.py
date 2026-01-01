@@ -48,82 +48,125 @@ from genealogy_extractors.cdp_client import fetch_page_content, BotCheckDetected
 from genealogy_extractors.rate_limiter import get_rate_limiter
 from genealogy_extractors.error_tracker import log_error
 from genealogy_extractors.debug_log import debug, info, warn, error, set_verbose, is_verbose
+from genealogy_extractors.location_resolver import build_filae_url
 import requests
 
 
 # Source configuration
+# location_filter_param: If set, source supports server-side location filtering
+#   - Format: 'param_name' (e.g., 'place__0__' for Geneanet)
+#   - Use {location} placeholder in url_template_with_location
+# location_filter_works: True if location filtering actually filters results server-side
 SOURCES = {
     'findagrave': {
         'name': 'Find A Grave',
         'extractor': FindAGraveExtractor(),
         'url_template': 'https://www.findagrave.com/memorial/search?firstname={given_name}&lastname={surname}&birthyear={birth_year}&birthyearfilter=5',
         'test_fixture': 'tests/fixtures/findagrave_johnson_mary.html',
-        'test_params': {'surname': 'Johnson', 'given_name': 'Mary', 'birth_year': 1870}
+        'test_params': {'surname': 'Johnson', 'given_name': 'Mary', 'birth_year': 1870},
+        # Find A Grave has location param but requires specific cemetery/location IDs
+        'location_filter_works': False,
     },
     'geneanet': {
         'name': 'Geneanet',
         'extractor': GeneanetExtractor(),
         'url_template': 'https://en.geneanet.org/fonds/individus/?nom={surname}&prenom={given_name}&type_periode=birth_between&from={birth_year}&to={birth_year_end}&go=1&size=20',
+        'url_template_with_location': 'https://en.geneanet.org/fonds/individus/?nom={surname}&prenom={given_name}&type_periode=birth_between&from={birth_year}&to={birth_year_end}&go=1&size=20&place__0__={location}',
         'test_fixture': 'tests/fixtures/geneanet_dubois_marie.html',
-        'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1880}
+        'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1880},
+        'location_filter_works': True,  # Tested: 10k vs 41k results with Paris filter
     },
     'antenati': {
         'name': 'Antenati',
         'extractor': AntenatiExtractor(),
         'url_template': 'https://antenati.cultura.gov.it/search-nominative/?cognome={surname}&nome={given_name}',
         'test_fixture': 'tests/fixtures/antenati_milanese_nominative.html',
-        'test_params': {'surname': 'Milanese', 'given_name': 'Giovanni', 'birth_year': 1885}
+        'test_params': {'surname': 'Milanese', 'given_name': 'Giovanni', 'birth_year': 1885},
+        # Antenati: No location filter in URL - uses archive/fondo selection
+        'location_filter_works': False,
     },
     'familysearch': {
         'name': 'FamilySearch',
         'extractor': FamilySearchExtractor(),
         'url_template': 'https://www.familysearch.org/en/search/record/results?q.givenName={given_name}&q.surname={surname}&q.birthLikeDate={birth_year}',
+        'url_template_with_location': 'https://www.familysearch.org/en/search/record/results?q.givenName={given_name}&q.surname={surname}&q.birthLikeDate={birth_year}&q.birthLikePlace={location}',
         'test_fixture': 'tests/fixtures/familysearch_anderson_margaret.html',
         'test_params': {'surname': 'Anderson', 'given_name': 'Margaret', 'birth_year': 1880},
-        'wait_for_selector': 'tr[data-testid*="/ark:/"]'  # Wait for results to load
+        'wait_for_selector': 'tr[data-testid*="/ark:/"]',  # Wait for results to load
+        'location_filter_works': True,  # Tested: 520 results with Paris,France filter
     },
     'wikitree': {
         'name': 'WikiTree',
         'extractor': WikiTreeExtractor(),
         'url_template': None,  # Uses API
         'test_fixture': 'tests/fixtures/wikitree_smith_john_api.json',
-        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880},
+        # WikiTree API has BirthLocation param but needs testing
+        'location_filter_works': False,
     },
     'ancestry': {
         'name': 'Ancestry',
         'extractor': AncestryExtractor(),
-        'url_template': 'https://www.ancestry.com/search/?name={given_name}_{surname}&birth={birth_year}-{birth_year_end}',
+        # Ancestry URL format discovered via testing:
+        # - name: FirstName_Surname (underscore separates, + for spaces within names)
+        # - birth: YYYY (just year, not range)
+        # - birth_x: ±range (e.g., 5 for ±5 years)
+        # - event: _country (underscore prefix, lowercase COUNTRY name - not full location)
+        # - searchMode: advanced (required for proper filtering)
+        'url_template': 'https://www.ancestry.com/search/?name={given_name}_{surname}&birth={birth_year}&birth_x=5&searchMode=advanced',
+        'url_template_with_location': 'https://www.ancestry.com/search/?name={given_name}_{surname}&birth={birth_year}&birth_x=5&event=_{country_lower}&searchMode=advanced',
         'test_fixture': 'tests/fixtures/ancestry_smith_john.html',
-        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880},
+        'location_filter_works': True,  # event=_france works for country filtering
     },
     'myheritage': {
         'name': 'MyHeritage',
         'extractor': MyHeritageExtractor(),
-        'url_template': 'https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.{given_name}+fnmo.2+fnmsvos.1+fnmsmi.1+ln.{surname}+lnmo.4+lnmsdm.1+lnmsmf3.1&qevents-event1=Event+et.birth+ey.{birth_year}+epmo.similar&useTranslation=1',
+        # MyHeritage URL format discovered via testing:
+        # - qname: Name+fn.{FirstName}+ln.{LastName}
+        # - qevents-event1: Event+et.any+ep.{Country}+epmo.similar (for country-level filtering)
+        # - qevents-event1: Event+et.birth+ey.{Year}+epmo.similar (for birth year)
+        # Uses {country} for broader filtering (France, Italy, etc.)
+        'url_template': 'https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.{given_name}+ln.{surname}&qevents-event1=Event+et.birth+ey.{birth_year}+epmo.similar&useTranslation=1',
+        'url_template_with_location': 'https://www.myheritage.com/research?action=query&formId=master&formMode=1&qname=Name+fn.{given_name}+ln.{surname}&qevents-event1=Event+et.any+ep.{country}+epmo.similar&useTranslation=1',
         'test_fixture': 'tests/fixtures/myheritage_smith_john.html',
         'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880},
-        'wait_for_selector': '.search_results_list'  # Wait for results to load
+        'wait_for_selector': '.search_results_list',  # Wait for results to load
+        'location_filter_works': True,  # Tested: Results show France-related records with ep.France filter
     },
     'filae': {
         'name': 'Filae',
         'extractor': FilaeExtractor(),
         'url_template': 'https://www.filae.com/search?ln={surname}&fn={given_name}&sy={birth_year}&ey={birth_year_end}',
         'test_fixture': 'tests/fixtures/filae_sample.html',
-        'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1875}
+        'test_params': {'surname': 'Dubois', 'given_name': 'Marie', 'birth_year': 1875},
+        # Location filtering uses build_filae_url() from location_resolver.py
+        # Resolves location names to GeoNames IDs for proper Filae filtering
+        # Uses static GeoNames data in data/french_locations.json (1092 locations)
+        'location_filter_works': True,
+        'use_location_resolver': True,  # Special flag to use Filae location resolver
     },
     'geni': {
         'name': 'Geni',
         'extractor': GeniExtractor(),
+        # Geni URL format discovered via testing:
+        # - names: FirstName+LastName
+        # - country: Country name (e.g., France, Germany, Italy) - uses {country} not {location}
+        # Location filtering works with country= parameter
         'url_template': 'https://www.geni.com/search?search_type=people&names={given_name}+{surname}',
+        'url_template_with_location': 'https://www.geni.com/search?search_type=people&names={given_name}+{surname}&country={country}',
         'test_fixture': 'tests/fixtures/geni_sample.html',
-        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880},
+        'location_filter_works': True,  # Tested: 34,522 results with country=France filter
     },
     'freebmd': {
         'name': 'FreeBMD',
         'extractor': FreeBMDExtractor(),
         'url_template': None,  # Uses Playwright form fill
         'test_fixture': 'tests/fixtures/freebmd_smith_john.html',
-        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880},
+        # FreeBMD is UK-only, no location filter needed
+        'location_filter_works': False,
     },
     # === NEW SOURCES ===
     'matchid': {
@@ -131,28 +174,35 @@ SOURCES = {
         'extractor': MatchIDExtractor(),
         'url_template': None,  # Uses API
         'test_fixture': 'tests/fixtures/matchid_sample.json',
-        'test_params': {'surname': 'Dupont', 'given_name': 'Marie', 'birth_year': 1920}
+        'test_params': {'surname': 'Dupont', 'given_name': 'Marie', 'birth_year': 1920},
+        # MatchID API has birthPlace filter - needs testing
+        'location_filter_works': False,
     },
     'billiongraves': {
         'name': 'BillionGraves',
         'extractor': BillionGravesExtractor(),
         'url_template': 'https://billiongraves.com/site/search/results?given_names={given_name}&family_names={surname}&year={birth_year}&year_range=5',
         'test_fixture': 'tests/fixtures/billiongraves_sample.html',
-        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880}
+        'test_params': {'surname': 'Smith', 'given_name': 'John', 'birth_year': 1880},
+        'location_filter_works': False,
     },
     'digitalarkivet': {
         'name': 'Digitalarkivet',
         'extractor': DigitalarkivetExtractor(),
         'url_template': 'https://www.digitalarkivet.no/en/search/persons?fornavn={given_name}&etternavn={surname}&fodtfra={birth_year}&fodttil={birth_year_end}',
         'test_fixture': 'tests/fixtures/digitalarkivet_sample.html',
-        'test_params': {'surname': 'Hansen', 'given_name': 'Ole', 'birth_year': 1850}
+        'test_params': {'surname': 'Hansen', 'given_name': 'Ole', 'birth_year': 1850},
+        # Norway-only, no location filter needed
+        'location_filter_works': False,
     },
     'irishgenealogy': {
         'name': 'IrishGenealogy.ie',
         'extractor': IrishGenealogyExtractor(),
         'url_template': 'https://www.irishgenealogy.ie/en/civil-records/search-civil-records?surname={surname}&firstname={given_name}&yearfrom={birth_year}&yearto={birth_year_end}',
         'test_fixture': 'tests/fixtures/irishgenealogy_sample.html',
-        'test_params': {'surname': "O'Brien", 'given_name': 'Patrick', 'birth_year': 1870}
+        'test_params': {'surname': "O'Brien", 'given_name': 'Patrick', 'birth_year': 1870},
+        # Ireland-only, no location filter needed
+        'location_filter_works': False,
     },
     # NOTE: Matricula is NOT name-searchable - it's a location-based parish register browser
     # The search at /en/suchen/ only allows searching by place name, not person name
@@ -171,7 +221,9 @@ SOURCES = {
         'extractor': ScotlandsPeopleExtractor(),
         'url_template': 'https://www.scotlandspeople.gov.uk/record-results?surname={surname}&forename={given_name}&from_year={birth_year}&to_year={birth_year_end}',
         'test_fixture': 'tests/fixtures/scotlandspeople_sample.html',
-        'test_params': {'surname': 'MacDonald', 'given_name': 'James', 'birth_year': 1860}
+        'test_params': {'surname': 'MacDonald', 'given_name': 'James', 'birth_year': 1860},
+        # Scotland-only, no location filter needed
+        'location_filter_works': False,
     },
     'anom': {
         'name': 'ANOM',
@@ -179,7 +231,9 @@ SOURCES = {
         # Correct URL: form-based search that produces results at /archive/resultats/basebagne/
         'url_template': 'https://recherche-anom.culture.gouv.fr/archive/resultats/basebagne/n:174?RECH_nom={surname}&RECH_prenom={given_name}&type=basebagne',
         'test_fixture': 'tests/fixtures/anom_sample.html',
-        'test_params': {'surname': 'Martin', 'given_name': 'Jean', 'birth_year': 1850}
+        'test_params': {'surname': 'Martin', 'given_name': 'Jean', 'birth_year': 1850},
+        # French colonial archives only
+        'location_filter_works': False,
     }
 }
 
@@ -390,7 +444,41 @@ def extract_from_source(source_key, params, test_mode=False, verbose=False, save
                 if 'birth_year_end' not in url_params and 'birth_year' in url_params:
                     url_params['birth_year_end'] = url_params['birth_year'] + 10
 
-                url = source['url_template'].format(**url_params)
+                # Build location variants for different source needs:
+                # - {country}: "France" (for Geni, Ancestry)
+                # - {region}: "Alsace" or "Sicily" (for regional sources)
+                # - {location}: "Paris, France" (for specific place sources)
+                # Priority: country > region > location (extracted from location string)
+                country = url_params.get('country', '')
+                region = url_params.get('region', '')
+                location = url_params.get('location', '')
+
+                # Ensure all location variants are available
+                url_params['country'] = country
+                url_params['country_lower'] = country.lower() if country else ''
+                url_params['region'] = region
+                url_params['region_lower'] = region.lower() if region else ''
+                url_params['location_lower'] = location.lower() if location else ''
+
+                # Determine which location to use for URL template
+                # Sources specify which field they need via their URL template placeholders
+                has_location_data = country or region or location
+
+                # Special handling for Filae - uses location resolver for French locations
+                if source.get('use_location_resolver') and has_location_data:
+                    # Use region first, then location for Filae's GeoNames lookup
+                    filae_location = region or location
+                    url = build_filae_url(
+                        surname=url_params.get('surname', ''),
+                        given_name=url_params.get('given_name', ''),
+                        birth_year=url_params.get('birth_year'),
+                        birth_year_end=url_params.get('birth_year_end'),
+                        location=filae_location
+                    )
+                elif has_location_data and source.get('url_template_with_location') and source.get('location_filter_works'):
+                    url = source['url_template_with_location'].format(**url_params)
+                else:
+                    url = source['url_template'].format(**url_params)
 
                 debug(source_name, f"Fetching: {url}")
 
