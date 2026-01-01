@@ -48,7 +48,17 @@ Configuration is stored in `~/.genealogy-extractors/config.json`.
 
 **Default behavior** (no config needed): Uses SQLite at `~/.genealogy-extractors/genealogy.db`
 
-**For PostgreSQL or API access**, create the config file:
+### Storage Backends
+
+The tool supports **three storage backends** for staged findings:
+
+| Backend | Config | Use Case |
+|---------|--------|----------|
+| **SQLite** (default) | `database.type: "sqlite"` | Standalone, no setup |
+| **PostgreSQL** | `database.type: "postgresql"` | Shared database |
+| **Kindred API** | `staged_findings.backend: "api"` | Centralized review in Kindred UI |
+
+### Full Configuration Example
 
 ```json
 {
@@ -64,6 +74,9 @@ Configuration is stored in `~/.genealogy-extractors/config.json`.
     "endpoint": "https://your-kindred-instance.com/api/graphql",
     "key": "your_api_key"
   },
+  "staged_findings": {
+    "backend": "api"
+  },
   "chrome": {
     "debug_port": 9222,
     "debug_host": "127.0.0.1"
@@ -71,7 +84,21 @@ Configuration is stored in `~/.genealogy-extractors/config.json`.
 }
 ```
 
-**Chrome with debug port** (required for sites needing login):
+### Staged Findings Backend Options
+
+**Local backend** (`"backend": "local"`, default):
+- Stores findings in SQLite or PostgreSQL
+- Review with `python research.py --review` (CLI)
+- Submit with `python research.py --submit-approved`
+
+**API backend** (`"backend": "api"`):
+- Stores findings directly in Kindred via GraphQL
+- Review in Kindred's web UI at `/research`
+- No local database needed for findings
+- Requires `api.endpoint` and `api.key` to be set
+
+### Chrome Setup (required for sites needing login)
+
 ```bash
 google-chrome --remote-debugging-port=9222 --user-data-dir=$HOME/.chrome-debug-profile &
 ```
@@ -233,6 +260,8 @@ class NewSiteExtractor(BaseRecordExtractor):
 
 ## Data Storage
 
+### Database Options
+
 | Config | Storage | Notes |
 |--------|---------|-------|
 | No config file | SQLite | `~/.genealogy-extractors/genealogy.db` |
@@ -240,6 +269,18 @@ class NewSiteExtractor(BaseRecordExtractor):
 | `database.type: "postgresql"` | PostgreSQL | Uses host/port/database/user/password |
 
 Tables created automatically: `search_log`, `staged_findings`
+
+### Staged Findings Storage
+
+| Backend | Where findings are stored | Review method |
+|---------|---------------------------|---------------|
+| `staged_findings.backend: "local"` | Local SQLite/PostgreSQL | `python research.py --review` |
+| `staged_findings.backend: "api"` | Kindred API | Kindred web UI at `/research` |
+
+When using API backend:
+- Findings are sent directly to Kindred via GraphQL `stageFinding` mutation
+- Search logs are still stored locally (for skip tracking)
+- No local `staged_findings` table is used
 
 ---
 
